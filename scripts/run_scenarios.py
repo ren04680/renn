@@ -319,7 +319,7 @@ def write(rows: list[dict]) -> None:
     SUBMISSION_DIR.mkdir(exist_ok=True)
     (SUBMISSION_DIR / "test_results.json").write_text(json.dumps({"generated": time.strftime("%Y-%m-%d %H:%M"),
                                                                    "mode": "offline (DEMO_OFFLINE=1)" if settings.offline else "online",
-                                                                   "results": rows}, indent=2, ensure_ascii=False))
+                                                                   "results": rows}, indent=2, ensure_ascii=False), encoding="utf-8")
     with open(SUBMISSION_DIR / "test_results.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["id", "scenario", "outcome", "pass", "agents", "tool_calls", "retries", "critic_loops", "llm_calls", "latency_s"])

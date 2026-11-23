@@ -196,12 +196,18 @@ def rebuild_from_db() -> int:
     with get_session() as s:
         rows = s.query(Memory).all()
         data = [(m.id, m.text, {"patient_id": m.patient_id, "kind": m.kind, "source": m.source}) for m in rows]
+    global _store
     with _lock:
-        st = get_store()
-        st.reset()
-        if data:
-            emb = get_embedder()([d[1] for d in data])
-            st.add([d[0] for d in data], emb, [d[1] for d in data], [d[2] for d in data])
+        emb = get_embedder()([d[1] for d in data]) if data else []
+        for attempt in (1, 2):
+            st = get_store()
+            try:
+                st.reset()
+                if data:
+                    st.add([d[0] for d in data], emb, [d[1] for d in data], [d[2] for d in data])
+                break
+            except Exception:  # e.g. chromadb file locks on Windows → fall back to the in-process store
+                _store = _NumpyStore()
     return len(data)
 
 
@@ -230,9 +236,17 @@ def add_memory(patient_id: str, text: str, kind: str, source: str) -> str:
 
 
 def search(patient_id: str, query: str, k: int = 4) -> list[dict]:
+    global _store
     with _lock:
         emb = get_embedder()([query])[0]
-        hits = get_store().query(emb, k, patient_id)
+        try:
+            hits = get_store().query(emb, k, patient_id)
+        except Exception:
+            if isinstance(_store, _NumpyStore):
+                raise
+            _store = _NumpyStore()
+            rebuild_from_db()  # RLock: re-entrant
+            hits = get_store().query(emb, k, patient_id)
     return [
         {"id": i, "text": d, "kind": m.get("kind"), "score": round(s, 3)} for (i, d, m, s) in hits
     ]

@@ -104,7 +104,7 @@ def main() -> dict:
         "embedding_comparison": emb,
         "train_seconds": round(time.time() - t0, 2),
     }
-    (MODELS_DIR / "metrics.json").write_text(json.dumps(metrics, indent=2))
+    (MODELS_DIR / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
 
     fig, axes = plt.subplots(1, 2, figsize=(15, 6.2), gridspec_kw={"width_ratios": [1.6, 1]})
     for ax, key, title in ((axes[0], "specialty", "Specialty"), (axes[1], "urgency", "Urgency")):

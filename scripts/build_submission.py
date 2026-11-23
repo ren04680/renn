@@ -37,8 +37,8 @@ def main() -> None:
             if p.is_file():
                 z.write(p, f"hospital-agent-os/{f}")
     shots = sorted((SUB / "screenshots").glob("*.png"))
-    res = json.loads((SUB / "test_results.json").read_text()) if (SUB / "test_results.json").exists() else {"results": []}
-    met = json.loads((ROOT / "models" / "metrics.json").read_text())
+    res = json.loads((SUB / "test_results.json").read_text(encoding="utf-8")) if (SUB / "test_results.json").exists() else {"results": []}
+    met = json.loads((ROOT / "models" / "metrics.json").read_text(encoding="utf-8"))
     n_pass = sum(r["pass"] for r in res["results"])
     std = met["split_standard_80_20"]
     lines = [

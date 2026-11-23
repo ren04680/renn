@@ -289,10 +289,10 @@ def metrics():
     out = {"scenarios": None, "classifier": None}
     p = SUBMISSION_DIR / "test_results.json"
     if p.exists():
-        out["scenarios"] = json.loads(p.read_text())
+        out["scenarios"] = json.loads(p.read_text(encoding="utf-8"))
     m = MODELS_DIR / "metrics.json"
     if m.exists():
-        out["classifier"] = json.loads(m.read_text())
+        out["classifier"] = json.loads(m.read_text(encoding="utf-8"))
     out["system"] = {"embedder": vector_memory.embedder_name(), "vector_store": vector_memory.store_backend(),
                      "settings": settings.as_dict()}
     return out

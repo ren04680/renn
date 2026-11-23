@@ -36,13 +36,18 @@ def initial_constraints(c: RunContext, g: dict | None) -> dict:
     if df < date.today().isoformat():
         df = date.today().isoformat()
     locality = pc.get("locality")
+    from_home = False
     if not locality and pc.get("near_me") and g:
         locality = (g.get("prefs") or {}).get("home_locality") or None
+        from_home = bool(locality)
+        if not locality:
+            c.cache["near_me_unresolved"] = True
     modes = ["tele"] if pc.get("mode") == "tele" else ["in_person"]
     cons = {
         "date_from": df, "date_to": dt, "date_text": pc.get("date_text") or "earliest (next 3 days)",
         "time_from": pc.get("time_from"), "time_to": pc.get("time_to"), "time_text": pc.get("time_text"),
         "locality": locality, "modes": modes, "in_person_only": bool(pc.get("in_person_only")),
+        "locality_from_home": from_home,
     }
     if g:
         cons.update({"patient_id": g.get("patient_id"), "specialty": g.get("specialty"), "doctor_id": g.get("doctor_id")})
@@ -94,7 +99,8 @@ def rank(slots: list[dict], g: dict, pol: RelaxationPolicy) -> list[tuple[float,
         loc = orig.get("locality") or prefs.get("locality") or prefs.get("home_locality")
         if loc and s["locality"] == loc and s["mode"] == "in_person":
             sc += 1.5
-            why.append(f"in {loc}" + (" as requested" if orig.get("locality") == loc else " (near home)"))
+            why.append(f"in {loc}" + (" — near your home, as you asked" if orig.get("locality_from_home")
+                                      else " as requested" if orig.get("locality") == loc else " (near home)"))
         days = (date.fromisoformat(s["date"]) - date.fromisoformat(cur["date_from"])).days
         sc -= 0.6 * days
         sc += s["rating"] - 4.0
@@ -120,6 +126,9 @@ def make_proposal(c: RunContext, goal_ref: str, items: list[dict], pol: Relaxati
     n = c.cache.get("proposal_n", 0) + 1
     c.cache["proposal_n"] = n
     extra_disc = []
+    if c.cache.get("near_me_unresolved"):
+        extra_disc.append("You said 'nearby', but I don't know your area (no profile), so I searched all of Pune — "
+                          "tell me your locality to narrow it down.")
     for it in items:
         g = c.cache.get("goals", {}).get(it.get("goal_ref"), {})
         if g.get("on_behalf_of"):

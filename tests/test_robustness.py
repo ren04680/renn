@@ -87,3 +87,15 @@ def test_llm_outage_trips_breaker_fast(fresh, monkeypatch):
     finally:
         llm.set_model_override(None)
         settings.update(offline=True)
+
+
+@pytest.mark.parametrize("pid,locality", [("P001", "Kothrud"), ("GUEST", None)])
+def test_plain_organ_word_and_nearby(fresh, pid, locality):
+    r = start_run("I want to book a nearby hospital for heart", pid)
+    assert r["status"] == "waiting" and r["interrupt"]["kind"] == "approval"  # no clarification loop
+    p = r["interrupt"]["proposal"]
+    assert p["items"][0]["specialty"] == "cardiology"
+    if locality:
+        assert p["items"][0]["locality"] == locality
+    else:
+        assert any("nearby" in d for d in p["disclosures"])  # honest: guest has no known area

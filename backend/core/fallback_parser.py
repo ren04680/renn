@@ -19,6 +19,17 @@ SPECIALTY_LABEL = {
     "cardiology": "Cardiology", "dermatology": "Dermatology", "orthopedics": "Orthopedics", "neurology": "Neurology",
     "ent": "ENT", "pediatrics": "Pediatrics", "general_medicine": "General Medicine", "gastroenterology": "Gastroenterology",
 }
+# plain organ / body words → specialty. Used only when no specialist is named, and only the first match
+# (so "skin rash and stomach pain" is not silently turned into two bookings).
+ORGAN_WORDS = {
+    "cardiology": ["heart", "dil", "cardio"],
+    "dermatology": ["skin", "twacha"],
+    "orthopedics": ["bone", "bones", "joint", "joints", "haddi"],
+    "neurology": ["brain", "nerve", "nerves"],
+    "ent": ["ear", "ears", "nose", "throat", "kaan", "gala"],
+    "gastroenterology": ["stomach", "liver", "digestion"],
+}
+
 LOCALITIES = {
     "Kothrud": ["kothrud"], "Baner": ["baner"], "Hadapsar": ["hadapsar"], "Loni Kalbhor": ["loni kalbhor", "loni"],
     "Viman Nagar": ["viman nagar", "vimannagar"], "Shivajinagar": ["shivajinagar", "shivaji nagar"],
@@ -236,6 +247,11 @@ def parse_request(text: str, today: date | None = None) -> dict:
     cancel = bool(re.search(r"\bcancel\b.{0,25}\b(appointment|booking|visit)\b", t))
 
     specs = _find_specialties(t)
+    if not specs:
+        organ = sorted((m.start(), spec) for spec, words in ORGAN_WORDS.items() for w in words
+                       for m in re.finditer(r"\b" + w + r"\b", t))
+        if organ and not re.search(r"\bheart\s+attack\b", t):
+            specs = [organ[0]]
     unsupported = next((name for name, pat in UNSUPPORTED if re.search(pat, t)), None)
     rels = _find_relations(t)
     has_symptoms = bool(SYMPTOM_WORDS.search(t))

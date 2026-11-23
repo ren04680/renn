@@ -74,6 +74,8 @@ class Patient(Base):
     preferred_mode: Mapped[str | None] = mapped_column(String, nullable=True)  # in_person|tele
     usual_doctor_id: Mapped[str | None] = mapped_column(String, nullable=True)
     language: Mapped[str] = mapped_column(String, default="English")
+    source: Mapped[str] = mapped_column(String, default="seed")  # seed | registered (created from the UI)
+    created_at: Mapped[float] = mapped_column(Float, default=0.0)
 
 
 class FamilyLink(Base):

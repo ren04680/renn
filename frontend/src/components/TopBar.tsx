@@ -1,4 +1,4 @@
-import { Bug, Cloud, CloudOff, HeartPulse, RotateCcw, Wifi, WifiOff } from "lucide-react";
+import { Bug, Cloud, CloudOff, HeartPulse, RotateCcw, UserPlus, Wifi, WifiOff } from "lucide-react";
 import type { Patient, Settings } from "../types";
 
 type Props = {
@@ -11,9 +11,10 @@ type Props = {
   resetting: boolean;
   connected: boolean;
   meta: any;
+  onNewPatient: () => void;
 };
 
-export default function TopBar({ patients, pid, setPid, settings, updateSettings, onReset, resetting, connected, meta }: Props) {
+export default function TopBar({ patients, pid, setPid, settings, updateSettings, onReset, resetting, connected, meta, onNewPatient }: Props) {
   const featured = patients.filter((p) => ["P001", "P014", "P023", "P031", "GUEST"].includes(p.id));
   const others = patients.filter((p) => !["P001", "P014", "P023", "P031", "GUEST"].includes(p.id));
   const cur = patients.find((p) => p.id === pid);
@@ -37,7 +38,7 @@ export default function TopBar({ patients, pid, setPid, settings, updateSettings
           <select
             data-testid="patient-select"
             value={pid}
-            onChange={(e) => setPid(e.target.value)}
+            onChange={(e) => (e.target.value === "__new__" ? onNewPatient() : setPid(e.target.value))}
             className="bg-transparent text-sm font-medium focus:outline-none pr-1 [&>*]:text-slate-900"
           >
             <optgroup label="Demo patients">
@@ -47,15 +48,21 @@ export default function TopBar({ patients, pid, setPid, settings, updateSettings
                 </option>
               ))}
             </optgroup>
-            <optgroup label="All patients">
-              {others.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.id} · {p.name}
-                </option>
-              ))}
-            </optgroup>
+            {others.length > 0 && (
+              <optgroup label="Registered by you">
+                {others.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.id} · {p.name}
+                  </option>
+                ))}
+              </optgroup>
+            )}
+            <option value="__new__">＋ Register new patient…</option>
           </select>
         </div>
+        <button data-testid="new-patient" onClick={onNewPatient} className="btn bg-indigo-500/90 hover:bg-indigo-500 text-white !py-1.5">
+          <UserPlus className="h-4 w-4" /> New patient
+        </button>
         {cur && cur.id !== "GUEST" && (
           <div className="hidden min-[1850px]:flex items-center gap-2 text-[11px] text-indigo-100/80">
             <span className="chip bg-white/10">{cur.locality}</span>

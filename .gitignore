@@ -9,3 +9,6 @@ frontend/node_modules/
 *.egg-info/
 data/hospital.db
 data/hospital.db-*
+data/test_hospital.db
+data/test_hospital.db-*
+data/chroma_test/

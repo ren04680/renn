@@ -6,6 +6,7 @@ import BlackboardTab from "./components/BlackboardTab";
 import ChatPanel from "./components/ChatPanel";
 import MetricsTab from "./components/MetricsTab";
 import OpsTab from "./components/OpsTab";
+import RegisterModal from "./components/RegisterModal";
 import TopBar from "./components/TopBar";
 import type { ChatMsg, Interrupt, Offer, Patient, RunResult, Settings } from "./types";
 
@@ -26,6 +27,7 @@ export default function App() {
   const [offers, setOffers] = useState<Offer[]>([]);
   const [resetting, setResetting] = useState(false);
   const [bbRun, setBbRun] = useState<string | null>(null);
+  const [regOpen, setRegOpen] = useState(false);
 
   useEffect(() => {
     api<Patient[]>("/patients").then(setPatients).catch(() => {});
@@ -160,6 +162,25 @@ export default function App() {
         resetting={resetting}
         connected={connected}
         meta={meta}
+        onNewPatient={() => setRegOpen(true)}
+      />
+      <RegisterModal
+        open={regOpen}
+        onClose={() => setRegOpen(false)}
+        patients={patients}
+        onCreated={async (id) => {
+          const ps = await api<Patient[]>("/patients");
+          setPatients(ps);
+          setPid(id);
+          setRegOpen(false);
+          setTab("patient");
+          const p = ps.find((x) => x.id === id);
+          push(id, {
+            role: "assistant",
+            kind: "text",
+            text: `Welcome, **${p?.name ?? id}**! You're registered as **${id}**. I've saved your preferences, so I won't need to ask for them again. How can I help — which doctor or problem?`,
+          });
+        }}
       />
       <div className="px-5 pt-3 flex items-center gap-1 border-b border-slate-200 bg-white">
         {tabs.map((t) => (

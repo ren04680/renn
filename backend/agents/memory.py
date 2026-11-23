@@ -15,6 +15,16 @@ from backend.tools.registry import call_tool
 AGENT = "memory"
 
 
+_GROUPS = [{"mother", "father", "parent"}, {"son", "daughter", "child"}, {"spouse", "wife", "husband"},
+           {"sibling", "brother", "sister"}]
+
+
+def _same_group(link_relation: str, asked: str) -> bool:
+    """'my son' matches a generic 'child' link; 'my mother' matches a generic 'parent' link (never mother↔father)."""
+    generic = {"parent", "child", "sibling", "spouse"}
+    return any(link_relation in grp and asked in grp for grp in _GROUPS) and (link_relation in generic or asked in generic)
+
+
 def _prefs_from_hits(hits: list[dict]) -> dict:
     prefs: dict = {}
     for h in hits:
@@ -51,8 +61,8 @@ def recall(c: RunContext, goal_ref: str) -> dict:
         else:
             prof = call_tool(c, AGENT, "get_patient_profile", {"patient_id": requester},
                              reason=f"resolve the patient's '{g['who']}' through registered family links")
-            fam = [f for f in prof.get("family", []) if f["relation"] == g["who"] or
-                   (g["who"] in ("mother", "father") and f["relation"] == "parent")]
+            fam = [f for f in prof.get("family", []) if f["relation"] == g["who"]] or \
+                  [f for f in prof.get("family", []) if _same_group(f["relation"], g["who"])]
             if fam:
                 g["patient_id"] = fam[0]["patient_id"]
                 g["patient_name"] = fam[0]["name"]

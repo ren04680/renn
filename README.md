@@ -19,7 +19,7 @@ Windows: `run.bat`. The built UI is committed (`frontend/dist`), so **Node is no
 |---|---|
 | `./run.sh` | start the backend; it serves the React UI at **http://localhost:8000** |
 | `./run.sh dev` | backend with `--reload` + Vite dev server on :5173 (needs Node 18+) |
-| `./run.sh test` | `pytest` (58 tests) + the 18-scenario runner → `submission/test_results.{md,csv,json}` |
+| `./run.sh test` | `pytest` (63 tests) + the 20-scenario runner → `submission/test_results.{md,csv,json}`. Uses its own test database, so your registered patients are never touched |
 | `./run.sh reset` | reseed the demo data to its known state (the UI's **Reset demo** button does the same) |
 | `./run.sh cli --patient P001` | interactive CLI with the original `[agent] message` trace style |
 | `./run.sh shots` | Playwright walkthrough → 35 numbered screenshots in `submission/screenshots/` |
@@ -59,6 +59,8 @@ Optional extras: `pip install -r requirements-optional.txt` (MiniLM embeddings, 
 | **Multi-goal planning** | supervisor + `find_joint_slots` | one combined proposal for patient + mother, one approval |
 | **Proactive / event-driven** | `agents/event_watcher.py`, `core/events.py` | Hospital Ops → *Doctor cancels block* → offers appear with no prompt |
 | **Human-in-the-loop** | LangGraph `interrupt()` | Approve / Reject card; proactive offers need *Confirm* |
+| **Receptionist-style intake** | `supervisor.gap_check` → `preference_question` | asks day / time / area **once**, with quick replies; memory fills what it knows (time, area, usual doctor) and says so |
+| **Patient registration** | `POST /api/patients`, UI **New patient** | create patients live; their preferences become memories; family links; kept across Reset |
 | **Safety** | `core/guardrails.py`, `tools/policy.py`, gated tools | emergency banner; policy rejections; `BLOCKED` gate events |
 
 ---
@@ -198,7 +200,7 @@ The unseen-phrase numbers are reported on purpose: template data inflates in-dis
 ---
 
 ## 6. Scenarios (all pass — `submission/test_results.md`)
-S01 direct booking · S02 clarification loop · S03 widen time · S04 widen area (time step skipped) · S05 teleconsult · S06 emergency · S07 waitlist after the full ladder · S08 memory "usual doctor next week" · S09 critic catches an injected fault · S10 multi-goal family booking · S11 doctor cancels a block (proactive) · S12 slot freed → waitlist fill · S13 billing with insurance · S14 Hinglish symptoms · S15 offline mode · S16 booking race → re-plan · S17 patient rejects · S18 Hinglish emergency.
+S01 direct booking · S02 clarification loop · S03 widen time · S04 widen area (time step skipped) · S05 teleconsult · S06 emergency · S07 waitlist after the full ladder · S08 memory "usual doctor next week" · S09 critic catches an injected fault · S10 multi-goal family booking · S11 doctor cancels a block (proactive) · S12 slot freed → waitlist fill · S13 billing with insurance · S14 Hinglish symptoms · S15 offline mode · S16 booking race → re-plan · S17 patient rejects · S18 Hinglish emergency · S19 intake: vague request → asks day/time/area · S20 intake: memory-aware, asks only the day.
 
 S01–S07 re-specify the original CLI's 7 scenarios; see `DECISIONS.md` D-01.
 

@@ -68,18 +68,107 @@ async def reset():
     return summary
 
 
+FEATURED = ["P001", "P014", "P023", "P031", "GUEST"]
+LOCALITY_OPTIONS = ["Kothrud", "Baner", "Hadapsar", "Viman Nagar", "Shivajinagar", "Loni Kalbhor"]
+RELATION_INVERSE = {"mother": "child", "father": "child", "spouse": "spouse", "son": "parent", "daughter": "parent",
+                    "sibling": "sibling"}
+
+
+class FamilyIn(BaseModel):
+    patient_id: str
+    relation: str  # what the NEW patient is to patient_id: mother|father|spouse|son|daughter|sibling
+
+
+class RegisterIn(BaseModel):
+    name: str
+    age: int
+    gender: str = "U"
+    phone: str = ""
+    email: str = ""
+    locality: str = ""
+    insurance_plan_id: str = "INS0"
+    preferred_time: str | None = None
+    preferred_mode: str | None = None
+    language: str = "English"
+    family: FamilyIn | None = None
+
+
+@router.get("/insurance_plans")
+def insurance_plans():
+    with get_session() as s:
+        return [{"id": p.id, "name": p.name, "notes": p.notes} for p in s.query(InsurancePlan).order_by(InsurancePlan.id).all()]
+
+
+@router.post("/patients")
+def register_patient(body: RegisterIn):
+    name = " ".join(body.name.split())
+    errs = []
+    if not (2 <= len(name) <= 60):
+        errs.append("name must be 2–60 characters")
+    if not (0 <= body.age <= 120):
+        errs.append("age must be 0–120")
+    if body.locality and body.locality not in LOCALITY_OPTIONS:
+        errs.append("unknown locality")
+    if body.preferred_time not in (None, "", "morning", "evening"):
+        errs.append("preferred_time must be morning or evening")
+    if body.preferred_mode not in (None, "", "in_person", "tele"):
+        errs.append("preferred_mode must be in_person or tele")
+    if body.family and body.family.relation not in RELATION_INVERSE:
+        errs.append("unknown relation")
+    with get_session() as s:
+        if not s.get(InsurancePlan, body.insurance_plan_id):
+            errs.append("unknown insurance plan")
+        if body.family and not s.get(Patient, body.family.patient_id):
+            errs.append("family member not found")
+        if errs:
+            raise HTTPException(422, "; ".join(errs))
+        nums = [int(p.id[1:]) for p in s.query(Patient).all() if p.id[1:].isdigit()]
+        pid = f"P{max(nums + [100]) + 1:03d}"
+        p = Patient(id=pid, name=name, age=body.age, gender=body.gender or "U",
+                    phone=body.phone or f"+91-90000{len(nums):05d}", email=body.email or f"{pid.lower()}@example.com",
+                    locality=body.locality or "", insurance_plan_id=body.insurance_plan_id,
+                    preferred_time=body.preferred_time or None, preferred_mode=body.preferred_mode or None,
+                    usual_doctor_id=None, language=body.language or "English", source="registered", created_at=time.time())
+        s.add(p)
+        if body.family:
+            s.add(FamilyLink(patient_id=body.family.patient_id, relative_id=pid, relation=body.family.relation))
+            s.add(FamilyLink(patient_id=pid, relative_id=body.family.patient_id, relation=RELATION_INVERSE[body.family.relation]))
+    # registration details become long-term memories the agents can recall
+    mems = []
+    if body.preferred_time:
+        mems.append((f"Prefers {body.preferred_time} slots (stated at registration).", "preference"))
+    if body.preferred_mode == "tele":
+        mems.append(("Prefers teleconsultation when possible (stated at registration).", "preference"))
+    elif body.preferred_mode == "in_person":
+        mems.append(("Prefers in-person consultations (stated at registration).", "preference"))
+    if body.locality:
+        mems.append((f"Lives in {body.locality}; prefers hospitals near {body.locality}.", "preference"))
+    if body.language and body.language != "English":
+        mems.append((f"Speaks {body.language}.", "fact"))
+    if body.family:
+        mems.append((f"Registered as the {body.family.relation} of {body.family.patient_id}.", "fact"))
+    for text, kind in mems:
+        vector_memory.add_memory(pid, text, kind, source="registration")
+    bus.emit("system", "memory", "run_status",
+             f"new patient registered: {pid} {name}", {"patient_id": pid, "memories": len(mems)})
+    return {"id": pid, "name": name, "memories": len(mems)}
+
+
 @router.get("/patients")
-def patients():
+def patients(all: bool = False):
     with get_session() as s:
         plans = {p.id: p.name for p in s.query(InsurancePlan).all()}
         fam = {}
         for f in s.query(FamilyLink).all():
             fam.setdefault(f.patient_id, []).append({"relation": f.relation, "patient_id": f.relative_id})
-        rows = s.query(Patient).order_by(Patient.id).all()
+        q = s.query(Patient)
+        if not all:  # the 100 seeded patients stay in the dataset, but only the demo cast + your own patients are listed
+            q = q.filter((Patient.id.in_(FEATURED)) | (Patient.source == "registered"))
+        rows = q.order_by(Patient.id).all()
         out = [{"id": p.id, "name": p.name, "age": p.age, "locality": p.locality, "plan": plans.get(p.insurance_plan_id),
-                "preferred_time": p.preferred_time, "preferred_mode": p.preferred_mode, "family": fam.get(p.id, [])} for p in rows]
-    featured = ["P001", "P014", "P023", "P031", "GUEST"]
-    out.sort(key=lambda p: (featured.index(p["id"]) if p["id"] in featured else 99, p["id"]))
+                "preferred_time": p.preferred_time, "preferred_mode": p.preferred_mode, "family": fam.get(p.id, []),
+                "source": p.source} for p in rows]
+    out.sort(key=lambda p: (FEATURED.index(p["id"]) if p["id"] in FEATURED else 99, p["id"]))
     return out
 
 

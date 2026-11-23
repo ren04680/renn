@@ -16,6 +16,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 os.environ.setdefault("DEMO_OFFLINE", "1")
+# scenario evidence runs on its own database + vector index (never touches the app's data / registered patients)
+os.environ.setdefault("HOSPITAL_DB", str(Path(__file__).resolve().parent.parent / "data" / "test_hospital.db"))
+os.environ.setdefault("HOSPITAL_CHROMA", str(Path(__file__).resolve().parent.parent / "data" / "chroma_test"))
 
 from backend.config import SUBMISSION_DIR, settings  # noqa: E402
 from backend.core.trace import bus  # noqa: E402
@@ -317,7 +320,7 @@ def run(only: set[str] | None = None, verbose: bool = False) -> list[dict]:
     for sid, name, fn in SCENARIOS:
         if only and sid not in only:
             continue
-        reset_demo(verbose=False)
+        reset_demo(verbose=False, keep_registered=False)
         from backend.agents import event_watcher  # noqa: F401  (registers tools)
 
         t0 = time.time()

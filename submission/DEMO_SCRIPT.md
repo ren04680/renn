@@ -16,25 +16,33 @@ Patient: **Guest (walk-in)**. Type or click the chip:
 ```
 ENT specialist in Hadapsar tomorrow
 ```
-Say, pointing at **Agent Activity**:
-- "Each agent lights up when it acts. The Supervisor decomposed the request into subtasks; you'll see them later on the Blackboard tab."
+- The agent asks **one** question: "What time?". It only asks for what it can't work out itself. Click the quick reply **"Earliest, any time"**.
+- Point at **Agent Activity**: "Each agent lights up when it acts. The Supervisor decomposed the request into subtasks; you'll see them later on the Blackboard tab."
 - "Scheduling is a ReAct agent. Every tool call carries its own *why*: `search_doctors`, then `get_availability`. It found nothing in Hadapsar."
-- "It wants to relax, but relaxation goes through a **policy checker**. `widen_time` is **skipped, not counted**, because no time was requested. The next allowed step is `widen_area`."
+- "It wants to relax, but relaxation goes through a **policy checker**. `widen_time` is **skipped, not counted**, because the time is open. The next allowed step is `widen_area`."
 - Approval card: "Fee and insurance come from the Billing agent, and the **'What I changed'** box discloses the relaxation. The Critic has already verified it. Nothing is written until I click." → **Approve & book**.
 
-## 2 · Memory: "my usual doctor" (45 s)
+## 2 · Memory: it asks only what it doesn't know (60 s)
 Switch patient to **P001 · Aarav Sharma**:
 ```
-Book with my usual doctor next week
+looking for a bone doctor
 ```
-- "No specialty and no doctor named. The Memory agent does a **vector recall** (`memory hit` rows), confirms with visit history (Dr. Arjun Mehra ×4), and recalls that he prefers **evenings**."
-- Card: "*Why this slot: your usual doctor · evening slot — you usually prefer evenings.*" → **Approve**.
+- "A guest would get three questions (day, time, area). Aarav gets **one**: *which day*. The agent says: *'From what I remember, I'll use your usual evening slots, hospitals near Kothrud, and your usual doctor Dr. Arjun Mehra if free.'* That's **vector memory plus visit history**. It never asks again for what it already knows."
+- Click **"Day after tomorrow"**. Card: **Dr. Arjun Mehra, evening, Kothrud**, with *"Why this slot: usual doctor · evening · near home."* → **Approve**.
+- (Optional, 15 s) `Book with my usual doctor next week` → no questions at all, straight to Dr. Mehra next week, evening.
+
+## 2b · Register a juror as a new patient (optional, 45 s)
+Click **New patient** in the top bar. Ask a juror for their name, age and area, pick an insurance plan and a preferred time, then click **Register & switch to patient**.
+- "They're now saved as **P101** in the hospital database, and their preferences became long-term memories."
+- Type `I need a skin doctor` → the agent asks only the day and says it will use their preferred time and area. Click a quick reply → card → Approve.
+- Patients you register are kept when you press Reset demo. The 100 seeded patients stay in the dataset, but only the demo cast is listed.
 
 ## 3 · Multi-goal family booking (60 s)
 Still P001:
 ```
 Book a cardiologist for me and a dermatologist for my mother on the same day, back to back, same hospital if possible
 ```
+- It asks **"Which day?"**. Both people's time and area preferences are already in memory. Click **"Tomorrow"**.
 - "The Supervisor splits this into **two linked goals with a coupling constraint**: same day, back to back, same hospital as a soft preference. Memory resolves 'my mother' to **P014 Sunita** through family links."
 - "Scheduling does **one joint search** (`find_joint_slots`) instead of two independent ones, and the result is **one combined proposal with one approval**. Each person's own insurance is applied."
 - → **Approve**. Then open the **Blackboard** tab for 10 s: "goal, subtasks with owners and dependencies, facts, critic verdicts, and the write log that is our audit trail in SQLite."
@@ -65,7 +73,7 @@ severe chest pain and sweating
 
 ## 7 · Metrics (30 s)
 Open the **Metrics** tab:
-- "18 scenarios pass, including the original 7, a booking race, a rejection, Hinglish input and offline mode. 58 pytest tests cover tools, the policy checker, the critic, guardrails, races, unscripted inputs, and the online ReAct loop with a deliberately misbehaving LLM."
+- "20 scenarios pass, including the original 7, the intake questions, a booking race, a rejection, Hinglish input and offline mode. 63 pytest tests cover tools, the policy checker, the critic, guardrails, races, unscripted inputs, and the online ReAct loop with a deliberately misbehaving LLM."
 - "Triage model: TF-IDF + logistic regression, 97% specialty accuracy on held-out data. We also report **63% on unseen phrasings** on purpose. That honest number is why triage asks the patient when it isn't confident, and why emergencies use a hard rule instead of ML."
 
 Close (10 s):
@@ -102,5 +110,8 @@ It's hybrid. There are episodic and preference memories in a vector store (Chrom
 **9. How do you handle two people booking the same slot?**
 Soft holds with a TTL while the patient decides. The final booking is one atomic conditional UPDATE in a transaction. If someone else won, the tool reports a race, and the Supervisor treats it as a re-plan rather than an error: it finds the next best slot and asks again. A test runs 8 threads booking the same slot, and exactly one wins. Joint family bookings are all-or-nothing.
 
-**10. What are the limitations?**
+**10. Why does it ask some questions and not others?**
+It's a gap check, not a fixed form. The Supervisor asks only for what is missing *and* can't be inferred: the specialist (if the symptoms are unclear), then the day, time and area in **one** message. Memory fills the rest (usual time, home area, usual doctor), and it tells the patient what it assumed so they can correct it. It asks at most once and never nags: an unhelpful answer means it proceeds with sensible defaults and discloses them.
+
+**11. What are the limitations?**
 The online path is only validated with a scripted fake LLM in our build environment (one live check is needed with a key). The offline embedder is lexical. State that is mid-approval lives in memory, so a restart drops pending conversations. The HIS is mock data.

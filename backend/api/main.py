@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
         await asyncio.to_thread(train)
     from scripts.seed import reset_demo
 
-    if not DB_PATH.exists() or _seeded_for() != date.today().isoformat():
+    if not DB_PATH.exists() or not _schema_ok() or _seeded_for() != date.today().isoformat():
         # demo fixtures are relative to "today": reseed when the calendar day changed (jury-day safety)
         await asyncio.to_thread(reset_demo)
     from backend.core import vector_memory
@@ -97,6 +97,22 @@ else:
     def root():
         return {"message": "API running. Build the UI with `cd frontend && npm install && npm run build`.",
                 "docs": "/docs"}
+
+
+def _schema_ok() -> bool:
+    """An older database (e.g. from before a model change) is rebuilt instead of crashing."""
+    try:
+        from backend.db.models import Base
+        from backend.db.session import engine
+
+        with engine.connect() as conn:
+            for t in Base.metadata.sorted_tables:
+                have = {r[1] for r in conn.exec_driver_sql(f"PRAGMA table_info({t.name})").fetchall()}
+                if not {c.name for c in t.columns} <= have:
+                    return False
+        return True
+    except Exception:
+        return False
 
 
 def _seeded_for() -> str | None:

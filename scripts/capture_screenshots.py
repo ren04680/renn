@@ -90,16 +90,31 @@ def main():
             page.select_option("[data-testid=patient-select]", pid)
             page.wait_for_timeout(600)
 
-        def send(text, expect="approval"):
-            before_cards = page.locator("[data-testid=approval-card]").count()
-            before_msgs = page.locator("[data-testid^=assistant-]").count()
+        def counts():
+            return (page.locator("[data-testid=approval-card]").count(), page.locator("[data-testid^=assistant-]").count())
+
+        def send(text, expect="approval", answers=(), shot_question=None):
+            """Send a message. If the agent asks an intake question, optionally screenshot it, then answer."""
+            answers = list(answers)
+            bc, bm = counts()
             page.fill("[data-testid=chat-input]", text)
             page.click("[data-testid=send-btn]")
-            if expect == "approval":
-                page.wait_for_function(f"document.querySelectorAll('[data-testid=approval-card]').length > {before_cards}", timeout=30000)
-            else:
-                page.wait_for_function(f"document.querySelectorAll('[data-testid^=assistant-]').length > {before_msgs}", timeout=30000)
-            page.wait_for_timeout(900)
+            while True:
+                page.wait_for_function(
+                    f"document.querySelectorAll('[data-testid=approval-card]').length > {bc} || "
+                    f"document.querySelectorAll('[data-testid^=assistant-]').length > {bm}", timeout=30000)
+                page.wait_for_timeout(700)
+                c, m = counts()
+                last = page.locator("[data-testid^=assistant-]").last.get_attribute("data-testid") if m else ""
+                if expect == "approval" and c == bc and last == "assistant-clarification":
+                    if shot_question:
+                        shot(shot_question)
+                        shot_question = None
+                    bc, bm = counts()
+                    page.fill("[data-testid=chat-input]", answers.pop(0) if answers else "earliest, any time, anywhere")
+                    page.click("[data-testid=send-btn]")
+                    continue
+                break
 
         def approve(yes=True):
             before = page.locator("[data-testid^=assistant-]").count()
@@ -123,13 +138,17 @@ def main():
         approve()
         shot("normal_request_booked")
         # 2) memory
+        send("looking for a bone doctor", answers=["Day after tomorrow"], shot_question="intake_memory_aware_asks_only_the_day")
+        shot("intake_answered_usual_doctor_evening_card")
+        approve()
         send("Book with my usual doctor next week")
         reveal("memory hit")
         shot("memory_recall_usual_doctor")
         approve()
         shot("memory_booked_usual_doctor_evening")
         # 3) multi-goal family
-        send("Book a cardiologist for me and a dermatologist for my mother on the same day, back to back, same hospital if possible")
+        send("Book a cardiologist for me and a dermatologist for my mother on the same day, back to back, same hospital if possible",
+             answers=["Tomorrow"])
         reveal("Decomposed into")
         shot("multigoal_decomposition")
         page.locator("[data-testid=approval-card]").last.scroll_into_view_if_needed()
@@ -191,13 +210,16 @@ def main():
         send("severe chest pain and sweating", expect="msg")
         shot("emergency_escalation")
         # clarification loop
+        send("looking for a bone doctor", answers=["Tomorrow morning, Kothrud"], shot_question="intake_guest_asks_day_time_area")
+        shot("intake_guest_answered_proposal")
+        approve()
         send("I want to see a doctor", expect="msg")
         shot("clarification_question")
-        send("I have knee pain, day after tomorrow evening")
+        send("I have knee pain, day after tomorrow evening", answers=["anywhere"])
         shot("clarification_answered_proposal")
         approve()
         # relaxation disclosure
-        send("ENT specialist in Hadapsar tomorrow")
+        send("ENT specialist in Hadapsar tomorrow", answers=["Earliest, any time"])
         page.locator("[data-testid=approval-card]").last.scroll_into_view_if_needed()
         shot("relaxation_widen_area_disclosed")
         approve()
@@ -206,12 +228,23 @@ def main():
         shot("relaxation_teleconsult_disclosed")
         approve()
         # Hinglish
-        send("mere ghutne mein dard hai, Kothrud mein dikhana hai")
+        send("mere ghutne mein dard hai, Kothrud mein dikhana hai", answers=["kal subah"])
         reveal("classify_symptoms")
         shot("hinglish_triage_classifier")
         approve()
         # waitlist
-        patient("P007")
+        page.click("[data-testid=tab-patient]")
+        page.click("[data-testid=new-patient]")
+        page.wait_for_selector("[data-testid=register-modal]")
+        page.fill("[data-testid=reg-name]", "Priya Deshmukh")
+        page.fill("[data-testid=reg-age]", "41")
+        page.select_option("[data-testid=reg-locality]", "Shivajinagar")
+        page.select_option("[data-testid=reg-plan]", "INS1")
+        page.select_option("[data-testid=reg-time]", "morning")
+        shot("register_new_patient_form")
+        page.click("[data-testid=reg-submit]")
+        page.wait_for_timeout(1200)
+        shot("registered_patient_welcome")
         send("Neurologist in Shivajinagar tomorrow morning", expect="msg")
         shot("waitlisted_after_full_ladder")
         # billing

@@ -7,6 +7,9 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 os.environ.setdefault("DEMO_OFFLINE", "1")
+# tests use their own database + vector index, so they never touch the patients you registered in the app
+os.environ["HOSPITAL_DB"] = str(ROOT / "data" / "test_hospital.db")
+os.environ["HOSPITAL_CHROMA"] = str(ROOT / "data" / "chroma_test")
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -25,7 +28,7 @@ def fresh():
     from backend.config import settings
     from scripts.seed import reset_demo
 
-    reset_demo(verbose=False)
+    reset_demo(verbose=False, keep_registered=False)
     settings.update(inject_fault=False, offline=True)
     yield
 

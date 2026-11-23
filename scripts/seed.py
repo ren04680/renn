@@ -7,6 +7,7 @@ way on any day. Run:  python -m scripts.seed      (or `reset_demo()` from code /
 from __future__ import annotations
 
 import csv
+import os
 import random
 import sys
 import time
@@ -119,7 +120,7 @@ def _t(hhmm: str, minutes: int) -> str:
     return f"{tot // 60:02d}:{tot % 60:02d}"
 
 
-def reset_demo(today: date | None = None, verbose: bool = True) -> dict:
+def reset_demo(today: date | None = None, verbose: bool = True, keep_registered: bool = True) -> dict:
     """Drop + recreate everything to the known demo state. Returns a summary dict."""
     rng = random.Random(SEED)
     today = today or date.today()
@@ -130,6 +131,7 @@ def reset_demo(today: date | None = None, verbose: bool = True) -> dict:
     nm = (next_monday - today).days  # offset of next Monday (1..7)
     now = time.time()
 
+    keep = _snapshot_registered() if keep_registered else {}
     init_db(drop=True)
     with get_session() as s:
         for h in HOSPITALS:
@@ -376,11 +378,13 @@ def reset_demo(today: date | None = None, verbose: bool = True) -> dict:
                 mem(p.id, "Prefers teleconsultation when possible.", "preference")
         s.add_all(mems)
 
+    _restore_registered(keep)
     # vector index
     from backend.core import vector_memory
 
     n_mem = vector_memory.rebuild_from_db()
-    export_csvs()
+    if "HOSPITAL_DB" not in os.environ:  # test/scenario databases don't overwrite the exported dataset
+        export_csvs()
     summary = {
         "today": today.isoformat(),
         "hospitals": len(HOSPITALS), "doctors": len(DOCTORS), "slots": len(slot_rows),
@@ -391,6 +395,39 @@ def reset_demo(today: date | None = None, verbose: bool = True) -> dict:
     if verbose:
         print("Seeded:", summary)
     return summary
+
+
+def _snapshot_registered() -> dict:
+    """Patients created from the UI survive 'Reset demo' (their bookings are reset, their profile is not)."""
+    try:
+        with engine.connect() as conn:
+            cols = [r[1] for r in conn.exec_driver_sql("PRAGMA table_info(patients)").fetchall()]
+            if "source" not in cols:
+                return {}
+            pats = [dict(r._mapping) for r in conn.exec_driver_sql("SELECT * FROM patients WHERE source='registered'").fetchall()]
+            ids = [p["id"] for p in pats]
+            if not ids:
+                return {}
+            q = ",".join("?" * len(ids))
+            links = [dict(r._mapping) for r in conn.exec_driver_sql(
+                f"SELECT patient_id, relative_id, relation FROM family_links WHERE patient_id IN ({q}) OR relative_id IN ({q})", tuple(ids + ids)).fetchall()]
+            mems = [dict(r._mapping) for r in conn.exec_driver_sql(
+                f"SELECT * FROM memories WHERE source='registration' AND patient_id IN ({q})", tuple(ids)).fetchall()]
+        return {"patients": pats, "links": links, "memories": mems}
+    except Exception:
+        return {}
+
+
+def _restore_registered(keep: dict) -> None:
+    if not keep:
+        return
+    with get_session() as s:
+        for p in keep["patients"]:
+            s.add(M.Patient(**p))
+        for l in keep["links"]:
+            s.add(M.FamilyLink(**l))
+        for m in keep["memories"]:
+            s.add(M.Memory(**m))
 
 
 def export_csvs() -> None:

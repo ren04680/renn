@@ -15,7 +15,7 @@ MODELS_DIR = ROOT / "models"
 LOGS_DIR = ROOT / "logs"
 SUBMISSION_DIR = ROOT / "submission"
 DB_PATH = Path(os.getenv("HOSPITAL_DB", str(DATA_DIR / "hospital.db")))
-CHROMA_DIR = DATA_DIR / "chroma"
+CHROMA_DIR = Path(os.getenv("HOSPITAL_CHROMA", str(DATA_DIR / "chroma")))
 TRIAGE_MODEL_PATH = MODELS_DIR / "triage_classifier.joblib"
 
 for _d in (DATA_DIR, MODELS_DIR, LOGS_DIR):

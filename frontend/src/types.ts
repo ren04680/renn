@@ -26,6 +26,7 @@ export type Patient = {
   preferred_time: string | null;
   preferred_mode: string | null;
   family: { relation: string; patient_id: string }[];
+  source?: string;
 };
 
 export type Cost = {

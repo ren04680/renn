@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+logs/*.jsonl
+data/chroma/
+frontend/node_modules/
+frontend/dist/
+.pytest_cache/
+*.egg-info/
+submission/source.zip
+data/hospital.db
+data/hospital.db-*

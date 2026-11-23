@@ -1,0 +1,5 @@
+# Optional: real MiniLM embeddings for vector memory + the embeddings-vs-TF-IDF comparison in train_triage.
+# Needs internet access to huggingface.co the first time (model is cached afterwards).
+sentence-transformers>=3.0
+# Optional: Python Playwright for scripts/capture_screenshots.py (then: python -m playwright install chromium)
+playwright>=1.45

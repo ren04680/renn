@@ -1,0 +1,7 @@
+id,name,locality,kind,address,network_plans
+H01,Kothrud Care Hospital,Kothrud,hospital,"Paud Road, Kothrud","INS1,INS2,INS3"
+H02,Baner Lifeline Hospital,Baner,hospital,"Baner Road, Baner","INS2,INS3"
+H03,Hadapsar Sunrise Hospital,Hadapsar,hospital,"Magarpatta Road, Hadapsar","INS1,INS2,INS4"
+H04,Viman Nagar City Hospital,Viman Nagar,hospital,"Nagar Road, Viman Nagar",INS2
+H05,Shivajinagar General Hospital,Shivajinagar,hospital,"JM Road, Shivajinagar","INS1,INS3,INS4"
+H06,Loni Kalbhor Community Clinic,Loni Kalbhor,clinic,"Solapur Highway, Loni Kalbhor","INS1,INS4"

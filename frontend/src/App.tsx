@@ -1,4 +1,4 @@
-import { Activity, BarChart3, Building2, LayoutGrid, MessagesSquare } from "lucide-react";
+import { BarChart3, Building2, LayoutGrid, MessagesSquare } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { api, uid, useTraceStream } from "./api";
 import ActivityPanel from "./components/ActivityPanel";
@@ -28,6 +28,22 @@ export default function App() {
   const [resetting, setResetting] = useState(false);
   const [bbRun, setBbRun] = useState<string | null>(null);
   const [regOpen, setRegOpen] = useState(false);
+  // Advanced controls (Inject fault, Online/Offline, Blackboard, Metrics) are hidden for a clean UI.
+  // Show them with ?advanced=1 in the URL or Ctrl+Shift+A.
+  const [advanced, setAdvanced] = useState(() => new URLSearchParams(window.location.search).has("advanced"));
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "A" || e.key === "a")) {
+        e.preventDefault();
+        setAdvanced((a) => !a);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+  useEffect(() => {
+    if (!advanced) setTab((t) => (t === "blackboard" || t === "metrics" ? "patient" : t));
+  }, [advanced]);
 
   useEffect(() => {
     api<Patient[]>("/patients").then(setPatients).catch(() => {});
@@ -145,8 +161,12 @@ export default function App() {
   const tabs: { key: Tab; label: string; icon: any }[] = [
     { key: "patient", label: "Patient", icon: MessagesSquare },
     { key: "ops", label: "Hospital Ops", icon: Building2 },
-    { key: "blackboard", label: "Blackboard", icon: LayoutGrid },
-    { key: "metrics", label: "Metrics", icon: BarChart3 },
+    ...(advanced
+      ? [
+          { key: "blackboard" as Tab, label: "Blackboard", icon: LayoutGrid },
+          { key: "metrics" as Tab, label: "Metrics", icon: BarChart3 },
+        ]
+      : []),
   ];
   const proactiveCount = useRef(0);
 
@@ -161,8 +181,8 @@ export default function App() {
         onReset={reset}
         resetting={resetting}
         connected={connected}
-        meta={meta}
         onNewPatient={() => setRegOpen(true)}
+        advanced={advanced}
       />
       <RegisterModal
         open={regOpen}
@@ -200,9 +220,7 @@ export default function App() {
             {tab === t.key && <span className="absolute inset-x-3 -bottom-px h-0.5 bg-indigo-600 rounded-full" />}
           </button>
         ))}
-        <div className="ml-auto flex items-center gap-2 pb-2 text-xs text-slate-500">
-          <Activity className="h-3.5 w-3.5" /> {events.length} trace events
-        </div>
+
       </div>
       <main className="flex-1 min-h-0 bg-slate-50">
         {tab === "patient" && (

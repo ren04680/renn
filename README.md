@@ -225,6 +225,7 @@ data/ models/ tests/ submission/ legacy/
 * **chromadb won't install:** the launchers retry automatically without it, and memory uses the built-in vector store.
 * **DeepSeek slow or down:** click the mode badge to switch to Offline. Even without that, the circuit breaker falls back after the first failure.
 * **Something looks off mid-demo:** click **Reset demo**. It reseeds everything in a few seconds.
+* **Where are Blackboard, Metrics, Inject fault and Online/Offline?** They're hidden for a clean UI. Press **Ctrl + Shift + A** or open `http://localhost:8000/?advanced=1`.
 
 ## 9. Known limitations
 * **The online (DeepSeek) path has not run against the real API in this build environment** (no key, host blocked). It is tested end to end with a scripted fake tool-calling LLM (`tests/test_react_loop.py`), including misbehaviour cases. Do one live check with your key before the jury.

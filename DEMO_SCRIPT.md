@@ -1,10 +1,10 @@
 # DEMO_SCRIPT.md — 6–7 minute live jury demo
 
 **Before the jury (2 min):**
-1. `./run.sh` → open **http://localhost:8000** (Chrome, zoom 90% on a laptop screen).
-2. Click **Reset demo** (top right). It reseeds every fixture relative to today.
-3. Check the badge: **Offline mode** is the safe default and is deterministic and fast. If you have a DeepSeek key in `.env` and the network is fine, the badge shows **Online · deepseek-chat**. Clicking the badge flips modes live. **If anything is slow, click it back to Offline.**
-4. Keep **Inject fault** OFF until step 4.
+1. `.\run.bat` (Windows) or `./run.sh` → open **http://localhost:8000** in Chrome (zoom 90% on a laptop screen).
+2. Click **Reset demo** (top right). It reseeds every fixture relative to today; patients you registered are kept.
+3. The screen is deliberately clean: **Patient** and **Hospital Ops** only. Press **Ctrl + Shift + A** (or open `http://localhost:8000/?advanced=1`) to reveal the advanced controls: **Inject fault**, **Online/Offline**, and the **Blackboard** and **Metrics** tabs. Press it again to hide them. You need them for steps 3, 4 and 7.
+4. Offline mode is the default (no key, or `DEMO_OFFLINE=1`). With a DeepSeek key in `.env` it runs online. If it's slow, press Ctrl+Shift+A and click the Online badge to switch to Offline.
 
 Opening line (15 s):
 > "This started as a workflow: fixed tool order, and an LLM that only parsed text. Now it's a multi-agent system. A Supervisor decomposes goals onto a blackboard. Specialists pick their own tools, remember patients, critique their own proposals, and react to hospital events with nobody typing. Our rule is: *free to think, gated to act — permitted to fail, never to invent.*"
@@ -45,10 +45,10 @@ Book a cardiologist for me and a dermatologist for my mother on the same day, ba
 - It asks **"Which day?"**. Both people's time and area preferences are already in memory. Click **"Tomorrow"**.
 - "The Supervisor splits this into **two linked goals with a coupling constraint**: same day, back to back, same hospital as a soft preference. Memory resolves 'my mother' to **P014 Sunita** through family links."
 - "Scheduling does **one joint search** (`find_joint_slots`) instead of two independent ones, and the result is **one combined proposal with one approval**. Each person's own insurance is applied."
-- → **Approve**. Then open the **Blackboard** tab for 10 s: "goal, subtasks with owners and dependencies, facts, critic verdicts, and the write log that is our audit trail in SQLite."
+- → **Approve**. Then press **Ctrl + Shift + A** and open the **Blackboard** tab for 10 s: "goal, subtasks with owners and dependencies, facts, critic verdicts, and the write log that is our audit trail in SQLite."
 
 ## 4 · Reflection: the Critic catches an injected fault (45 s)
-Back on the **Patient** tab, switch to **Guest**, then turn **Inject fault ON** (it turns yellow):
+Back on the **Patient** tab, switch to **Guest**, then turn **Inject fault ON** (top bar, visible in advanced mode; it turns yellow):
 ```
 Pediatrician in Kothrud tomorrow between 10 and 11 am
 ```
@@ -72,7 +72,7 @@ severe chest pain and sweating
 - "A hard rule runs before every agent, in English and Hinglish. Scheduling never runs, and it tells the patient to call 108. No model can override this."
 
 ## 7 · Metrics (30 s)
-Open the **Metrics** tab:
+Open the **Metrics** tab (advanced mode, Ctrl + Shift + A):
 - "20 scenarios pass, including the original 7, the intake questions, a booking race, a rejection, Hinglish input and offline mode. 63 pytest tests cover tools, the policy checker, the critic, guardrails, races, unscripted inputs, and the online ReAct loop with a deliberately misbehaving LLM."
 - "Triage model: TF-IDF + logistic regression, 97% specialty accuracy on held-out data. We also report **63% on unseen phrasings** on purpose. That honest number is why triage asks the patient when it isn't confident, and why emergencies use a hard rule instead of ML."
 

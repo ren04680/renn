@@ -75,7 +75,7 @@ def main():
         except Exception:
             browser = pw.chromium.launch(executable_path=_chromium_path())
         page = browser.new_page(viewport={"width": 1600, "height": 950}, device_scale_factor=a.scale)
-        page.goto(base + "/")
+        page.goto(base + "/?advanced=1")  # advanced mode shows Inject fault, Blackboard and Metrics for the evidence shots
         page.wait_for_selector("[data-testid=chat-input]")
         page.wait_for_timeout(1200)
 

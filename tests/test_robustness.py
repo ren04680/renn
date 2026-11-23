@@ -13,7 +13,8 @@ def run(text, pid="GUEST", answer=None):
     while r["status"] == "waiting" and n < 4:
         n += 1
         if r["interrupt"]["kind"] == "clarification":
-            r = resume_run(r["run_id"], {"text": answer or "knee pain tomorrow"})
+            prefs = r["interrupt"].get("purpose") == "preferences"
+            r = resume_run(r["run_id"], {"text": "earliest, any time, anywhere" if prefs else (answer or "knee pain tomorrow")})
         else:
             r = resume_run(r["run_id"], {"approved": True})
     return r
@@ -89,13 +90,28 @@ def test_llm_outage_trips_breaker_fast(fresh, monkeypatch):
         settings.update(offline=True)
 
 
-@pytest.mark.parametrize("pid,locality", [("P001", "Kothrud"), ("GUEST", None)])
-def test_plain_organ_word_and_nearby(fresh, pid, locality):
+@pytest.mark.parametrize("pid", ["P001", "GUEST"])
+def test_plain_organ_word_and_nearby(fresh, pid):
     r = start_run("I want to book a nearby hospital for heart", pid)
-    assert r["status"] == "waiting" and r["interrupt"]["kind"] == "approval"  # no clarification loop
-    p = r["interrupt"]["proposal"]
-    assert p["items"][0]["specialty"] == "cardiology"
-    if locality:
-        assert p["items"][0]["locality"] == locality
+    it = r["interrupt"]
+    assert it["kind"] == "clarification" and it["purpose"] == "preferences"  # receptionist-style intake, not a loop
+    assert "Cardiology" in it["question"] and "Which day" in it["question"]
+    if pid == "P001":
+        assert "What time" not in it["question"] and "Kothrud" in it["question"]  # memory supplies time + area
     else:
-        assert any("nearby" in d for d in p["disclosures"])  # honest: guest has no known area
+        assert "What time" in it["question"] and "area" in it["question"]
+    r = resume_run(r["run_id"], {"text": "tomorrow, any time" + (", anywhere" if pid == "GUEST" else "")})
+    assert r["interrupt"]["kind"] == "approval"
+    assert r["interrupt"]["proposal"]["items"][0]["specialty"] == "cardiology"
+
+
+def test_complete_request_asks_nothing(fresh):
+    r = start_run("I need a dermatologist in Baner tomorrow morning", "GUEST")
+    assert r["interrupt"]["kind"] == "approval"
+
+
+def test_preference_question_asked_once(fresh):
+    r = start_run("looking for a bone doctor", "GUEST")
+    assert r["interrupt"]["purpose"] == "preferences"
+    r = resume_run(r["run_id"], {"text": "hmm not sure"})  # unhelpful answer → proceed with defaults, never nag
+    assert r["interrupt"]["kind"] == "approval"

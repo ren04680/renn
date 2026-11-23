@@ -52,7 +52,7 @@ export default function App() {
       if (r.interrupt.kind === "approval") {
         push(p, { role: "assistant", kind: "approval", text: r.interrupt.question, proposal: r.interrupt.proposal, runId: r.run_id });
       } else {
-        push(p, { role: "assistant", kind: "clarification", text: r.interrupt.question, runId: r.run_id });
+        push(p, { role: "assistant", kind: "clarification", text: r.interrupt.question, runId: r.run_id, suggestions: r.interrupt.suggestions ?? [] });
       }
     } else {
       setPending((x) => ({ ...x, [p]: null }));

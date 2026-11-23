@@ -39,25 +39,39 @@ def _tools(evs, name=None, agent=None):
             and (agent is None or e["agent"] == agent)]
 
 
-def chat(patient, text, answers, hooks=None, inject_fault=False, offline=True):
-    """Run a chat scenario, auto-answering interrupts in order. Returns (final, run_ids)."""
+def chat(patient, text, answers, hooks=None, inject_fault=False, offline=True, prefs_answer="earliest, any time, anywhere"):
+    """Run a chat scenario. Approvals and clarification texts are taken from `answers` by kind, in order;
+    the receptionist-style preference question (day/time/area) gets `prefs_answer` unless a text answer is queued.
+    Returns (final, run_ids, interrupts)."""
     from backend.core.runner import resume_run, start_run
 
     settings.update(inject_fault=inject_fault, offline=offline)
     r = start_run(text, patient)
     rid = r["run_id"]
-    i = 0
+    texts = [a["text"] for a in answers if "text" in a]
+    approvals = [a for a in answers if "approved" in a]
     interrupts = []
-    while r["status"] == "waiting":
-        interrupts.append(r["interrupt"])
-        if hooks and r["interrupt"]["kind"] in hooks and i not in hooks.get("done", set()):
-            hooks[r["interrupt"]["kind"]](r)
-            hooks.setdefault("done", set()).add(i)
-        ans = answers[i] if i < len(answers) else {"approved": True}
-        i += 1
+    n = 0
+    while r["status"] == "waiting" and n < 8:
+        n += 1
+        it = r["interrupt"]
+        interrupts.append(it)
+        if hooks and it["kind"] in hooks:
+            hooks[it["kind"]](r)
+        if it["kind"] == "clarification":
+            if it.get("purpose") == "preferences":
+                ans = {"text": texts.pop(0) if texts and texts[0] != "__prefs_default__" else prefs_answer}
+            else:
+                ans = {"text": texts.pop(0) if texts else "knee pain"}
+        else:
+            ans = approvals.pop(0) if approvals else {"approved": True}
         r = resume_run(rid, ans)
     settings.update(inject_fault=False)
     return r, [rid], interrupts
+
+
+def approvals_of(it):
+    return [x for x in it if x["kind"] == "approval"]
 
 
 # ----------------------------------------------------------------------------- scenarios
@@ -70,7 +84,8 @@ def s01():
 
 
 def s02():
-    r, ids, it = chat("GUEST", "I want to see a doctor", [{"text": "I have knee pain, day after tomorrow evening"}, {"approved": True}])
+    r, ids, it = chat("GUEST", "I want to see a doctor", [{"text": "I have knee pain, day after tomorrow evening"}, {"approved": True}],
+                      prefs_answer="day after tomorrow evening, anywhere")
     a = r["response"]["outcome"].get("appointments", [{}])[0]
     return r, ids, [("asked a clarification first", it and it[0]["kind"] == "clarification"),
                     ("booked orthopedics", r["response"]["kind"] == "booked" and a.get("specialty") == "orthopedics"),
@@ -148,7 +163,8 @@ def s10():
     ok_pair = len(apps) == 2
     if ok_pair:
         a, b = sorted(apps, key=lambda x: x["start"])
-    return r, ids, [("one approval for both", len(it) == 1 and len(it[0]["proposal"]["items"]) == 2),
+    ap = approvals_of(it)
+    return r, ids, [("one approval for both", len(ap) == 1 and len(ap[0]["proposal"]["items"]) == 2),
                     ("two appointments booked", ok_pair),
                     ("mother resolved to P014 (dermatology)", ok_pair and any(x["patient_id"] == "P014" and x["specialty"] == "dermatology" for x in apps)),
                     ("same day + back-to-back", ok_pair and a["date"] == b["date"] and a["end"] <= b["start"] and _gap(a["end"], b["start"]) <= 30),
@@ -240,7 +256,7 @@ def s16():
     a = r["response"]["outcome"].get("appointments", [{}])[0]
     evs = _events(ids)
     return r, ids, [("race detected", any(e["type"] == "decision" and "race" in e["msg"].lower() for e in evs)),
-                    ("re-planned and asked approval again", len(it) == 2),
+                    ("re-planned and asked approval again", len(approvals_of(it)) == 2),
                     ("booked a different slot (no double booking)", r["response"]["kind"] == "booked" and a.get("slot_id") != taken.get("slot"))]
 
 
@@ -249,7 +265,8 @@ def s17():
     from backend.db.session import get_session
 
     r, ids, it = chat("P010", "Need an orthopedic doctor in Baner the day after tomorrow", [{"approved": False}])
-    sid = it[0]["proposal"]["items"][0]["slot_id"] if it else None
+    ap = approvals_of(it)
+    sid = ap[0]["proposal"]["items"][0]["slot_id"] if ap else None
     with get_session() as s:
         st = s.get(Slot, sid).status if sid else None
     return r, ids, [("rejected → nothing booked", r["response"]["kind"] == "rejected"), ("hold released", st == "free")]
@@ -259,6 +276,25 @@ def s18():
     r, ids, _ = chat("GUEST", "papa ko seene mein bahut tez dard aur pasina aa raha hai", [])
     return r, ids, [("Hinglish emergency escalated", r["response"]["kind"] == "emergency"),
                     ("no scheduling", not _tools(_events(ids), agent="scheduling"))]
+
+
+def s19():
+    r, ids, it = chat("GUEST", "looking for a bone doctor", [{"text": "tomorrow morning, Kothrud"}, {"approved": True}])
+    q = next((x for x in it if x["kind"] == "clarification"), {})
+    a = r["response"]["outcome"].get("appointments", [{}])[0]
+    return r, ids, [("asked day, time and area in one message", q.get("purpose") == "preferences" and all(w in q.get("question", "") for w in ("Which day", "What time", "area"))),
+                    ("offered quick replies", len(q.get("suggestions", [])) >= 3),
+                    ("booked orthopedics tomorrow morning in Kothrud", r["response"]["kind"] == "booked" and a.get("specialty") == "orthopedics"
+                     and a.get("date") == D1 and a.get("start", "99") < "12:00" and a.get("locality") == "Kothrud")]
+
+
+def s20():
+    r, ids, it = chat("P001", "looking for a bone doctor", [{"text": "day after tomorrow"}, {"approved": True}])
+    q = next((x for x in it if x["kind"] == "clarification"), {})
+    a = r["response"]["outcome"].get("appointments", [{}])[0]
+    return r, ids, [("asked only the day (memory knows time, area, usual doctor)", "Which day" in q.get("question", "") and "What time" not in q.get("question", "")),
+                    ("told the patient what it remembered", "Dr. Arjun Mehra" in q.get("question", "") and "evening" in q.get("question", "")),
+                    ("booked usual doctor, evening, day after tomorrow", a.get("doctor_id") == "D11" and a.get("start", "") >= "16:00" and a.get("date") == D2)]
 
 
 SCENARIOS = [
@@ -271,6 +307,7 @@ SCENARIOS = [
     ("S13", "Billing: cost with my insurance", s13), ("S14", "Hinglish symptom input", s14),
     ("S15", "Offline mode (no LLM)", s15), ("S16", "Booking race → re-plan", s16),
     ("S17", "Patient rejects proposal", s17), ("S18", "Hinglish emergency", s18),
+    ("S19", "Intake: vague request → asks day, time, area", s19), ("S20", "Intake: memory-aware — asks only the day", s20),
 ]
 
 

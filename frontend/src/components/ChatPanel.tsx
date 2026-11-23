@@ -271,7 +271,7 @@ export default function ChatPanel({ patient, messages, busy, pending, onSend, on
             <div className="text-sm text-slate-500 mt-1">I can book, plan for family, use what I remember about you, and explain costs.</div>
           </div>
         )}
-        {messages.map((m) =>
+        {messages.map((m, idx) =>
           m.role === "user" ? (
             <div key={m.id} className="flex justify-end animate-slideIn">
               <div className="max-w-[85%] rounded-2xl rounded-br-md bg-indigo-600 text-white px-3.5 py-2 text-[14px] shadow-sm">{m.text}</div>
@@ -302,6 +302,20 @@ export default function ChatPanel({ patient, messages, busy, pending, onSend, on
                 }`}
               >
                 <Md text={m.text} />
+                {m.kind === "clarification" && idx === messages.length - 1 && pending?.kind === "clarification" && (m.suggestions?.length ?? 0) > 0 && (
+                  <div className="mt-2.5 flex flex-wrap gap-1.5" data-testid="quick-replies">
+                    {m.suggestions!.map((sgt) => (
+                      <button
+                        key={sgt}
+                        disabled={busy}
+                        onClick={() => onSend(sgt)}
+                        className="rounded-full bg-white border border-violet-300 text-violet-800 hover:bg-violet-600 hover:text-white px-3 py-1 text-[12.5px] font-medium transition"
+                      >
+                        {sgt}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ),

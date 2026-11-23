@@ -116,6 +116,13 @@ def plan(c: RunContext, round_no: int = 1) -> list[Subtask]:
                 goals["G1"]["doctor_id"] = d.id
                 goals["G1"]["specialty"] = goals["G1"]["specialty"] or d.specialty
                 c.trace.thought(AGENT, f"Patient named {d.name} → pinning goal G1 to {d.id}.")
+    for ref, carried in (c.cache.get("carry_goals") or {}).items():
+        if ref in goals:
+            for k, v in carried.items():
+                if v and not goals[ref].get(k):
+                    goals[ref][k] = v
+            if carried.get("specialty"):
+                goals[ref]["symptoms"] = None  # already triaged — don't re-classify text that now contains scheduling answers
     c.cache["goals"] = goals
     sts: list[Subtask] = []
 
@@ -227,8 +234,69 @@ def gap_check(c: RunContext) -> dict:
         if tri.get("top3"):
             opts = ", ".join(SPECIALTY_LABEL[x["specialty"]] for x in tri["top3"][:2])
             q += f" (From your description it could be {opts}, but I'm not confident enough to guess.)"
-        return {"question": q, "missing": missing}
+        return {"question": q, "missing": missing, "purpose": "specialty",
+                "suggestions": ["Knee pain", "Skin rash", "Chest discomfort", "Fever and cough"]}
+    if parsed["intent"] in ("book", "reschedule") and not c.cache.get("prefs_asked"):
+        pq = preference_question(c)
+        if pq:
+            c.cache["prefs_asked"] = True
+            return pq
     return {"ok": True}
+
+
+def preference_question(c: RunContext) -> dict | None:
+    """Receptionist-style intake: ask (once, in one message) only for what is missing and cannot be inferred.
+    Memory fills what it can (usual time of day, home area, usual doctor) — those are *told*, not asked."""
+    goals = c.cache["goals"]
+    parsed = c.cache["parsed"]
+    pc = parsed["constraints"]
+    flex = parsed.get("flexible") or {}
+    prefs = [g.get("prefs") or {} for g in goals.values()]
+    known_from_memory = []
+    need_date = not pc.get("date_from") and not flex.get("date")
+    mem_time = all(p.get("time") for p in prefs)
+    need_time = not pc.get("time_from") and not flex.get("time") and not mem_time
+    if not pc.get("time_from") and not flex.get("time") and mem_time:
+        known_from_memory.append(f"your usual **{prefs[0]['time']}** slots")
+    home = all(p.get("home_locality") for p in prefs)
+    area_given = pc.get("locality") or pc.get("mode") == "tele" or flex.get("area")
+    need_area = not area_given and not home
+    if not area_given and home:
+        known_from_memory.append(f"hospitals near **{prefs[0]['home_locality']}**")
+    g1 = goals.get("G1") or {}
+    if g1.get("prefs", {}).get("usual_doctor_id") and not g1.get("doctor_id"):
+        from backend.db.models import Doctor
+        from backend.db.session import get_session
+
+        with get_session() as s:
+            d = s.get(Doctor, g1["prefs"]["usual_doctor_id"])
+            if d and d.specialty == g1.get("specialty"):
+                known_from_memory.append(f"your usual doctor **{d.name}** if free")
+    if not (need_date or need_time or need_area):
+        if known_from_memory:
+            c.trace.thought(AGENT, "No need to ask the patient: memory supplies " + ", ".join(k.replace("**", "") for k in known_from_memory) + ".")
+        return None
+    what = " + ".join(SPECIALTY_LABEL.get(g.get("specialty"), "doctor") for g in goals.values())
+    qs = []
+    if need_date:
+        qs.append("**Which day?** (e.g. tomorrow, Friday, next week — or “earliest”)")
+    if need_time:
+        qs.append("**What time?** Morning (9:30–12:00) or evening (4:00–6:30) — or “any time”")
+    if need_area:
+        qs.append("**Which area of Pune** suits you (Kothrud, Baner, Hadapsar, Viman Nagar, Shivajinagar, Loni Kalbhor) — or is an **online** consultation fine?")
+    head = f"Sure — let's book your **{what}** appointment. " + ("A few quick questions so I pick the right slot:" if len(qs) > 1 else "One quick question:")
+    body = "\n".join(f"{i + 1}. {q}" for i, q in enumerate(qs)) if len(qs) > 1 else qs[0]
+    tail = ("\nFrom what I remember, I'll use " + ", ".join(known_from_memory) + " — tell me if you'd prefer otherwise.") if known_from_memory else ""
+    if need_date and not need_time and not need_area:
+        sugg = ["Tomorrow", "Day after tomorrow", "Next week", "Earliest available"]
+    elif need_area:
+        sugg = ["Tomorrow morning, Kothrud", "Tomorrow evening, anywhere", "Earliest, any time, anywhere", "Online consultation, earliest"]
+    else:
+        sugg = ["Tomorrow morning", "Tomorrow evening", "Day after tomorrow, any time", "Earliest, any time"]
+    missing = [m for m, n in (("date", need_date), ("time", need_time), ("area", need_area)) if n]
+    c.trace.thought(AGENT, f"Before searching, ask the patient for: {', '.join(missing)}"
+                    + (f"; memory already gives: {', '.join(k.replace('**', '') for k in known_from_memory)}" if known_from_memory else "") + ".")
+    return {"question": head + "\n" + body + tail, "missing": missing, "purpose": "preferences", "suggestions": sugg}
 
 
 # ----------------------------------------------------------------------------- dispatch

@@ -74,7 +74,7 @@ export type Proposal = {
 
 export type Interrupt =
   | { kind: "approval"; run_id: string; proposal: Proposal; question: string }
-  | { kind: "clarification"; run_id: string; question: string };
+  | { kind: "clarification"; run_id: string; question: string; purpose?: string; suggestions?: string[] };
 
 export type RunResult = {
   run_id: string;
@@ -91,6 +91,7 @@ export type ChatMsg = {
   text: string;
   runId?: string;
   proposal?: Proposal;
+  suggestions?: string[];
   resolved?: "approved" | "rejected";
   ts: number;
 };

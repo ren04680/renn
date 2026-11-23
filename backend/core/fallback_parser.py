@@ -303,7 +303,14 @@ def parse_request(text: str, today: date | None = None) -> dict:
     if re.search(r"\bi (prefer|like)\b.*\b(online|tele|video)", t):
         prefs_stated.append("Prefers teleconsultation (stated by patient).")
 
+    any_all = bool(re.search(r"\b(you decide|anything is fine|any is fine|whatever|no preference|doesn'?t matter|koi bhi chalega)\b", t))
+    flexible = {
+        "date": any_all or bool(re.search(r"\b(earliest|asap|as soon as possible|soonest|any ?day|whenever|jaldi|kabhi bhi)\b", t)),
+        "time": any_all or bool(re.search(r"\b(any ?time|anytime|whenever|flexible|earliest|asap|as soon as possible|any slot|koi bhi time)\b", t)),
+        "area": any_all or bool(re.search(r"\b(anywhere|any ?where in pune|any area|any hospital|any location|kahin bhi)\b", t)),
+    }
     return {
+        "flexible": flexible,
         "intent": intent,
         "goals": goals,
         "multi_goal": len(goals) > 1,

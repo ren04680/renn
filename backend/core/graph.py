@@ -142,6 +142,8 @@ def gap_check_node(state: GraphState) -> dict:
     if r.get("question"):
         c.bb.set_status("supervisor", st.id, "blocked", r, msg=f"{st.id} blocked — missing {r.get('missing')}")
         c.cache["clarify_question"] = r["question"]
+        c.cache["clarify_purpose"] = r.get("purpose", "specialty")
+        c.cache["clarify_suggestions"] = r.get("suggestions", [])
         return {"next": "clarify"}
     goals = c.cache["goals"]
     c.trace.decision("supervisor", "Gap check passed: " + "; ".join(
@@ -154,19 +156,25 @@ def gap_check_node(state: GraphState) -> dict:
 def clarify(state: GraphState) -> dict:
     c = ctx(state["run_id"])
     q = c.cache.get("clarify_question", "Could you tell me a bit more?")
-    key = f"clarify_asked_{c.cache.get('clarify_rounds', 0)}"
+    purpose = c.cache.get("clarify_purpose", "specialty")
+    sugg = c.cache.get("clarify_suggestions", [])
+    key = f"clarify_asked_{c.cache.get('clarify_rounds', 0)}_{purpose}"
     if not c.cache.get(key):
         c.cache[key] = True
-        c.trace("supervisor", "approval_request", f"Clarification needed → asking the patient: {q}",
-                {"kind": "clarification", "question": q})
+        c.trace("supervisor", "approval_request", f"Asking the patient ({purpose}): {q.replace('**', '')}",
+                {"kind": "clarification", "question": q, "purpose": purpose})
     c.pause()
-    answer = interrupt({"kind": "clarification", "question": q, "run_id": c.run_id})
+    answer = interrupt({"kind": "clarification", "question": q, "run_id": c.run_id, "purpose": purpose, "suggestions": sugg})
     c.unpause()
     ans = answer.get("text", "") if isinstance(answer, dict) else str(answer)
-    c.cache["clarify_rounds"] = c.cache.get("clarify_rounds", 0) + 1
+    if purpose == "specialty":
+        c.cache["clarify_rounds"] = c.cache.get("clarify_rounds", 0) + 1
+    else:
+        # a "which day / what time / where" answer must not change WHAT was already decided (specialty, doctor)
+        c.cache["carry_goals"] = {ref: {k: g.get(k) for k in ("specialty", "doctor_id")} for ref, g in c.cache["goals"].items()}
     c.trace("human", "message", ans, {"role": "user", "clarification": True})
     c.cache["text"] = f"{c.cache['text']}. {ans}"
-    if c.cache["clarify_rounds"] > MAX_CLARIFY_ROUNDS:
+    if c.cache.get("clarify_rounds", 0) > MAX_CLARIFY_ROUNDS:
         _outcome(c, "supervisor", status="failed", reason="the request stayed unclear after two clarifications.")
         return {"next": "finish"}
     return {"text": c.cache["text"], "last_message": ans, "replan": True, "next": "guard"}

@@ -3,7 +3,10 @@ REM Hospital Agent OS — Windows launcher.  run.bat [test|reset|cli]
 cd /d %~dp0
 if not exist .venv ( python -m venv .venv )
 call .venv\Scripts\activate.bat
-if not exist .venv\deps-ok ( pip install -r requirements.txt && echo ok> .venv\deps-ok )
+if not exist .venv\deps-ok (
+  pip install -r requirements.txt || pip install -r requirements-core.txt
+  echo ok> .venv\deps-ok
+)
 if not exist .env copy .env.example .env
 if not exist models\triage_classifier.joblib python -m scripts.train_triage
 if not exist data\hospital.db python -m scripts.seed

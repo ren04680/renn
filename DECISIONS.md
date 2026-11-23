@@ -77,3 +77,12 @@ Principle used throughout: **"Free to think, gated to act. The agent is permitte
 - **D-38: Scenario runner resets the DB before each scenario**, so scenarios are independent and deterministic. 18 scenarios (spec asked for ≥14).
 - **D-39: Screenshots** use Python Playwright (`scripts/capture_screenshots.py`, 35 numbered steps at deviceScaleFactor 2). On machines without Playwright's bundled browser, set `PW_CHROMIUM` to an existing Chromium.
 - **D-40: Auto-reseed on server start when the calendar day changed** (fixtures are relative to "today"), so a rehearsal yesterday cannot break today's demo. Manual reset: the UI button or `./run.sh reset`.
+
+## Final pre-demo hardening (after a fuzz test with 30 unscripted inputs)
+
+- **D-41: Honest scope.** Requests for specialties the network doesn't have (eye, dental, gynaecology, mental health, urology, oncology) get an honest "we don't offer this" instead of the classifier's nearest guess. "Eye problem" used to be classified as gastroenterology at 93%. Mental-health requests also show the Tele-MANAS 14416 helpline. "Cancel my appointment" lists the patient's appointments and refers to the front desk; the agent does not cancel on its own.
+- **D-42: Unregistered family members** ("my child has fever" as a guest, "my son" when no son is linked) are booked under the requester's account **with a disclosure** instead of being refused. No patient record is invented.
+- **D-43: Negation-aware triage input.** "No chest pain, just a rash" was escalated by the ML layer. Negated symptom phrases are now stripped before classification; the hard rule still screens the full original text first.
+- **D-44: Doctor names** are resolved token by token ("book Dr. Mehra tomorrow" used to search for a doctor named "tomorrow"). Same-patient joint bookings can never overlap.
+- **D-45: LLM circuit breaker.** After any LLM failure every LLM step is skipped for 120 s, so steps fall back to offline logic instantly instead of each waiting for its timeout. `max_retries=0` and `LLM_TIMEOUT=20`. Measured with an unreachable DeepSeek host: 1.8 s for the first booking, 0.1 s for the next.
+- **D-46: Installer resilience.** If `chromadb` fails to install (some Windows / new-Python setups), `run.sh` / `run.bat` retry with `requirements-core.txt` and the app uses its built-in numpy vector store. Tested.

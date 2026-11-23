@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23 02:36",
+  "generated": "2026-11-23 02:40",
   "mode": "offline (DEMO_OFFLINE=1)",
   "results": [
     {
@@ -38,8 +38,8 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.25,
-      "response": "Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹650. Ref **A66E522**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.24,
+      "response": "Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹650. Ref **A5B76E7**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -75,8 +75,8 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.11,
-      "response": "Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Wed 25 Nov (day after tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **A7E8635**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.15,
+      "response": "Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Wed 25 Nov (day after tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **AA9F72E**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -116,7 +116,7 @@
       "critic_loops": 0,
       "llm_calls": 0,
       "latency_s": 0.06,
-      "response": "Booked! ✅ **Dr. Shreya Apte** (Pediatrics) — Tue 24 Nov (tomorrow), 11:00–11:30, at Kothrud Care Hospital, Kothrud — you pay ₹650. Ref **A064C9B**.\n\nWhat I changed from your request: No free slot in your requested time (10:00–11:00), so I widened the search to the whole day.\nA confirmation SMS has been sent.",
+      "response": "Booked! ✅ **Dr. Shreya Apte** (Pediatrics) — Tue 24 Nov (tomorrow), 11:00–11:30, at Kothrud Care Hospital, Kothrud — you pay ₹650. Ref **A1AD598**.\n\nWhat I changed from your request: No free slot in your requested time (10:00–11:00), so I widened the search to the whole day.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -155,8 +155,8 @@
       "retries": 1,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.08,
-      "response": "Booked! ✅ **Dr. Ritu Malhotra** (ENT) — Tue 24 Nov (tomorrow), 10:00–10:30, at Kothrud Care Hospital, Kothrud — you pay ₹600. Ref **A273C4D**.\n\nWhat I changed from your request: Nothing suitable in Hadapsar, so I searched hospitals across all of Pune.\nA confirmation SMS has been sent.",
+      "latency_s": 0.06,
+      "response": "Booked! ✅ **Dr. Ritu Malhotra** (ENT) — Tue 24 Nov (tomorrow), 10:00–10:30, at Kothrud Care Hospital, Kothrud — you pay ₹600. Ref **A5EEFED**.\n\nWhat I changed from your request: Nothing suitable in Hadapsar, so I searched hospitals across all of Pune.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -192,7 +192,7 @@
       "critic_loops": 0,
       "llm_calls": 0,
       "latency_s": 0.06,
-      "response": "Booked! ✅ **Dr. Ramesh Agarwal** (Gastroenterology) — Tue 24 Nov (tomorrow), 11:30–12:00, 🎥 video consultation — you pay ₹840. Ref **A47B38C**.\n\nWhat I changed from your request: No in-person slot was free, so I included teleconsultation (video) slots.\nA confirmation SMS has been sent.",
+      "response": "Booked! ✅ **Dr. Ramesh Agarwal** (Gastroenterology) — Tue 24 Nov (tomorrow), 11:30–12:00, 🎥 video consultation — you pay ₹840. Ref **A285280**.\n\nWhat I changed from your request: No in-person slot was free, so I included teleconsultation (video) slots.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -303,8 +303,8 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.13,
-      "response": "Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Mon 30 Nov, 16:30–17:00, at Kothrud Care Hospital, Kothrud — you pay ₹180. Ref **A3726D6**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.1,
+      "response": "Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Mon 30 Nov, 16:30–17:00, at Kothrud Care Hospital, Kothrud — you pay ₹180. Ref **A4CD1B2**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -339,8 +339,8 @@
       "retries": 0,
       "critic_loops": 1,
       "llm_calls": 0,
-      "latency_s": 0.14,
-      "response": "Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹130. Ref **A612F84**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.13,
+      "response": "Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹130. Ref **A9BE6D2**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -383,8 +383,8 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.15,
-      "response": "Booked! ✅ **Dr. Sunita Rao** (Cardiology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Baner Lifeline Hospital, Baner — you pay ₹200. Ref **AFA1B7C**.\n✅ **Dr. Neha Joshi** (Dermatology) for Sunita Sharma — Tue 24 Nov (tomorrow), 16:30–17:00, at Baner Lifeline Hospital, Baner — you pay ₹395. Ref **AD620EB**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.13,
+      "response": "Booked! ✅ **Dr. Sunita Rao** (Cardiology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Baner Lifeline Hospital, Baner — you pay ₹200. Ref **A513084**.\n✅ **Dr. Neha Joshi** (Dermatology) for Sunita Sharma — Tue 24 Nov (tomorrow), 16:30–17:00, at Baner Lifeline Hospital, Baner — you pay ₹395. Ref **A389265**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -424,7 +424,7 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.11,
+      "latency_s": 0.1,
       "response": "3 offers; P001 accepted → accepted",
       "error": ""
     },
@@ -486,7 +486,7 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.04,
+      "latency_s": 0.05,
       "response": "Here is what your appointments will cost, using your insurance on file:\n• **Dr. Anil Kulkarni** (Cardiology, Kothrud Care Hospital) on Wed 25 Nov (day after tomorrow) 10:00: fee ₹1000. Your plan **CarePlus Gold** covers 80% here (in-network) → insurer ₹800, **you pay ₹200**.",
       "error": ""
     },
@@ -519,8 +519,8 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.06,
-      "response": "Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Tue 24 Nov (tomorrow), 09:30–10:00, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **AEFE8B4**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.1,
+      "response": "Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Tue 24 Nov (tomorrow), 09:30–10:00, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **A4C452C**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -556,8 +556,8 @@
       "retries": 0,
       "critic_loops": 0,
       "llm_calls": 0,
-      "latency_s": 0.11,
-      "response": "Booked! ✅ **Dr. Amit Deshmukh** (Dermatology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹470. Ref **A101BA0**.\nA confirmation SMS has been sent.",
+      "latency_s": 0.12,
+      "response": "Booked! ✅ **Dr. Amit Deshmukh** (Dermatology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹470. Ref **A70FB0A**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {
@@ -593,7 +593,7 @@
       "critic_loops": 0,
       "llm_calls": 0,
       "latency_s": 0.13,
-      "response": "Booked! ✅ **Dr. Vivek Sathe** (General Medicine) — Tue 24 Nov (tomorrow), 17:30–18:00, at Kothrud Care Hospital, Kothrud — you pay ₹350. Ref **A059A2B**.\nA confirmation SMS has been sent.",
+      "response": "Booked! ✅ **Dr. Vivek Sathe** (General Medicine) — Tue 24 Nov (tomorrow), 17:30–18:00, at Kothrud Care Hospital, Kothrud — you pay ₹350. Ref **A2F434A**.\nA confirmation SMS has been sent.",
       "error": ""
     },
     {

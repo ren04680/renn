@@ -217,7 +217,14 @@ scripts/    seed.py train_triage.py run_scenarios.py capture_screenshots.py
 data/ models/ tests/ submission/ legacy/
 ```
 
-## 8. Known limitations
+## 8. Running on your laptop — troubleshooting
+* Use **Python 3.11–3.13**. Check with `python3 --version` (Windows: `python --version`).
+* **Port 8000 busy:** `PORT=8010 ./run.sh`, then open http://localhost:8010.
+* **chromadb won't install:** the launchers retry automatically without it, and memory uses the built-in vector store.
+* **DeepSeek slow or down:** click the mode badge to switch to Offline. Even without that, the circuit breaker falls back after the first failure.
+* **Something looks off mid-demo:** click **Reset demo**. It reseeds everything in a few seconds.
+
+## 9. Known limitations
 * **The online (DeepSeek) path has not run against the real API in this build environment** (no key, host blocked). It is tested end to end with a scripted fake tool-calling LLM (`tests/test_react_loop.py`), including misbehaviour cases. Do one live check with your key before the jury.
 * The offline embedder is lexical (hashing n-grams with synonyms), not semantic. Install `sentence-transformers` for real MiniLM embeddings.
 * Multi-goal joint search uses the deterministic `find_joint_slots` planner in both modes. The LLM's role there is the decomposition.

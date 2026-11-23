@@ -1,24 +1,24 @@
 # Scenario test results
 
-Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic planner) · **18/18 passed**
+Generated 2026-11-23 02:40 · mode: offline (DEMO_OFFLINE=1, deterministic planner) · **18/18 passed**
 
 | # | Scenario | Outcome | Pass | Agents involved | Tool calls | Retries | Critic loops | Latency (s) |
 |---|---|---|---|---|---|---|---|---|
-| S01 | Original: direct booking | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 9 | 0 | 0 | 0.25 |
-| S02 | Original: clarification loop | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor, triage | 12 | 0 | 0 | 0.11 |
+| S01 | Original: direct booking | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 9 | 0 | 0 | 0.24 |
+| S02 | Original: clarification loop | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor, triage | 12 | 0 | 0 | 0.15 |
 | S03 | Original: retry — widen time window | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 11 | 1 | 0 | 0.06 |
-| S04 | Original: retry — widen area (time step skipped) | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 12 | 1 | 0 | 0.08 |
+| S04 | Original: retry — widen area (time step skipped) | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 12 | 1 | 0 | 0.06 |
 | S05 | Original: retry — allow teleconsultation | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 11 | 1 | 0 | 0.06 |
 | S06 | Original: emergency escalated | emergency | ✅ | guardrail | 0 | 0 | 0 | 0.01 |
 | S07 | Original: waitlisted after full ladder | waitlisted | ✅ | guardrail, memory, notification, scheduling, supervisor | 17 | 4 | 0 | 0.11 |
-| S08 | Memory: 'my usual doctor next week' | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 13 | 0 | 0 | 0.13 |
-| S09 | Reflection: critic catches injected fault | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 20 | 0 | 1 | 0.14 |
-| S10 | Multi-goal: family back-to-back booking | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 21 | 0 | 0 | 0.15 |
-| S11 | Proactive: doctor cancels block | proactive | ✅ | critic, event_watcher, memory, notification | 24 | 0 | 0 | 0.11 |
+| S08 | Memory: 'my usual doctor next week' | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 13 | 0 | 0 | 0.1 |
+| S09 | Reflection: critic catches injected fault | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 20 | 0 | 1 | 0.13 |
+| S10 | Multi-goal: family back-to-back booking | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 21 | 0 | 0 | 0.13 |
+| S11 | Proactive: doctor cancels block | proactive | ✅ | critic, event_watcher, memory, notification | 24 | 0 | 0 | 0.1 |
 | S12 | Proactive: slot freed → waitlist fill | proactive | ✅ | critic, event_watcher, memory, notification | 9 | 0 | 0 | 0.05 |
-| S13 | Billing: cost with my insurance | billing | ✅ | billing, guardrail, memory, supervisor | 4 | 0 | 0 | 0.04 |
-| S14 | Hinglish symptom input | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor, triage | 12 | 0 | 0 | 0.06 |
-| S15 | Offline mode (no LLM) | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor, triage | 15 | 0 | 0 | 0.11 |
+| S13 | Billing: cost with my insurance | billing | ✅ | billing, guardrail, memory, supervisor | 4 | 0 | 0 | 0.05 |
+| S14 | Hinglish symptom input | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor, triage | 12 | 0 | 0 | 0.1 |
+| S15 | Offline mode (no LLM) | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor, triage | 15 | 0 | 0 | 0.12 |
 | S16 | Booking race → re-plan | booked | ✅ | billing, critic, guardrail, memory, notification, scheduling, supervisor | 21 | 0 | 0 | 0.13 |
 | S17 | Patient rejects proposal | rejected | ✅ | billing, critic, guardrail, memory, scheduling, supervisor | 14 | 1 | 0 | 0.07 |
 | S18 | Hinglish emergency | emergency | ✅ | guardrail | 0 | 0 | 0 | 0.01 |
@@ -31,14 +31,14 @@ Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic plann
 - ✅ tomorrow morning
 - ✅ no relaxation needed
 
-> Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹650. Ref **A66E522**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹650. Ref **A5B76E7**. A confirmation SMS has been sent.
 
 **S02 — Original: clarification loop** → `booked`
 - ✅ asked a clarification first
 - ✅ booked orthopedics
 - ✅ day after tomorrow evening
 
-> Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Wed 25 Nov (day after tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **A7E8635**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Wed 25 Nov (day after tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **AA9F72E**. A confirmation SMS has been sent.
 
 **S03 — Original: retry — widen time window** → `booked`
 - ✅ booked
@@ -46,7 +46,7 @@ Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic plann
 - ✅ closest slot to 10–11 (11:00, Kothrud)
 - ✅ relaxation disclosed
 
-> Booked! ✅ **Dr. Shreya Apte** (Pediatrics) — Tue 24 Nov (tomorrow), 11:00–11:30, at Kothrud Care Hospital, Kothrud — you pay ₹650. Ref **A064C9B**.  What I changed from your request: No free slot in your requested time (10:00–11:00), so I widened the search to the whole day. A confirmation SMS has b
+> Booked! ✅ **Dr. Shreya Apte** (Pediatrics) — Tue 24 Nov (tomorrow), 11:00–11:30, at Kothrud Care Hospital, Kothrud — you pay ₹650. Ref **A1AD598**.  What I changed from your request: No free slot in your requested time (10:00–11:00), so I widened the search to the whole day. A confirmation SMS has b
 
 **S04 — Original: retry — widen area (time step skipped)** → `booked`
 - ✅ booked
@@ -54,14 +54,14 @@ Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic plann
 - ✅ widen_time skipped (ineffective, not counted)
 - ✅ ENT outside Hadapsar, tomorrow
 
-> Booked! ✅ **Dr. Ritu Malhotra** (ENT) — Tue 24 Nov (tomorrow), 10:00–10:30, at Kothrud Care Hospital, Kothrud — you pay ₹600. Ref **A273C4D**.  What I changed from your request: Nothing suitable in Hadapsar, so I searched hospitals across all of Pune. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Ritu Malhotra** (ENT) — Tue 24 Nov (tomorrow), 10:00–10:30, at Kothrud Care Hospital, Kothrud — you pay ₹600. Ref **A5EEFED**.  What I changed from your request: Nothing suitable in Hadapsar, so I searched hospitals across all of Pune. A confirmation SMS has been sent.
 
 **S05 — Original: retry — allow teleconsultation** → `booked`
 - ✅ booked
 - ✅ relaxed to teleconsultation
 - ✅ tele slot tomorrow
 
-> Booked! ✅ **Dr. Ramesh Agarwal** (Gastroenterology) — Tue 24 Nov (tomorrow), 11:30–12:00, 🎥 video consultation — you pay ₹840. Ref **A47B38C**.  What I changed from your request: No in-person slot was free, so I included teleconsultation (video) slots. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Ramesh Agarwal** (Gastroenterology) — Tue 24 Nov (tomorrow), 11:30–12:00, 🎥 video consultation — you pay ₹840. Ref **A285280**.  What I changed from your request: No in-person slot was free, so I included teleconsultation (video) slots. A confirmation SMS has been sent.
 
 **S06 — Original: emergency escalated** → `emergency`
 - ✅ escalated
@@ -85,14 +85,14 @@ Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic plann
 - ✅ next week
 - ✅ evening slot (remembered preference)
 
-> Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Mon 30 Nov, 16:30–17:00, at Kothrud Care Hospital, Kothrud — you pay ₹180. Ref **A3726D6**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Mon 30 Nov, 16:30–17:00, at Kothrud Care Hospital, Kothrud — you pay ₹180. Ref **A4CD1B2**. A confirmation SMS has been sent.
 
 **S09 — Reflection: critic catches injected fault** → `booked`
 - ✅ critic said REVISE first
 - ✅ then APPROVE
 - ✅ booked correct specialty
 
-> Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹130. Ref **A612F84**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Neha Joshi** (Dermatology) — Tue 24 Nov (tomorrow), 10:00–10:30, at Baner Lifeline Hospital, Baner — you pay ₹130. Ref **A9BE6D2**. A confirmation SMS has been sent.
 
 **S10 — Multi-goal: family back-to-back booking** → `booked`
 - ✅ one approval for both
@@ -101,7 +101,7 @@ Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic plann
 - ✅ same day + back-to-back
 - ✅ same hospital
 
-> Booked! ✅ **Dr. Sunita Rao** (Cardiology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Baner Lifeline Hospital, Baner — you pay ₹200. Ref **AFA1B7C**. ✅ **Dr. Neha Joshi** (Dermatology) for Sunita Sharma — Tue 24 Nov (tomorrow), 16:30–17:00, at Baner Lifeline Hospital, Baner — you pay ₹395. Ref **AD620E
+> Booked! ✅ **Dr. Sunita Rao** (Cardiology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Baner Lifeline Hospital, Baner — you pay ₹200. Ref **A513084**. ✅ **Dr. Neha Joshi** (Dermatology) for Sunita Sharma — Tue 24 Nov (tomorrow), 16:30–17:00, at Baner Lifeline Hospital, Baner — you pay ₹395. Ref **A38926
 
 **S11 — Proactive: doctor cancels block** → `proactive`
 - ✅ watcher woke with no user prompt
@@ -129,21 +129,21 @@ Generated 2026-11-23 02:36 · mode: offline (DEMO_OFFLINE=1, deterministic plann
 - ✅ Hinglish → orthopedics by the ML model
 - ✅ booked in Kothrud
 
-> Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Tue 24 Nov (tomorrow), 09:30–10:00, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **AEFE8B4**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Arjun Mehra** (Orthopedics) — Tue 24 Nov (tomorrow), 09:30–10:00, at Kothrud Care Hospital, Kothrud — you pay ₹900. Ref **A4C452C**. A confirmation SMS has been sent.
 
 **S15 — Offline mode (no LLM)** → `booked`
 - ✅ booked in forced offline mode
 - ✅ zero LLM calls
 - ✅ same agent structure (triage+memory+scheduling+critic)
 
-> Booked! ✅ **Dr. Amit Deshmukh** (Dermatology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹470. Ref **A101BA0**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Amit Deshmukh** (Dermatology) — Tue 24 Nov (tomorrow), 16:00–16:30, at Kothrud Care Hospital, Kothrud — you pay ₹470. Ref **A70FB0A**. A confirmation SMS has been sent.
 
 **S16 — Booking race → re-plan** → `booked`
 - ✅ race detected
 - ✅ re-planned and asked approval again
 - ✅ booked a different slot (no double booking)
 
-> Booked! ✅ **Dr. Vivek Sathe** (General Medicine) — Tue 24 Nov (tomorrow), 17:30–18:00, at Kothrud Care Hospital, Kothrud — you pay ₹350. Ref **A059A2B**. A confirmation SMS has been sent.
+> Booked! ✅ **Dr. Vivek Sathe** (General Medicine) — Tue 24 Nov (tomorrow), 17:30–18:00, at Kothrud Care Hospital, Kothrud — you pay ₹350. Ref **A2F434A**. A confirmation SMS has been sent.
 
 **S17 — Patient rejects proposal** → `rejected`
 - ✅ rejected → nothing booked

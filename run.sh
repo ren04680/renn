@@ -15,7 +15,7 @@ fi
 # shellcheck disable=SC1091
 . .venv/bin/activate
 if [ ! -f .venv/.deps-ok ] || [ requirements.txt -nt .venv/.deps-ok ]; then
-  echo "▶ installing Python dependencies"; pip install -q --upgrade pip && pip install -q -r requirements.txt && touch .venv/.deps-ok
+  echo "▶ installing Python dependencies"; pip install -q --upgrade pip && { pip install -q -r requirements.txt || { echo "▶ chromadb failed to install — using the built-in vector store fallback"; pip install -q -r requirements-core.txt; }; } && touch .venv/.deps-ok
 fi
 [ -f .env ] || cp .env.example .env
 [ -f models/triage_classifier.joblib ] || { echo "▶ training triage classifier"; python -m scripts.train_triage; }

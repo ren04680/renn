@@ -120,7 +120,7 @@ def _t(hhmm: str, minutes: int) -> str:
     return f"{tot // 60:02d}:{tot % 60:02d}"
 
 
-def reset_demo(today: date | None = None, verbose: bool = True, keep_registered: bool = True) -> dict:
+def reset_demo(today: date | None = None, verbose: bool = True, keep_registered: bool = True, export: bool = False) -> dict:
     """Drop + recreate everything to the known demo state. Returns a summary dict."""
     rng = random.Random(SEED)
     today = today or date.today()
@@ -383,7 +383,9 @@ def reset_demo(today: date | None = None, verbose: bool = True, keep_registered:
     from backend.core import vector_memory
 
     n_mem = vector_memory.rebuild_from_db()
-    if "HOSPITAL_DB" not in os.environ:  # test/scenario databases don't overwrite the exported dataset
+    if export and "HOSPITAL_DB" not in os.environ:
+        # only on request (`python -m scripts.seed --export`): the running app must never rewrite the
+        # git-tracked dataset CSVs, otherwise `git pull` refuses to update ("local changes would be overwritten")
         export_csvs()
     summary = {
         "today": today.isoformat(),
@@ -444,4 +446,4 @@ def export_csvs() -> None:
 
 
 if __name__ == "__main__":
-    reset_demo()
+    reset_demo(export="--export" in sys.argv)

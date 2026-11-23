@@ -45,8 +45,9 @@ def recall(c: RunContext, goal_ref: str) -> dict:
     # 1) resolve who the appointment is for
     if g["who"] != "self":
         if requester == "GUEST":
-            g["patient_id"] = None
-            g["unresolved"] = f"Guest sessions have no family links, so I can't identify your {g['who']}."
+            g["patient_id"] = "GUEST"
+            g["on_behalf_of"] = g["who"]
+            t.thought(AGENT, f"Guest session: no family links, so the appointment for the {g['who']} is made under the guest booking (disclosed).")
         else:
             prof = call_tool(c, AGENT, "get_patient_profile", {"patient_id": requester},
                              reason=f"resolve the patient's '{g['who']}' through registered family links")
@@ -57,9 +58,10 @@ def recall(c: RunContext, goal_ref: str) -> dict:
                 g["patient_name"] = fam[0]["name"]
                 t.thought(AGENT, f"'{g['who']}' resolves to {fam[0]['name']} ({fam[0]['patient_id']}) via family links.")
             else:
-                g["patient_id"] = None
-                g["unresolved"] = f"I couldn't find your {g['who']} among your registered family members."
-                t.thought(AGENT, g["unresolved"])
+                g["patient_id"] = requester
+                g["on_behalf_of"] = g["who"]
+                t.thought(AGENT, f"Your {g['who']} isn't a registered family member — booking under {requester}'s account for them "
+                                 "(disclosed; front desk registers them at the visit). Not inventing a patient record.")
     else:
         g["patient_id"] = requester
     pid = g.get("patient_id")

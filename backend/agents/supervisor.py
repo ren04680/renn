@@ -105,8 +105,13 @@ def plan(c: RunContext, round_no: int = 1) -> list[Subtask]:
         from backend.db.models import Doctor
         from backend.db.session import get_session
 
+        d = None
         with get_session() as s:
-            d = s.query(Doctor).filter(Doctor.name.ilike(f"%{parsed['doctor_name'].split()[-1]}%")).first()
+            for tok in parsed["doctor_name"].split():
+                if len(tok) >= 3 and tok not in ("tomorrow", "today", "next", "the", "for", "and"):
+                    d = s.query(Doctor).filter(Doctor.name.ilike(f"% {tok}%")).first()
+                    if d:
+                        break
             if d:
                 goals["G1"]["doctor_id"] = d.id
                 goals["G1"]["specialty"] = goals["G1"]["specialty"] or d.specialty
@@ -124,6 +129,9 @@ def plan(c: RunContext, round_no: int = 1) -> list[Subtask]:
     if intent == "billing":
         r = add("recall", "memory", "Load profile, insurance and upcoming appointments", [], "G1")
         add("billing_answer", "billing", "Answer the cost / insurance question from data", [r], "G1")
+    elif intent == "cancel" or parsed.get("unsupported"):
+        r = add("recall", "memory", "Load profile and upcoming appointments", [], "G1")
+        add("gap_check", "supervisor", "Check the request is within what this system may do", [r])
     else:
         recalls, triages = {}, []
         for ref, g in goals.items():
@@ -175,6 +183,17 @@ def gap_check(c: RunContext) -> dict:
     """Returns {"ok": True} or {"question": ...} or {"fail": ...} or {"emergency": ...}."""
     goals = c.cache["goals"]
     parsed = c.cache["parsed"]
+    if parsed.get("unsupported"):
+        return {"info": f"Our hospital network doesn't offer **{parsed['unsupported']}** yet, so I won't book an unrelated "
+                        "specialist just to have something to show you. Please consult a dedicated clinic for this — or, if you also "
+                        "have another problem, describe it and I'll find the right doctor."
+                        + (" If you are struggling right now, you can call Tele-MANAS on **14416** (free, 24×7)." if "mental" in parsed["unsupported"] else "")}
+    if parsed["intent"] == "cancel":
+        up = (c.bb.facts.get("memory_G1") or {}).get("upcoming") or []
+        lst = "".join(f"\n• {a['doctor_name']} — {date_label(a['date'])} {a['start']} (ref {a['appointment_id']})" for a in up[:5])
+        return {"info": "Cancelling isn't something I do on my own: it needs front-desk confirmation in this hospital. "
+                        + (f"Your upcoming appointments:{lst}\nCall the front desk with the reference number, or ask me to **reschedule** instead." if up
+                           else "You have no upcoming appointments.")}
     for ref, g in goals.items():
         tri = c.bb.facts.get(f"triage_{ref}") or {}
         if tri.get("urgency") == "emergency":
@@ -267,5 +286,7 @@ def compose_response(c: RunContext) -> dict:
         return {"kind": "emergency", "text": o.get("message", ""), "outcome": o}
     if st == "billing":
         return {"kind": "billing", "text": o.get("answer", ""), "outcome": o}
+    if st == "info":
+        return {"kind": "text", "text": o.get("text", ""), "outcome": o}
     reason = o.get("reason") or "I couldn't complete this request."
     return {"kind": "failed", "text": f"Sorry — {reason} Nothing was booked (I never guess a slot).", "outcome": o}

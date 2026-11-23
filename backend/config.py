@@ -24,7 +24,7 @@ for _d in (DATA_DIR, MODELS_DIR, LOGS_DIR):
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "").strip()
 DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
-LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "25"))
+LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "20"))
 HOLD_TTL_SECONDS = int(os.getenv("HOLD_TTL_SECONDS", "300"))
 PROACTIVE_HOLD_TTL_SECONDS = int(os.getenv("PROACTIVE_HOLD_TTL_SECONDS", "900"))
 EMBEDDINGS = os.getenv("EMBEDDINGS", "auto")

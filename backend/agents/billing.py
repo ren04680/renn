@@ -25,8 +25,36 @@ def cost_proposal(c: RunContext, proposal: dict) -> dict:
     return proposal
 
 
+def _specialty_answer(c: RunContext, patient_id: str, spec: str) -> dict:
+    from backend.db.models import Doctor
+    from backend.db.session import get_session
+
+    with get_session() as s:
+        docs = [d.id for d in s.query(Doctor).filter(Doctor.specialty == spec).order_by(Doctor.fee).all()]
+    ests = []
+    for did in docs:
+        e = call_tool(c, AGENT, "estimate_cost", {"patient_id": patient_id, "doctor_id": did},
+                      reason=f"price every {SPECIALTY_LABEL[spec]} doctor with this patient's own plan")
+        if e.get("ok"):
+            ests.append(e["estimate"])
+    ests.sort(key=lambda e: e["patient_pays"])
+    lo, hi = ests[0], ests[-1]
+    lines = [f"A **{SPECIALTY_LABEL[spec]}** consultation costs ₹{min(e['fee'] for e in ests)}–₹{max(e['fee'] for e in ests)} in our network. "
+             f"With your plan **{lo['plan_name']}** you would pay between **₹{lo['patient_pays']}** and **₹{hi['patient_pays']}**:"]
+    for e in ests:
+        lines.append(f"• {e['doctor_name']} ({e['hospital']}): fee ₹{e['fee']}, {e['coverage_pct']}% covered ({e['basis']}) → you pay ₹{e['patient_pays']}")
+    lines.append(f"Cheapest for you: **{lo['doctor_name']}**. Want me to book one?")
+    res = {"answer": "\n".join(lines), "estimates": ests}
+    c.trace.thought(AGENT, f"Priced {len(ests)} {spec} doctors with the patient's plan (₹{lo['patient_pays']}–₹{hi['patient_pays']}).")
+    c.bb.write(AGENT, "facts", {"billing_answer": res}, msg=f"billing answer: {spec} price range")
+    return res
+
+
 def answer_question(c: RunContext, patient_id: str) -> dict:
     t = c.trace
+    spec_q = (c.cache.get("goals", {}).get("G1") or {}).get("specialty")
+    if spec_q:
+        return _specialty_answer(c, patient_id, spec_q)
     ap = call_tool(c, AGENT, "get_patient_appointments", {"patient_id": patient_id},
                    reason="the question is about cost — find what the patient is actually booked for")
     lines, rows = [], []

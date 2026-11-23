@@ -119,8 +119,14 @@ def make_proposal(c: RunContext, goal_ref: str, items: list[dict], pol: Relaxati
                   notes: list[str], coupling: dict | None = None, kind: str = "single", extra: dict | None = None) -> dict:
     n = c.cache.get("proposal_n", 0) + 1
     c.cache["proposal_n"] = n
+    extra_disc = []
+    for it in items:
+        g = c.cache.get("goals", {}).get(it.get("goal_ref"), {})
+        if g.get("on_behalf_of"):
+            extra_disc.append(f"Booked under your account for your {g['on_behalf_of']} (not registered yet — the front desk "
+                              "will register them at the visit).")
     p = {"proposal_id": f"PR-{c.run_id[:6]}-{n}", "goal_ref": goal_ref, "kind": kind, "items": items,
-         "coupling": coupling, "relaxations": list(pol.applied), "disclosures": [r["disclosure"] for r in pol.applied],
+         "coupling": coupling, "relaxations": list(pol.applied), "disclosures": [r["disclosure"] for r in pol.applied] + extra_disc,
          "skipped_steps": list(pol.skipped), "rationale": rationale, "preference_notes": notes, "stage": "proposed",
          **(extra or {})}
     return p
@@ -251,6 +257,9 @@ def react(c: RunContext, goal_ref: str, g: dict, pol: RelaxationPolicy) -> dict:
             c.llm_calls += 1
             ai: AIMessage = bound.invoke(msgs)
         except Exception as e:  # noqa: BLE001
+            from backend.core.llm import trip_breaker
+
+            trip_breaker()
             raise LLMUnavailable(f"{type(e).__name__}: {e}") from e
         msgs.append(ai)
         text = ai.content if isinstance(ai.content, str) else ""

@@ -128,6 +128,12 @@ def gap_check_node(state: GraphState) -> dict:
     if r.get("emergency"):
         c.bb.set_status("supervisor", st.id, "done", r)
         return {"next": "escalate"}
+    if r.get("info"):
+        c.bb.set_status("supervisor", st.id, "done", {"info": True})
+        supervisor.skip_downstream(c, ("triage", "schedule", "cost", "verify", "approve", "book", "notify", "remember"), "nothing to book")
+        c.trace.decision("supervisor", "Request is outside what the agents may do → honest answer instead of an action.")
+        _outcome(c, "supervisor", status="info", text=r["info"])
+        return {"next": "supervisor"}
     if r.get("fail"):
         c.bb.set_status("supervisor", st.id, "failed", r)
         supervisor.skip_downstream(c, ("schedule", "cost", "verify", "approve", "book", "notify", "remember"), "gap not resolvable")

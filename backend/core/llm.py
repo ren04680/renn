@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import re
 import threading
+import time
 from typing import Any
 
 from backend.config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL, LLM_TIMEOUT
@@ -31,7 +32,7 @@ def chat_model():
 
             _model = ChatOpenAI(
                 model=DEEPSEEK_MODEL, api_key=DEEPSEEK_API_KEY or "missing", base_url=DEEPSEEK_BASE_URL,
-                timeout=LLM_TIMEOUT, max_retries=1, temperature=0,
+                timeout=LLM_TIMEOUT, max_retries=0, temperature=0,
             )
         return _model
 
@@ -39,17 +40,34 @@ def chat_model():
 # test hook: tests can inject a fake chat model (e.g. scripted tool-calling LLM)
 _override = None
 
+# circuit breaker: after an LLM failure, skip the LLM for BREAKER_SECONDS (every step falls back
+# instantly instead of each one waiting for its own timeout — keeps a live demo responsive)
+BREAKER_SECONDS = 120
+_breaker_until = 0.0
+
 
 def set_model_override(m) -> None:
-    global _override
+    global _override, _breaker_until
     _override = m
+    _breaker_until = 0.0
+
+
+def trip_breaker() -> None:
+    global _breaker_until
+    _breaker_until = time.time() + BREAKER_SECONDS
+
+
+def breaker_open() -> bool:
+    return time.time() < _breaker_until
 
 
 def get_model(c: RunContext):
-    if _override is not None:
-        return _override
     if c.offline:
         raise LLMUnavailable("offline mode")
+    if breaker_open():
+        raise LLMUnavailable(f"LLM failed recently — circuit open for {int(_breaker_until - time.time())}s")
+    if _override is not None:
+        return _override
     return chat_model()
 
 
@@ -85,4 +103,5 @@ def llm_json(c: RunContext, agent: str, step: str, system: str, user: str) -> An
     except LLMUnavailable:
         raise
     except Exception as e:  # noqa: BLE001
+        trip_breaker()
         raise LLMUnavailable(f"{type(e).__name__}: {e}") from e

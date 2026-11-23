@@ -32,6 +32,15 @@ WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", 
 MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 SESSIONS = {"morning": ("09:00", "12:00"), "afternoon": ("12:00", "16:00"), "evening": ("16:00", "20:00")}
 
+UNSUPPORTED = [
+    ("ophthalmology (eye care)", r"\b(eye|eyes|vision|ophthalm\w*|cataract|spectacles|glasses|aankh\w*)\b"),
+    ("dentistry", r"\b(dentist|dental|tooth|teeth|toothache|gums?|daant|daat)\b"),
+    ("gynaecology / obstetrics", r"\b(pregnan\w*|gyn(a)?ec\w*|obstetric\w*|periods?|menstrua\w*)\b"),
+    ("psychiatry / mental health", r"\b(depress\w*|anxiety|psychiatr\w*|mental health|panic attacks?)\b"),
+    ("urology / nephrology", r"\b(kidney stones?|urolog\w*|nephrolog\w*|prostate)\b"),
+    ("oncology", r"\b(cancer|tumou?r|oncolog\w*|chemo\w*)\b"),
+]
+
 SYMPTOM_WORDS = re.compile(
     r"\b(pain|ache|aching|dard|fever|bukhar|rash|itch\w*|khujli|cough|khansi|cold|vomit\w*|ulti|nausea|dizz\w*|chakkar|"
     r"headache|migraine|swelling|swollen|bleed\w*|burn\w*|acidity|acne|pimples?|sore|blocked|numb\w*|tingl\w*|"
@@ -224,9 +233,10 @@ def parse_request(text: str, today: date | None = None) -> dict:
     billing = bool(re.search(r"\b(cost|how much|fee|fees|price|charges?|insurance|cover(ed|age)?|kitna|paisa|bill)\b", t))
     booking_verbs = bool(re.search(r"\b(book|appointment|schedule|see a|see an|consult|visit|need a|need an|want a|want to see|dikhana|milna)\b", t))
     reschedule = bool(re.search(r"\b(reschedule|move my appointment|change my appointment|postpone)\b", t))
-    cancel = bool(re.search(r"\bcancel (my )?appointment\b", t))
+    cancel = bool(re.search(r"\bcancel\b.{0,25}\b(appointment|booking|visit)\b", t))
 
     specs = _find_specialties(t)
+    unsupported = next((name for name, pat in UNSUPPORTED if re.search(pat, t)), None)
     rels = _find_relations(t)
     has_symptoms = bool(SYMPTOM_WORDS.search(t))
 
@@ -260,10 +270,10 @@ def parse_request(text: str, today: date | None = None) -> dict:
             "symptoms": raw.strip() if (has_symptoms and not specs) else None,
         })
 
-    if reschedule:
-        intent = "reschedule"
-    elif cancel:
+    if cancel:
         intent = "cancel"
+    elif reschedule:
+        intent = "reschedule"
     elif billing and not (booking_verbs and (specs or has_symptoms)):
         intent = "billing"
     elif specs or has_symptoms or booking_verbs or usual or doctor_name:
@@ -293,5 +303,6 @@ def parse_request(text: str, today: date | None = None) -> dict:
         "billing_question": billing,
         "has_symptoms": has_symptoms,
         "stated_preferences": prefs_stated,
+        "unsupported": unsupported if not specs else None,
         "parser": "rule-based",
     }

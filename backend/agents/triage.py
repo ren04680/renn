@@ -5,6 +5,8 @@ The LLM may override the specialty WITH stated reasoning, but it can never downg
 """
 from __future__ import annotations
 
+import re
+
 from backend.core.context import RunContext
 from backend.core.fallback_parser import SPECIALTY_LABEL
 from backend.core.llm import LLMUnavailable, llm_json, note_fallback
@@ -32,7 +34,11 @@ def run(c: RunContext, goal_ref: str) -> dict:
         res = {"specialty": None, "urgency": "emergency", "source": "hard-rule", "matches": es.get("matches")}
         c.bb.write(AGENT, "facts", {f"triage_{goal_ref}": res}, msg=f"triage_{goal_ref}: EMERGENCY (hard rule)")
         return res
-    cl = call_tool(c, AGENT, "classify_symptoms", {"text": text}, reason="map free-text symptoms to a specialty and urgency")
+    clf_text = re.sub(r"\b(no|without|denies|not having)\s+((any|severe|much)\s+)?[a-z]+(\s+(pain|ache|problem|issues?|fever|cough))?\s*[,.;]?",
+                      " ", text, flags=re.I).strip() or text
+    if clf_text != text:
+        t.thought(AGENT, f"Negated symptoms removed before classification: '{clf_text}' (the hard rule already screened the full text).")
+    cl = call_tool(c, AGENT, "classify_symptoms", {"text": clf_text}, reason="map free-text symptoms to a specialty and urgency")
     spec, conf, urg = cl["specialty"], cl["specialty_conf"], cl["urgency"]
     res = {"specialty": spec if conf >= CONF_ACCEPT else None, "specialty_conf": conf, "urgency": urg,
            "urgency_conf": cl["urgency_conf"], "emergency_prob": cl["emergency_prob"], "top3": cl["top3"],

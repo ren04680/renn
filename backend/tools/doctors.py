@@ -196,6 +196,9 @@ def find_joint_slots(c: RunContext, goal_a: dict, goal_b: dict, same_day=True, b
                 continue
             if a["mode"] != b["mode"]:
                 continue
+            if goal_a["patient_id"] == goal_b["patient_id"] and not (
+                    hm_to_min(a["end"]) <= hm_to_min(b["start"]) or hm_to_min(b["end"]) <= hm_to_min(a["start"])):
+                continue  # one person cannot be in two consultations at once
             if back_to_back:
                 if a["date"] != b["date"]:
                     continue
@@ -204,7 +207,8 @@ def find_joint_slots(c: RunContext, goal_a: dict, goal_b: dict, same_day=True, b
                 if not (0 <= gap1 <= max_gap_minutes or 0 <= gap2 <= max_gap_minutes):
                     continue
             same_h = a["hospital_id"] == b["hospital_id"]
-            score = (5 if (same_h and prefer_same_hospital) else 0) - (datetime.fromisoformat(a["date"]) - datetime.fromisoformat(df)).days \
+            gap = abs(hm_to_min(a["start"]) - hm_to_min(b["start"])) if a["date"] == b["date"] else 600
+            score = (5 if (same_h and prefer_same_hospital) else 0) - (datetime.fromisoformat(a["date"]) - datetime.fromisoformat(df)).days - gap / 240 \
                 + (0.3 * (a["rating"] + b["rating"]) - 2.5) - 0.01 * hm_to_min(min(a["start"], b["start"])) / 60
             pairs.append({"a": a, "b": b, "same_hospital": same_h, "score": round(score, 3)})
     pairs.sort(key=lambda p: -p["score"])

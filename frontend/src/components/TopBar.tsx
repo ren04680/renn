@@ -57,7 +57,7 @@ export default function TopBar({ patients, pid, setPid, settings, updateSettings
           </select>
         </div>
         {cur && cur.id !== "GUEST" && (
-          <div className="hidden 2xl:flex items-center gap-2 text-[11px] text-indigo-100/80">
+          <div className="hidden min-[1850px]:flex items-center gap-2 text-[11px] text-indigo-100/80">
             <span className="chip bg-white/10">{cur.locality}</span>
             <span className="chip bg-white/10">{cur.plan}</span>
             {cur.preferred_time && <span className="chip bg-white/10">prefers {cur.preferred_time}</span>}

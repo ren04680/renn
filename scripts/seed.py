@@ -331,6 +331,7 @@ def reset_demo(today: date | None = None, verbose: bool = True) -> dict:
                                 reason=rng.choice(REASONS[doc_rows[sl.doctor_id].specialty])))
 
         cancel_fixture = {"09:30": None, "10:00": "P001", "10:30": "P014", "11:00": "P023"}
+        setst("D01", 2, "11:30", "free")
         reg_pool = [p for p in pmap if p.startswith("P") and p not in ("P001", "P014", "P023", "P031")]
         for sl in slot_rows:
             if sl.status != "booked":
@@ -342,7 +343,6 @@ def reset_demo(today: date | None = None, verbose: bool = True) -> dict:
         for t, pid in cancel_fixture.items():
             sl = setst("D01", 2, t, "booked")
             add_appt(sl, pid)
-        setst("D01", 2, "11:30", "free")
 
         # waitlist: P031 waiting for neurology over the next 3 days
         s.add(M.WaitlistEntry(id="W0001", patient_id="P031", specialty="neurology", doctor_id=None,

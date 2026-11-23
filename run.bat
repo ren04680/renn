@@ -43,16 +43,22 @@ call ".venv\Scripts\activate.bat"
 
 if not exist ".venv\deps-ok" (
   echo [2/4] Installing Python packages - first run takes a few minutes ...
-  python -m pip install --upgrade pip
-  python -m pip install --prefer-binary -r requirements.txt
+  python -m pip install --upgrade pip --retries 10 --timeout 60
+  python -m pip install --prefer-binary --retries 10 --timeout 60 -r requirements.txt
   if errorlevel 1 (
-    echo chromadb failed to install - using the built-in vector store instead.
-    python -m pip install --prefer-binary -r requirements-core.txt
+    echo First install attempt failed - retrying once ...
+    python -m pip install --prefer-binary --retries 10 --timeout 60 -r requirements.txt
+  )
+  if errorlevel 1 (
+    echo Retrying without chromadb - the app then uses its built-in vector store ...
+    python -m pip install --prefer-binary --retries 10 --timeout 60 -r requirements-core.txt
   )
   python -c "import fastapi, langgraph, sklearn, uvicorn, sqlalchemy" && echo ok> ".venv\deps-ok"
 )
 if not exist ".venv\deps-ok" (
   echo ERROR: package installation failed - scroll up for the pip error.
+  echo If you see SSL or connection errors, your network is blocking PyPI downloads:
+  echo switch to a mobile hotspot or pause antivirus HTTPS scanning, then run .\run.bat again.
   exit /b 1
 )
 

@@ -293,7 +293,7 @@ def run(only: set[str] | None = None, verbose: bool = False) -> list[dict]:
             r, ids, checks, err = {"response": {"kind": "crash", "text": str(e)}, "stats": {}}, [], [("ran without crashing", False)], traceback.format_exc()
         dt = time.time() - t0
         evs = _events(ids)
-        agents = sorted({e["agent"] for e in evs if e["agent"] not in ("system", "human", "guardrail")})
+        agents = sorted({e["agent"] for e in evs if e["agent"] not in ("system", "human")})
         row = {
             "id": sid, "scenario": name, "outcome": r["response"]["kind"],
             "pass": all(ok for _, ok in checks), "checks": [{"check": c, "pass": bool(ok)} for c, ok in checks],

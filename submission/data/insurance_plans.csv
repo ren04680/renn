@@ -1,0 +1,6 @@
+id,name,coverage_pct,out_of_network_pct,copay,tele_covered,annual_opd_limit,notes
+INS0,Self-pay (no insurance),0,0,0,0,0,Patient pays the full consultation fee.
+INS1,MediShield Basic,50,0,100,0,10000,50% OPD cover at network hospitals only; ₹100 copay; tele not covered.
+INS2,CarePlus Gold,80,50,0,1,25000,"80% in-network, 50% out-of-network; tele covered; no copay."
+INS3,Senior Care Plus,70,30,200,1,15000,"70% in-network, 30% out-of-network; ₹200 copay; tele covered."
+INS4,Govt Employee Health Scheme,100,0,0,0,50000,"100% at empanelled hospitals, nothing elsewhere."

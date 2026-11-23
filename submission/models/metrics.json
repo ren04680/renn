@@ -1,0 +1,178 @@
+{
+  "model": "tfidf_word12_char25 + logistic_regression",
+  "dataset_size": 2800,
+  "class_counts": {
+    "specialty": {
+      "neurology": 407,
+      "cardiology": 402,
+      "general_medicine": 379,
+      "gastroenterology": 375,
+      "pediatrics": 338,
+      "ent": 312,
+      "dermatology": 298,
+      "orthopedics": 289
+    },
+    "urgency": {
+      "routine": 1664,
+      "soon": 672,
+      "emergency": 464
+    },
+    "language": {
+      "english": 2118,
+      "hinglish": 682
+    }
+  },
+  "split_standard_80_20": {
+    "specialty": {
+      "accuracy": 0.9696,
+      "macro_f1": 0.9703,
+      "report": {
+        "cardiology": {
+          "precision": 0.9634146341463414,
+          "recall": 0.9875,
+          "f1-score": 0.9753086419753086,
+          "support": 80.0
+        },
+        "dermatology": {
+          "precision": 0.9836065573770492,
+          "recall": 1.0,
+          "f1-score": 0.9917355371900827,
+          "support": 60.0
+        },
+        "ent": {
+          "precision": 0.9242424242424242,
+          "recall": 0.9838709677419355,
+          "f1-score": 0.953125,
+          "support": 62.0
+        },
+        "gastroenterology": {
+          "precision": 0.972972972972973,
+          "recall": 0.9473684210526315,
+          "f1-score": 0.96,
+          "support": 76.0
+        },
+        "general_medicine": {
+          "precision": 0.9866666666666667,
+          "recall": 0.9736842105263158,
+          "f1-score": 0.9801324503311258,
+          "support": 76.0
+        },
+        "neurology": {
+          "precision": 0.95,
+          "recall": 0.9382716049382716,
+          "f1-score": 0.9440993788819876,
+          "support": 81.0
+        },
+        "orthopedics": {
+          "precision": 1.0,
+          "recall": 0.9473684210526315,
+          "f1-score": 0.972972972972973,
+          "support": 57.0
+        },
+        "pediatrics": {
+          "precision": 0.9852941176470589,
+          "recall": 0.9852941176470589,
+          "f1-score": 0.9852941176470589,
+          "support": 68.0
+        },
+        "accuracy": 0.9696428571428571,
+        "macro avg": {
+          "precision": 0.9707746716315642,
+          "recall": 0.9704197178698555,
+          "f1-score": 0.9703335123748171,
+          "support": 560.0
+        },
+        "weighted avg": {
+          "precision": 0.9701342983749522,
+          "recall": 0.9696428571428571,
+          "f1-score": 0.9696502660062424,
+          "support": 560.0
+        }
+      },
+      "labels": [
+        "cardiology",
+        "dermatology",
+        "ent",
+        "gastroenterology",
+        "general_medicine",
+        "neurology",
+        "orthopedics",
+        "pediatrics"
+      ]
+    },
+    "urgency": {
+      "accuracy": 0.9982,
+      "macro_f1": 0.9983,
+      "report": {
+        "emergency": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 93.0
+        },
+        "routine": {
+          "precision": 0.9970059880239521,
+          "recall": 1.0,
+          "f1-score": 0.9985007496251874,
+          "support": 333.0
+        },
+        "soon": {
+          "precision": 1.0,
+          "recall": 0.9925373134328358,
+          "f1-score": 0.9962546816479401,
+          "support": 134.0
+        },
+        "accuracy": 0.9982142857142857,
+        "macro avg": {
+          "precision": 0.999001996007984,
+          "recall": 0.9975124378109452,
+          "f1-score": 0.9982518104243758,
+          "support": 560.0
+        },
+        "weighted avg": {
+          "precision": 0.9982196321642429,
+          "recall": 0.9982142857142857,
+          "f1-score": 0.9982122802964489,
+          "support": 560.0
+        }
+      },
+      "labels": [
+        "emergency",
+        "routine",
+        "soon"
+      ],
+      "emergency_recall": 1.0
+    }
+  },
+  "split_unseen_phrases": {
+    "specialty": {
+      "accuracy": 0.6341,
+      "macro_f1": 0.6198,
+      "labels": [
+        "cardiology",
+        "dermatology",
+        "ent",
+        "gastroenterology",
+        "general_medicine",
+        "neurology",
+        "orthopedics",
+        "pediatrics"
+      ]
+    },
+    "urgency": {
+      "accuracy": 0.7066,
+      "macro_f1": 0.6628,
+      "labels": [
+        "emergency",
+        "routine",
+        "soon"
+      ],
+      "emergency_recall": 0.5299
+    }
+  },
+  "embedding_comparison": {
+    "status": "skipped",
+    "reason": "ModuleNotFoundError: No module named 'sentence_transformers'"
+  },
+  "train_seconds": 6.42
+}

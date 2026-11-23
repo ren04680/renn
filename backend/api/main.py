@@ -7,6 +7,7 @@ from __future__ import annotations
 import asyncio
 import json
 from contextlib import asynccontextmanager
+from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -29,9 +30,10 @@ async def lifespan(app: FastAPI):
         from scripts.train_triage import main as train
 
         await asyncio.to_thread(train)
-    if not DB_PATH.exists():
-        from scripts.seed import reset_demo
+    from scripts.seed import reset_demo
 
+    if not DB_PATH.exists() or _seeded_for() != date.today().isoformat():
+        # demo fixtures are relative to "today": reseed when the calendar day changed (jury-day safety)
         await asyncio.to_thread(reset_demo)
     from backend.core import vector_memory
     from backend.core.graph import get_graph
@@ -97,5 +99,11 @@ else:
                 "docs": "/docs"}
 
 
-def _unused(p: Path) -> None:  # pragma: no cover
-    pass
+def _seeded_for() -> str | None:
+    try:
+        from backend.db.session import engine
+
+        with engine.connect() as conn:
+            return conn.exec_driver_sql("SELECT MIN(date) FROM slots").scalar()
+    except Exception:
+        return None

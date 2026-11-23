@@ -1,19 +1,19 @@
 id,scenario,outcome,pass,agents,tool_calls,retries,critic_loops,llm_calls,latency_s
-S01,Original: direct booking,booked,PASS,billing critic memory notification scheduling supervisor,9,0,0,0,0.28
-S02,Original: clarification loop,booked,PASS,billing critic memory notification scheduling supervisor triage,12,0,0,0,0.11
-S03,Original: retry — widen time window,booked,PASS,billing critic memory notification scheduling supervisor,11,1,0,0,0.05
-S04,Original: retry — widen area (time step skipped),booked,PASS,billing critic memory notification scheduling supervisor,12,1,0,0,0.07
-S05,Original: retry — allow teleconsultation,booked,PASS,billing critic memory notification scheduling supervisor,11,1,0,0,0.06
-S06,Original: emergency escalated,emergency,PASS,,0,0,0,0,0.01
-S07,Original: waitlisted after full ladder,waitlisted,PASS,memory notification scheduling supervisor,17,4,0,0,0.11
-S08,Memory: 'my usual doctor next week',booked,PASS,billing critic memory notification scheduling supervisor,13,0,0,0,0.1
-S09,Reflection: critic catches injected fault,booked,PASS,billing critic memory notification scheduling supervisor,20,0,1,0,0.13
-S10,Multi-goal: family back-to-back booking,booked,PASS,billing critic memory notification scheduling supervisor,21,0,0,0,0.14
+S01,Original: direct booking,booked,PASS,billing critic guardrail memory notification scheduling supervisor,9,0,0,0,0.19
+S02,Original: clarification loop,booked,PASS,billing critic guardrail memory notification scheduling supervisor triage,12,0,0,0,0.12
+S03,Original: retry — widen time window,booked,PASS,billing critic guardrail memory notification scheduling supervisor,11,1,0,0,0.06
+S04,Original: retry — widen area (time step skipped),booked,PASS,billing critic guardrail memory notification scheduling supervisor,12,1,0,0,0.07
+S05,Original: retry — allow teleconsultation,booked,PASS,billing critic guardrail memory notification scheduling supervisor,11,1,0,0,0.06
+S06,Original: emergency escalated,emergency,PASS,guardrail,0,0,0,0,0.01
+S07,Original: waitlisted after full ladder,waitlisted,PASS,guardrail memory notification scheduling supervisor,17,4,0,0,0.1
+S08,Memory: 'my usual doctor next week',booked,PASS,billing critic guardrail memory notification scheduling supervisor,13,0,0,0,0.12
+S09,Reflection: critic catches injected fault,booked,PASS,billing critic guardrail memory notification scheduling supervisor,20,0,1,0,0.14
+S10,Multi-goal: family back-to-back booking,booked,PASS,billing critic guardrail memory notification scheduling supervisor,21,0,0,0,0.16
 S11,Proactive: doctor cancels block,proactive,PASS,critic event_watcher memory notification,24,0,0,0,0.09
-S12,Proactive: slot freed → waitlist fill,proactive,PASS,critic event_watcher memory notification,9,0,0,0,0.05
-S13,Billing: cost with my insurance,billing,PASS,billing memory supervisor,4,0,0,0,0.04
-S14,Hinglish symptom input,booked,PASS,billing critic memory notification scheduling supervisor triage,12,0,0,0,0.07
-S15,Offline mode (no LLM),booked,PASS,billing critic memory notification scheduling supervisor triage,15,0,0,0,0.1
-S16,Booking race → re-plan,booked,PASS,billing critic memory notification scheduling supervisor,21,0,0,0,0.12
-S17,Patient rejects proposal,rejected,PASS,billing critic memory scheduling supervisor,14,1,0,0,0.07
-S18,Hinglish emergency,emergency,PASS,,0,0,0,0,0.01
+S12,Proactive: slot freed → waitlist fill,proactive,PASS,critic event_watcher memory notification,9,0,0,0,0.04
+S13,Billing: cost with my insurance,billing,PASS,billing guardrail memory supervisor,4,0,0,0,0.06
+S14,Hinglish symptom input,booked,PASS,billing critic guardrail memory notification scheduling supervisor triage,12,0,0,0,0.09
+S15,Offline mode (no LLM),booked,PASS,billing critic guardrail memory notification scheduling supervisor triage,15,0,0,0,0.14
+S16,Booking race → re-plan,booked,PASS,billing critic guardrail memory notification scheduling supervisor,21,0,0,0,0.17
+S17,Patient rejects proposal,rejected,PASS,billing critic guardrail memory scheduling supervisor,14,1,0,0,0.07
+S18,Hinglish emergency,emergency,PASS,guardrail,0,0,0,0,0.01

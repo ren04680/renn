@@ -65,7 +65,7 @@ severe chest pain and sweating
 
 ## 7 · Metrics (30 s)
 Open the **Metrics** tab:
-- "18 scenarios pass, including the original 7, a booking race, a rejection, Hinglish input and offline mode. 48 pytest tests cover tools, the policy checker, the critic, guardrails, races, and the online ReAct loop with a deliberately misbehaving LLM."
+- "18 scenarios pass, including the original 7, a booking race, a rejection, Hinglish input and offline mode. 58 pytest tests cover tools, the policy checker, the critic, guardrails, races, unscripted inputs, and the online ReAct loop with a deliberately misbehaving LLM."
 - "Triage model: TF-IDF + logistic regression, 97% specialty accuracy on held-out data. We also report **63% on unseen phrasings** on purpose. That honest number is why triage asks the patient when it isn't confident, and why emergencies use a hard rule instead of ML."
 
 Close (10 s):

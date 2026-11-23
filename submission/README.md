@@ -19,7 +19,7 @@ Windows: `run.bat`. The built UI is committed (`frontend/dist`), so **Node is no
 |---|---|
 | `./run.sh` | start the backend; it serves the React UI at **http://localhost:8000** |
 | `./run.sh dev` | backend with `--reload` + Vite dev server on :5173 (needs Node 18+) |
-| `./run.sh test` | `pytest` (48 tests) + the 18-scenario runner → `submission/test_results.{md,csv,json}` |
+| `./run.sh test` | `pytest` (58 tests) + the 18-scenario runner → `submission/test_results.{md,csv,json}` |
 | `./run.sh reset` | reseed the demo data to its known state (the UI's **Reset demo** button does the same) |
 | `./run.sh cli --patient P001` | interactive CLI with the original `[agent] message` trace style |
 | `./run.sh shots` | Playwright walkthrough → 35 numbered screenshots in `submission/screenshots/` |

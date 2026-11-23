@@ -1,307 +1,307 @@
 id,patient_id,text,kind,source,created_at
-M00001,P001,"Usual doctor: Dr. Arjun Mehra (Orthopedics, Kothrud Care Hospital, D11) — seen 4 times for knee pain.",preference,seed,1785154945.5087175
-M00002,P001,Prefers evening slots after 4 PM because of office hours.,preference,seed,1783211177.5087175
-M00003,P001,Prefers in-person consultations; lives in Kothrud.,preference,seed,1782061319.5087175
-M00004,P001,Mother Sunita Sharma (P014) is registered; P001 often books appointments for her.,fact,seed,1785159754.5087175
-M00005,P014,Prefers morning slots; avoids travelling in the evening.,preference,seed,1792374679.5087175
-M00006,P014,Prefers hospitals in or near Kothrud.,preference,seed,1791117920.5087175
-M00007,P014,Speaks Marathi; son Aarav (P001) usually accompanies her.,fact,seed,1790781555.5087175
-M00008,P023,Prefers teleconsultation — travels frequently for work.,preference,seed,1794849628.5087175
-M00009,P023,"Usual cardiologist: Dr. Farah Khan (D04), follow-ups for blood pressure.",preference,seed,1788912971.5087175
-M00010,P031,"Has recurring migraines; waiting for a neurology appointment, prefers mornings.",fact,seed,1791560066.5087175
-M00011,P002,Visited Ent (Dr. Ashok Bhosale) on 2026-01-25 at 17:00 for sinusitis.,episode,seed,1794782206.5087175
-M00012,P002,Visited Pediatrics (Dr. Leena Fernandes) on 2026-10-12 at 17:00 for vaccination.,episode,seed,1788999574.5087175
-M00013,P002,Visited Pediatrics (Dr. Divya Reddy) on 2025-12-26 at 16:00 for growth check.,episode,seed,1794415454.5087175
-M00014,P002,Visited Gastroenterology (Dr. Ramesh Agarwal) on 2026-09-20 at 09:30 for stomach pain.,episode,seed,1788294650.5087175
-M00015,P003,Visited Pediatrics (Dr. Leena Fernandes) on 2026-02-01 at 10:00 for child cough.,episode,seed,1779171612.5087175
-M00016,P003,Visited Cardiology (Dr. Sunita Rao) on 2026-03-01 at 16:30 for high blood pressure follow-up.,episode,seed,1790444660.5087175
-M00017,P005,Visited Neurology (Dr. Harish Menon) on 2026-09-08 at 11:00 for sleep issues.,episode,seed,1787202429.5087175
-M00018,P005,Visited Gastroenterology (Dr. Snehal Kale) on 2025-11-07 at 10:00 for indigestion.,episode,seed,1780692592.5087175
-M00019,P006,Visited Cardiology (Dr. Rajesh Iyer) on 2026-09-06 at 17:00 for ECG review.,episode,seed,1788909200.5087175
-M00020,P006,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-11-06 at 17:30 for knee pain.,episode,seed,1792426406.5087175
-M00021,P006,Visited General Medicine (Dr. Vivek Sathe) on 2026-03-06 at 18:00 for annual check-up.,episode,seed,1785218098.5087175
-M00022,P007,Visited Orthopedics (Dr. Arjun Mehra) on 2026-04-24 at 17:30 for shoulder stiffness.,episode,seed,1779765245.5087175
-M00023,P008,Visited General Medicine (Dr. Vivek Sathe) on 2025-11-19 at 11:30 for annual check-up.,episode,seed,1790343612.5087175
-M00024,P008,Visited General Medicine (Dr. Rahul Chavan) on 2026-06-11 at 10:30 for cold and cough.,episode,seed,1779410792.5087175
-M00025,P008,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-01-04 at 17:30 for shoulder stiffness.,episode,seed,1781159309.5087175
-M00026,P009,Visited Neurology (Dr. Harish Menon) on 2026-07-24 at 16:00 for dizziness.,episode,seed,1794583175.5087175
-M00027,P009,Visited Orthopedics (Dr. Pooja Bhide) on 2026-02-24 at 10:00 for shoulder stiffness.,episode,seed,1791407517.5087175
-M00028,P010,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-01-20 at 17:30 for IBS follow-up.,episode,seed,1789741651.5087175
-M00029,P010,Visited Ent (Dr. Vandana Kulkarni) on 2026-11-02 at 09:30 for ear pain.,episode,seed,1790200785.5087175
-M00030,P011,Visited Orthopedics (Dr. Arjun Mehra) on 2025-11-30 at 11:00 for knee pain.,episode,seed,1780374581.5087175
-M00031,P011,Visited Ent (Dr. Ritu Malhotra) on 2026-06-15 at 10:30 for sore throat.,episode,seed,1779039755.5087175
-M00032,P011,Visited Cardiology (Dr. Vikram Shah) on 2026-07-27 at 16:00 for chest discomfort.,episode,seed,1779494674.5087175
-M00033,P012,Visited Dermatology (Dr. Sameer Gupta) on 2025-11-28 at 17:30 for acne.,episode,seed,1794656628.5087175
-M00034,P012,Visited General Medicine (Dr. Asha More) on 2026-02-20 at 09:30 for diabetes review.,episode,seed,1780231963.5087175
-M00035,P012,Visited General Medicine (Dr. Zoya Mirza) on 2026-04-09 at 17:30 for diabetes review.,episode,seed,1787173926.5087175
-M00036,P015,Visited Neurology (Dr. Prakash Jadhav) on 2026-03-27 at 16:00 for numbness in hands.,episode,seed,1788559430.5087175
-M00037,P015,Visited Neurology (Dr. Harish Menon) on 2026-06-11 at 10:30 for sleep issues.,episode,seed,1785422326.5087175
-M00038,P017,Visited Orthopedics (Dr. Swati Gokhale) on 2026-09-08 at 09:30 for ankle sprain.,episode,seed,1782170835.5087175
-M00039,P018,Visited Ent (Dr. Ashok Bhosale) on 2026-06-26 at 10:30 for sinusitis.,episode,seed,1793606562.5087175
-M00040,P018,Visited Ent (Dr. Sanjay Pawar) on 2026-05-23 at 10:30 for hearing check.,episode,seed,1784113077.5087175
-M00041,P018,Visited Cardiology (Dr. Sunita Rao) on 2026-05-27 at 18:00 for chest discomfort.,episode,seed,1795051009.5087175
-M00042,P019,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-01-31 at 10:00 for indigestion.,episode,seed,1791870410.5087175
-M00043,P019,Visited Pediatrics (Dr. Divya Reddy) on 2026-07-19 at 17:30 for vaccination.,episode,seed,1780826827.5087175
-M00044,P021,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-02-03 at 10:00 for ankle sprain.,episode,seed,1781367122.5087175
-M00045,P021,Visited Pediatrics (Dr. Manoj Tiwari) on 2026-07-22 at 16:00 for child cough.,episode,seed,1778682187.5087175
-M00046,P021,Visited Pediatrics (Dr. Leena Fernandes) on 2026-07-20 at 17:30 for growth check.,episode,seed,1785558452.5087175
-M00047,P021,Visited Cardiology (Dr. Anil Kulkarni) on 2025-12-01 at 17:00 for palpitations.,episode,seed,1794073135.5087175
-M00048,P022,Visited Neurology (Dr. Meera Iyengar) on 2025-11-24 at 16:30 for dizziness.,episode,seed,1778957558.5087175
-M00049,P024,Visited Ent (Dr. Ashok Bhosale) on 2025-11-03 at 09:30 for sore throat.,episode,seed,1781904179.5087175
-M00050,P024,Visited Pediatrics (Dr. Divya Reddy) on 2026-02-21 at 17:00 for growth check.,episode,seed,1779004385.5087175
-M00051,P024,Visited Cardiology (Dr. Vikram Shah) on 2025-12-10 at 16:00 for high blood pressure follow-up.,episode,seed,1778943969.5087175
-M00052,P025,Visited Dermatology (Dr. Neha Joshi) on 2026-08-15 at 10:00 for skin rash.,episode,seed,1787533760.5087175
-M00053,P025,Visited Neurology (Dr. Harish Menon) on 2025-11-23 at 10:00 for sleep issues.,episode,seed,1793278315.5087175
-M00054,P025,Visited Neurology (Dr. Prakash Jadhav) on 2025-11-14 at 10:00 for sleep issues.,episode,seed,1794677033.5087175
-M00055,P025,Visited Orthopedics (Dr. Arjun Mehra) on 2026-03-18 at 09:30 for shoulder stiffness.,episode,seed,1781155104.5087175
-M00056,P029,Visited Ent (Dr. Ashok Bhosale) on 2026-10-03 at 11:30 for sinusitis.,episode,seed,1784717054.5087175
-M00057,P030,Visited General Medicine (Dr. Zoya Mirza) on 2025-12-21 at 16:30 for cold and cough.,episode,seed,1793184165.5087175
-M00058,P030,Visited Pediatrics (Dr. Shreya Apte) on 2026-04-23 at 17:30 for child fever.,episode,seed,1786327710.5087175
-M00059,P030,Visited Cardiology (Dr. Rajesh Iyer) on 2026-10-07 at 10:00 for chest discomfort.,episode,seed,1781318416.5087175
-M00060,P031,Visited Dermatology (Dr. Priya Nair) on 2025-11-22 at 18:00 for eczema flare.,episode,seed,1779432640.5087175
-M00061,P031,Visited Dermatology (Dr. Priya Nair) on 2026-03-29 at 16:30 for hair fall.,episode,seed,1791391346.5087175
-M00062,P033,Visited Orthopedics (Dr. Swati Gokhale) on 2026-07-19 at 16:30 for back pain.,episode,seed,1778712869.5087175
-M00063,P033,Visited Ent (Dr. Ritu Malhotra) on 2026-06-09 at 09:30 for sore throat.,episode,seed,1783679754.5087175
-M00064,P033,Visited Orthopedics (Dr. Arjun Mehra) on 2026-10-18 at 18:00 for knee pain.,episode,seed,1780271923.5087175
-M00065,P034,Visited General Medicine (Dr. Vivek Sathe) on 2026-02-01 at 11:30 for fever.,episode,seed,1780677776.5087175
-M00066,P034,Visited Neurology (Dr. Nikhil Bose) on 2026-07-23 at 17:30 for sleep issues.,episode,seed,1794617062.5087175
-M00067,P034,Visited Orthopedics (Dr. Pooja Bhide) on 2026-08-06 at 18:00 for back pain.,episode,seed,1789901775.5087175
-M00068,P034,Visited Ent (Dr. Ritu Malhotra) on 2026-09-11 at 18:00 for sinusitis.,episode,seed,1785651188.5087175
-M00069,P036,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-10-02 at 10:00 for indigestion.,episode,seed,1788866021.5087175
-M00070,P036,Visited Ent (Dr. Sanjay Pawar) on 2026-07-30 at 16:00 for hearing check.,episode,seed,1779570130.5087175
-M00071,P036,Visited Pediatrics (Dr. Manoj Tiwari) on 2025-11-30 at 10:00 for vaccination.,episode,seed,1783777623.5087175
-M00072,P036,Visited Ent (Dr. Ashok Bhosale) on 2026-10-04 at 16:00 for sinusitis.,episode,seed,1780614671.5087175
-M00073,P037,Visited Gastroenterology (Dr. Faisal Qureshi) on 2025-12-28 at 18:00 for indigestion.,episode,seed,1787527138.5087175
-M00074,P037,Visited Orthopedics (Dr. Swati Gokhale) on 2026-01-22 at 16:00 for shoulder stiffness.,episode,seed,1778281791.5087175
-M00075,P037,Visited General Medicine (Dr. Asha More) on 2026-11-06 at 11:00 for diabetes review.,episode,seed,1787943239.5087175
-M00076,P038,Visited General Medicine (Dr. Rahul Chavan) on 2026-05-08 at 16:00 for annual check-up.,episode,seed,1783935140.5087175
-M00077,P039,Visited Gastroenterology (Dr. Nandini Kher) on 2026-05-09 at 17:00 for indigestion.,episode,seed,1779596073.5087175
-M00078,P039,Visited Dermatology (Dr. Amit Deshmukh) on 2025-12-13 at 11:30 for skin rash.,episode,seed,1790914275.5087175
-M00079,P039,Visited Orthopedics (Dr. Swati Gokhale) on 2026-07-31 at 10:00 for shoulder stiffness.,episode,seed,1785470556.5087175
-M00080,P042,Visited Cardiology (Dr. Rajesh Iyer) on 2026-01-16 at 18:00 for ECG review.,episode,seed,1782216542.5087175
-M00081,P042,Visited Neurology (Dr. Meera Iyengar) on 2026-01-30 at 17:30 for dizziness.,episode,seed,1781327690.5087175
-M00082,P042,Visited Gastroenterology (Dr. Snehal Kale) on 2026-05-05 at 11:00 for IBS follow-up.,episode,seed,1783227056.5087175
-M00083,P042,Visited Ent (Dr. Ritu Malhotra) on 2026-03-16 at 16:30 for ear pain.,episode,seed,1779466635.5087175
-M00084,P043,Visited Cardiology (Dr. Sunita Rao) on 2025-12-29 at 17:30 for high blood pressure follow-up.,episode,seed,1789878544.5087175
-M00085,P043,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-08-19 at 18:00 for back pain.,episode,seed,1788362460.5087175
-M00086,P044,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-05-09 at 11:00 for knee pain.,episode,seed,1785837535.5087175
-M00087,P044,Visited Gastroenterology (Dr. Snehal Kale) on 2026-10-07 at 16:00 for indigestion.,episode,seed,1792423106.5087175
-M00088,P044,Visited Neurology (Dr. Meera Iyengar) on 2025-12-01 at 17:30 for numbness in hands.,episode,seed,1779112135.5087175
-M00089,P044,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-03-13 at 09:30 for growth check.,episode,seed,1790983465.5087175
-M00090,P046,Visited Dermatology (Dr. Sameer Gupta) on 2025-12-19 at 11:30 for eczema flare.,episode,seed,1789500542.5087175
-M00091,P046,Visited Orthopedics (Dr. Rohan Kapoor) on 2025-12-09 at 16:00 for ankle sprain.,episode,seed,1788621647.5087175
-M00092,P047,Visited Dermatology (Dr. Sameer Gupta) on 2026-07-03 at 11:00 for hair fall.,episode,seed,1790070196.5087175
-M00093,P047,Visited General Medicine (Dr. Rahul Chavan) on 2026-05-16 at 17:00 for cold and cough.,episode,seed,1778800214.5087175
-M00094,P047,Visited Cardiology (Dr. Rajesh Iyer) on 2026-08-29 at 10:30 for ECG review.,episode,seed,1791929459.5087175
-M00095,P047,Visited Neurology (Dr. Meera Iyengar) on 2026-02-18 at 11:00 for dizziness.,episode,seed,1781357108.5087175
-M00096,P048,Visited Orthopedics (Dr. Pooja Bhide) on 2026-05-07 at 11:00 for knee pain.,episode,seed,1778748562.5087175
-M00097,P049,Visited Pediatrics (Dr. Shreya Apte) on 2026-03-07 at 17:00 for growth check.,episode,seed,1785126360.5087175
-M00098,P049,Visited Neurology (Dr. Prakash Jadhav) on 2026-08-18 at 09:30 for sleep issues.,episode,seed,1787439367.5087175
-M00099,P049,Visited Neurology (Dr. Meera Iyengar) on 2026-09-04 at 10:30 for numbness in hands.,episode,seed,1788287823.5087175
-M00100,P050,Visited Cardiology (Dr. Rajesh Iyer) on 2026-08-25 at 10:30 for chest discomfort.,episode,seed,1793736513.5087175
-M00101,P050,Visited Ent (Dr. Ritu Malhotra) on 2026-02-17 at 18:00 for hearing check.,episode,seed,1794706865.5087175
-M00102,P050,Visited Cardiology (Dr. Vikram Shah) on 2026-09-26 at 17:00 for high blood pressure follow-up.,episode,seed,1783276341.5087175
-M00103,P050,Visited Gastroenterology (Dr. Nandini Kher) on 2026-08-13 at 16:30 for stomach pain.,episode,seed,1786563962.5087175
-M00104,P051,Visited Orthopedics (Dr. Swati Gokhale) on 2026-08-07 at 10:30 for shoulder stiffness.,episode,seed,1783334822.5087175
-M00105,P051,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-01-07 at 11:00 for child fever.,episode,seed,1789993310.5087175
-M00106,P051,Visited General Medicine (Dr. Zoya Mirza) on 2026-09-02 at 09:30 for fever.,episode,seed,1789452771.5087175
-M00107,P051,Visited Neurology (Dr. Prakash Jadhav) on 2026-02-23 at 10:30 for sleep issues.,episode,seed,1778421278.5087175
-M00108,P052,Visited Dermatology (Dr. Amit Deshmukh) on 2026-03-10 at 17:30 for skin rash.,episode,seed,1794242491.5087175
-M00109,P052,Visited Dermatology (Dr. Neha Joshi) on 2026-03-07 at 18:00 for acne.,episode,seed,1793178964.5087175
-M00110,P052,Visited Cardiology (Dr. Farah Khan) on 2026-02-14 at 16:00 for ECG review.,episode,seed,1783982729.5087175
-M00111,P052,Visited Cardiology (Dr. Rajesh Iyer) on 2026-04-03 at 17:00 for high blood pressure follow-up.,episode,seed,1780866001.5087175
-M00112,P053,Visited Pediatrics (Dr. Divya Reddy) on 2025-10-25 at 16:30 for child fever.,episode,seed,1791491052.5087175
-M00113,P053,Visited Orthopedics (Dr. Imran Shaikh) on 2026-03-09 at 10:00 for back pain.,episode,seed,1787708764.5087175
-M00114,P053,Visited Ent (Dr. Ashok Bhosale) on 2026-02-03 at 11:30 for hearing check.,episode,seed,1791265608.5087175
-M00115,P054,Visited Cardiology (Dr. Anil Kulkarni) on 2026-01-17 at 17:30 for chest discomfort.,episode,seed,1787795825.5087175
-M00116,P056,Visited Neurology (Dr. Nikhil Bose) on 2026-04-13 at 10:00 for dizziness.,episode,seed,1778995515.5087175
-M00117,P056,Visited Orthopedics (Dr. Rohan Kapoor) on 2025-12-10 at 11:30 for shoulder stiffness.,episode,seed,1786664151.5087175
-M00118,P056,Visited General Medicine (Dr. Vivek Sathe) on 2026-05-05 at 16:30 for diabetes review.,episode,seed,1783895841.5087175
-M00119,P057,Visited General Medicine (Dr. Vivek Sathe) on 2026-01-27 at 10:30 for cold and cough.,episode,seed,1783395317.5087175
-M00120,P058,Visited Gastroenterology (Dr. Faisal Qureshi) on 2026-06-04 at 16:30 for indigestion.,episode,seed,1793749028.5087175
-M00121,P058,Visited Orthopedics (Dr. Arjun Mehra) on 2025-10-22 at 17:00 for back pain.,episode,seed,1786339710.5087175
-M00122,P059,Visited Dermatology (Dr. Amit Deshmukh) on 2026-02-21 at 16:00 for hair fall.,episode,seed,1790242522.5087175
-M00123,P060,Visited Cardiology (Dr. Sunita Rao) on 2026-04-23 at 10:00 for chest discomfort.,episode,seed,1791820800.5087175
-M00124,P060,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-01-05 at 10:00 for ankle sprain.,episode,seed,1793623344.5087175
-M00125,P060,Visited Dermatology (Dr. Priya Nair) on 2026-07-18 at 10:00 for eczema flare.,episode,seed,1780624200.5087175
-M00126,P060,Visited Cardiology (Dr. Farah Khan) on 2026-04-17 at 18:00 for palpitations.,episode,seed,1779976300.5087175
-M00127,P062,Visited Gastroenterology (Dr. Nandini Kher) on 2026-11-03 at 17:30 for stomach pain.,episode,seed,1791593005.5087175
-M00128,P063,Visited Neurology (Dr. Meera Iyengar) on 2026-01-06 at 18:00 for numbness in hands.,episode,seed,1791762085.5087175
-M00129,P063,Visited Orthopedics (Dr. Arjun Mehra) on 2026-05-08 at 09:30 for back pain.,episode,seed,1791897102.5087175
-M00130,P064,Visited Dermatology (Dr. Priya Nair) on 2026-04-18 at 16:30 for eczema flare.,episode,seed,1793906966.5087175
-M00131,P065,Visited Neurology (Dr. Prakash Jadhav) on 2026-11-01 at 10:00 for migraine.,episode,seed,1778292871.5087175
-M00132,P065,Visited Ent (Dr. Ashok Bhosale) on 2026-01-14 at 16:00 for sore throat.,episode,seed,1791778217.5087175
-M00133,P065,Visited Ent (Dr. Ritu Malhotra) on 2026-01-02 at 17:00 for sinusitis.,episode,seed,1789710083.5087175
-M00134,P066,Visited Cardiology (Dr. Vikram Shah) on 2026-08-11 at 17:30 for ECG review.,episode,seed,1791353812.5087175
-M00135,P066,Visited Dermatology (Dr. Sameer Gupta) on 2026-10-02 at 16:00 for eczema flare.,episode,seed,1788423608.5087175
-M00136,P066,Visited Dermatology (Dr. Sameer Gupta) on 2026-06-30 at 17:00 for eczema flare.,episode,seed,1783180654.5087175
-M00137,P067,Visited Gastroenterology (Dr. Snehal Kale) on 2026-05-19 at 17:00 for IBS follow-up.,episode,seed,1790046089.5087175
-M00138,P067,Visited Cardiology (Dr. Farah Khan) on 2026-09-10 at 10:00 for palpitations.,episode,seed,1785513206.5087175
-M00139,P067,Visited General Medicine (Dr. Asha More) on 2025-11-27 at 16:00 for annual check-up.,episode,seed,1780500344.5087175
-M00140,P068,Visited Pediatrics (Dr. Divya Reddy) on 2026-02-07 at 11:30 for child fever.,episode,seed,1778340153.5087175
-M00141,P068,Visited Neurology (Dr. Nikhil Bose) on 2026-09-22 at 16:00 for sleep issues.,episode,seed,1778592000.5087175
-M00142,P068,Visited Dermatology (Dr. Sameer Gupta) on 2026-08-09 at 16:00 for hair fall.,episode,seed,1791983465.5087175
-M00143,P069,Visited Neurology (Dr. Prakash Jadhav) on 2026-06-24 at 11:00 for numbness in hands.,episode,seed,1790137921.5087175
-M00144,P069,Visited Gastroenterology (Dr. Snehal Kale) on 2026-07-11 at 11:30 for stomach pain.,episode,seed,1783110241.5087175
-M00145,P070,Visited Neurology (Dr. Harish Menon) on 2026-07-04 at 10:30 for dizziness.,episode,seed,1784087661.5087175
-M00146,P074,Visited Cardiology (Dr. Rajesh Iyer) on 2026-10-18 at 16:00 for ECG review.,episode,seed,1790692350.5087175
-M00147,P074,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-01-18 at 17:00 for child cough.,episode,seed,1791188586.5087175
-M00148,P074,Visited Orthopedics (Dr. Swati Gokhale) on 2026-06-18 at 11:00 for ankle sprain.,episode,seed,1788540911.5087175
-M00149,P075,Visited Orthopedics (Dr. Arjun Mehra) on 2026-02-12 at 17:00 for ankle sprain.,episode,seed,1780581192.5087175
-M00150,P075,Visited Cardiology (Dr. Rajesh Iyer) on 2026-05-15 at 10:30 for ECG review.,episode,seed,1781364977.5087175
-M00151,P075,Visited Gastroenterology (Dr. Ramesh Agarwal) on 2025-11-16 at 16:00 for IBS follow-up.,episode,seed,1795094184.5087175
-M00152,P075,Visited Cardiology (Dr. Anil Kulkarni) on 2025-11-28 at 16:30 for high blood pressure follow-up.,episode,seed,1787083785.5087175
-M00153,P076,Visited Dermatology (Dr. Priya Nair) on 2026-05-07 at 10:30 for eczema flare.,episode,seed,1779421722.5087175
-M00154,P076,Visited Ent (Dr. Ritu Malhotra) on 2026-06-24 at 18:00 for hearing check.,episode,seed,1783862425.5087175
-M00155,P076,Visited Pediatrics (Dr. Leena Fernandes) on 2026-08-06 at 16:30 for growth check.,episode,seed,1785693215.5087175
-M00156,P076,Visited Neurology (Dr. Anjali Verma) on 2025-11-15 at 16:00 for dizziness.,episode,seed,1778369476.5087175
-M00157,P077,Visited Ent (Dr. Vandana Kulkarni) on 2026-08-08 at 18:00 for sinusitis.,episode,seed,1789568634.5087175
-M00158,P077,Visited Neurology (Dr. Meera Iyengar) on 2025-11-04 at 11:00 for dizziness.,episode,seed,1792455253.5087175
-M00159,P077,Visited General Medicine (Dr. Zoya Mirza) on 2026-07-31 at 10:30 for annual check-up.,episode,seed,1786389223.5087175
-M00160,P078,Visited Cardiology (Dr. Sunita Rao) on 2026-04-07 at 10:30 for ECG review.,episode,seed,1782818336.5087175
-M00161,P078,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-06-08 at 17:30 for child cough.,episode,seed,1781389848.5087175
-M00162,P078,Visited Cardiology (Dr. Farah Khan) on 2026-09-19 at 09:30 for high blood pressure follow-up.,episode,seed,1783214042.5087175
-M00163,P079,Visited Ent (Dr. Vandana Kulkarni) on 2025-12-21 at 17:00 for ear pain.,episode,seed,1787079248.5087175
-M00164,P080,Visited Ent (Dr. Kiran Shetty) on 2026-05-08 at 16:00 for sore throat.,episode,seed,1790227998.5087175
-M00165,P080,Visited Cardiology (Dr. Farah Khan) on 2026-09-07 at 18:00 for palpitations.,episode,seed,1781164577.5087175
-M00166,P081,Visited Orthopedics (Dr. Imran Shaikh) on 2026-05-11 at 17:30 for shoulder stiffness.,episode,seed,1787658709.5087175
-M00167,P082,Visited Gastroenterology (Dr. Ramesh Agarwal) on 2026-04-27 at 17:00 for indigestion.,episode,seed,1790684905.5087175
-M00168,P082,Visited Orthopedics (Dr. Pooja Bhide) on 2025-12-16 at 16:30 for shoulder stiffness.,episode,seed,1780926319.5087175
-M00169,P082,Visited General Medicine (Dr. Suresh Patwardhan) on 2026-09-29 at 16:00 for annual check-up.,episode,seed,1781443508.5087175
-M00170,P083,Visited Pediatrics (Dr. Leena Fernandes) on 2025-12-09 at 11:30 for child cough.,episode,seed,1781581085.5087175
-M00171,P084,Visited General Medicine (Dr. Rahul Chavan) on 2026-03-26 at 18:00 for diabetes review.,episode,seed,1779922028.5087175
-M00172,P084,Visited Gastroenterology (Dr. Nandini Kher) on 2026-08-15 at 09:30 for stomach pain.,episode,seed,1783176093.5087175
-M00173,P084,Visited Orthopedics (Dr. Pooja Bhide) on 2025-12-05 at 10:00 for shoulder stiffness.,episode,seed,1794316548.5087175
-M00174,P084,Visited Neurology (Dr. Harish Menon) on 2026-04-19 at 10:00 for migraine.,episode,seed,1780464750.5087175
-M00175,P086,Visited Cardiology (Dr. Anil Kulkarni) on 2026-04-19 at 10:00 for chest discomfort.,episode,seed,1790430228.5087175
-M00176,P086,Visited Ent (Dr. Ashok Bhosale) on 2026-08-21 at 16:30 for ear pain.,episode,seed,1794981403.5087175
-M00177,P086,Visited Ent (Dr. Ritu Malhotra) on 2026-07-05 at 17:00 for sore throat.,episode,seed,1792980469.5087175
-M00178,P087,Visited Orthopedics (Dr. Swati Gokhale) on 2026-08-13 at 09:30 for knee pain.,episode,seed,1792470542.5087175
-M00179,P088,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-03-14 at 17:30 for child cough.,episode,seed,1783963640.5087175
-M00180,P088,Visited Gastroenterology (Dr. Snehal Kale) on 2025-11-16 at 18:00 for stomach pain.,episode,seed,1784752138.5087175
-M00181,P089,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-03-31 at 16:00 for indigestion.,episode,seed,1781838060.5087175
-M00182,P089,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-07-15 at 17:00 for acidity.,episode,seed,1789801405.5087175
-M00183,P089,Visited Ent (Dr. Kiran Shetty) on 2026-04-11 at 10:30 for sore throat.,episode,seed,1780750178.5087175
-M00184,P089,Visited Ent (Dr. Sanjay Pawar) on 2026-11-08 at 16:00 for sinusitis.,episode,seed,1793252692.5087175
-M00185,P090,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-11-04 at 17:00 for IBS follow-up.,episode,seed,1782119400.5087175
-M00186,P090,Visited Ent (Dr. Sanjay Pawar) on 2026-04-02 at 18:00 for sore throat.,episode,seed,1794070567.5087175
-M00187,P091,Visited Cardiology (Dr. Rajesh Iyer) on 2026-05-01 at 16:30 for high blood pressure follow-up.,episode,seed,1790250115.5087175
-M00188,P092,Visited General Medicine (Dr. Zoya Mirza) on 2026-07-04 at 16:30 for annual check-up.,episode,seed,1793375451.5087175
-M00189,P092,Visited General Medicine (Dr. Asha More) on 2026-06-27 at 16:30 for fever.,episode,seed,1785392361.5087175
-M00190,P092,Visited Neurology (Dr. Prakash Jadhav) on 2025-12-30 at 11:30 for dizziness.,episode,seed,1781245675.5087175
-M00191,P092,Visited Ent (Dr. Vandana Kulkarni) on 2026-08-04 at 10:30 for ear pain.,episode,seed,1781826250.5087175
-M00192,P093,Visited Ent (Dr. Sanjay Pawar) on 2025-12-17 at 18:00 for hearing check.,episode,seed,1785103840.5087175
-M00193,P094,Visited Ent (Dr. Ashok Bhosale) on 2026-03-02 at 16:00 for sinusitis.,episode,seed,1784789361.5087175
-M00194,P094,Visited Cardiology (Dr. Sunita Rao) on 2026-10-14 at 10:30 for chest discomfort.,episode,seed,1783767222.5087175
-M00195,P094,Visited Dermatology (Dr. Priya Nair) on 2026-06-24 at 17:00 for acne.,episode,seed,1795050072.5087175
-M00196,P096,Visited Dermatology (Dr. Amit Deshmukh) on 2026-11-01 at 11:00 for hair fall.,episode,seed,1785927343.5087175
-M00197,P097,Visited General Medicine (Dr. Rahul Chavan) on 2026-02-26 at 17:00 for diabetes review.,episode,seed,1790387362.5087175
-M00198,P097,Visited Cardiology (Dr. Vikram Shah) on 2026-09-28 at 09:30 for high blood pressure follow-up.,episode,seed,1781761314.5087175
-M00199,P098,Visited General Medicine (Dr. Suresh Patwardhan) on 2026-02-03 at 10:30 for cold and cough.,episode,seed,1780343606.5087175
-M00200,P098,Visited Neurology (Dr. Nikhil Bose) on 2026-04-27 at 10:00 for migraine.,episode,seed,1788432086.5087175
-M00201,P099,Visited General Medicine (Dr. Zoya Mirza) on 2026-07-05 at 11:00 for fever.,episode,seed,1780479342.5087175
-M00202,P100,Visited Dermatology (Dr. Sameer Gupta) on 2025-12-03 at 17:00 for acne.,episode,seed,1783730538.5087175
-M00203,P100,Visited General Medicine (Dr. Rahul Chavan) on 2026-05-27 at 09:30 for annual check-up.,episode,seed,1781742267.5087175
-M00204,P100,Visited Dermatology (Dr. Priya Nair) on 2026-03-07 at 11:00 for eczema flare.,episode,seed,1788695080.5087175
-M00205,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-01-27 at 17:00 for knee pain.,episode,seed,1785197511.5087175
-M00206,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-04-27 at 16:00 for knee pain.,episode,seed,1792487228.5087175
-M00207,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-07-26 at 16:30 for knee pain.,episode,seed,1794074713.5087175
-M00208,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-10-09 at 16:00 for knee pain follow-up.,episode,seed,1784091506.5087175
-M00209,P014,Visited General Medicine (Dr. Vivek Sathe) on 2026-09-24 at 10:00 for diabetes review.,episode,seed,1782229215.5087175
-M00210,P023,Visited Cardiology (Dr. Farah Khan) on 2026-08-25 at 18:00 for high blood pressure follow-up.,episode,seed,1791087179.5087175
-M00211,P002,Prefers evening slots.,preference,seed,1785788188.5087175
-M00212,P002,Prefers teleconsultation when possible.,preference,seed,1788143486.5087175
-M00213,P004,Prefers evening slots.,preference,seed,1792200719.5087175
-M00214,P006,Prefers teleconsultation when possible.,preference,seed,1778146376.5087175
-M00215,P010,Prefers evening slots.,preference,seed,1784837774.5087175
-M00216,P011,Prefers morning slots.,preference,seed,1783882934.5087175
-M00217,P012,Prefers teleconsultation when possible.,preference,seed,1789945600.5087175
-M00218,P013,Prefers teleconsultation when possible.,preference,seed,1794529323.5087175
-M00219,P015,Prefers evening slots.,preference,seed,1794379352.5087175
-M00220,P017,Prefers morning slots.,preference,seed,1786635024.5087175
-M00221,P018,Prefers morning slots.,preference,seed,1787217207.5087175
-M00222,P019,Prefers morning slots.,preference,seed,1785116622.5087175
-M00223,P020,Prefers morning slots.,preference,seed,1781130229.5087175
-M00224,P020,Prefers teleconsultation when possible.,preference,seed,1778361025.5087175
-M00225,P022,Prefers evening slots.,preference,seed,1791609411.5087175
-M00226,P024,Prefers evening slots.,preference,seed,1793303781.5087175
-M00227,P026,Prefers morning slots.,preference,seed,1782800132.5087175
-M00228,P027,Prefers evening slots.,preference,seed,1786599246.5087175
-M00229,P027,Prefers teleconsultation when possible.,preference,seed,1778286373.5087175
-M00230,P028,Prefers teleconsultation when possible.,preference,seed,1783421075.5087175
-M00231,P029,Prefers morning slots.,preference,seed,1791160751.5087175
-M00232,P030,Prefers evening slots.,preference,seed,1793713577.5087175
-M00233,P032,Prefers morning slots.,preference,seed,1791129318.5087175
-M00234,P033,Prefers evening slots.,preference,seed,1780258115.5087175
-M00235,P033,Prefers teleconsultation when possible.,preference,seed,1785317311.5087175
-M00236,P034,Prefers teleconsultation when possible.,preference,seed,1795140294.5087175
-M00237,P037,Prefers morning slots.,preference,seed,1780110131.5087175
-M00238,P037,Prefers teleconsultation when possible.,preference,seed,1783940935.5087175
-M00239,P038,Prefers morning slots.,preference,seed,1787393115.5087175
-M00240,P039,Prefers evening slots.,preference,seed,1787468929.5087175
-M00241,P041,Prefers morning slots.,preference,seed,1783559863.5087175
-M00242,P043,Prefers morning slots.,preference,seed,1785275686.5087175
-M00243,P043,Prefers teleconsultation when possible.,preference,seed,1785767800.5087175
-M00244,P044,Prefers evening slots.,preference,seed,1790618563.5087175
-M00245,P045,Prefers evening slots.,preference,seed,1782642868.5087175
-M00246,P046,Prefers morning slots.,preference,seed,1787006031.5087175
-M00247,P047,Prefers evening slots.,preference,seed,1791784397.5087175
-M00248,P047,Prefers teleconsultation when possible.,preference,seed,1784314508.5087175
-M00249,P048,Prefers evening slots.,preference,seed,1788854144.5087175
-M00250,P049,Prefers morning slots.,preference,seed,1783193100.5087175
-M00251,P050,Prefers morning slots.,preference,seed,1780071126.5087175
-M00252,P051,Prefers evening slots.,preference,seed,1792027300.5087175
-M00253,P052,Prefers morning slots.,preference,seed,1790397715.5087175
-M00254,P053,Prefers evening slots.,preference,seed,1781031369.5087175
-M00255,P054,Prefers morning slots.,preference,seed,1781489024.5087175
-M00256,P055,Prefers morning slots.,preference,seed,1792565536.5087175
-M00257,P057,Prefers evening slots.,preference,seed,1792219877.5087175
-M00258,P058,Prefers evening slots.,preference,seed,1793228353.5087175
-M00259,P058,Prefers teleconsultation when possible.,preference,seed,1781058394.5087175
-M00260,P059,Prefers evening slots.,preference,seed,1790951026.5087175
-M00261,P059,Prefers teleconsultation when possible.,preference,seed,1779334825.5087175
-M00262,P060,Prefers evening slots.,preference,seed,1788108258.5087175
-M00263,P060,Prefers teleconsultation when possible.,preference,seed,1780344444.5087175
-M00264,P062,Prefers evening slots.,preference,seed,1792695542.5087175
-M00265,P063,Prefers morning slots.,preference,seed,1782923769.5087175
-M00266,P063,Prefers teleconsultation when possible.,preference,seed,1781801055.5087175
-M00267,P064,Prefers evening slots.,preference,seed,1782068525.5087175
-M00268,P065,Prefers morning slots.,preference,seed,1786467134.5087175
-M00269,P066,Prefers morning slots.,preference,seed,1778577360.5087175
-M00270,P067,Prefers evening slots.,preference,seed,1781107535.5087175
-M00271,P067,Prefers teleconsultation when possible.,preference,seed,1780548594.5087175
-M00272,P069,Prefers teleconsultation when possible.,preference,seed,1778888954.5087175
-M00273,P070,Prefers evening slots.,preference,seed,1781325634.5087175
-M00274,P070,Prefers teleconsultation when possible.,preference,seed,1789851130.5087175
-M00275,P072,Prefers evening slots.,preference,seed,1790471772.5087175
-M00276,P073,Prefers teleconsultation when possible.,preference,seed,1778343868.5087175
-M00277,P074,Prefers morning slots.,preference,seed,1791049654.5087175
-M00278,P074,Prefers teleconsultation when possible.,preference,seed,1779049232.5087175
-M00279,P075,Prefers teleconsultation when possible.,preference,seed,1779956933.5087175
-M00280,P076,Prefers evening slots.,preference,seed,1790973780.5087175
-M00281,P077,Prefers evening slots.,preference,seed,1791353852.5087175
-M00282,P077,Prefers teleconsultation when possible.,preference,seed,1788180127.5087175
-M00283,P078,Prefers evening slots.,preference,seed,1780033452.5087175
-M00284,P079,Prefers morning slots.,preference,seed,1779432049.5087175
-M00285,P080,Prefers morning slots.,preference,seed,1794221104.5087175
-M00286,P082,Prefers morning slots.,preference,seed,1790052560.5087175
-M00287,P083,Prefers evening slots.,preference,seed,1782922499.5087175
-M00288,P084,Prefers evening slots.,preference,seed,1791330099.5087175
-M00289,P085,Prefers morning slots.,preference,seed,1781604219.5087175
-M00290,P086,Prefers evening slots.,preference,seed,1791612959.5087175
-M00291,P088,Prefers teleconsultation when possible.,preference,seed,1791259622.5087175
-M00292,P089,Prefers teleconsultation when possible.,preference,seed,1782913979.5087175
-M00293,P090,Prefers morning slots.,preference,seed,1785598179.5087175
-M00294,P090,Prefers teleconsultation when possible.,preference,seed,1793963582.5087175
-M00295,P091,Prefers morning slots.,preference,seed,1790171181.5087175
-M00296,P091,Prefers teleconsultation when possible.,preference,seed,1791364453.5087175
-M00297,P093,Prefers evening slots.,preference,seed,1782850850.5087175
-M00298,P094,Prefers evening slots.,preference,seed,1785083655.5087175
-M00299,P095,Prefers evening slots.,preference,seed,1782750442.5087175
-M00300,P096,Prefers teleconsultation when possible.,preference,seed,1785139507.5087175
-M00301,P097,Prefers evening slots.,preference,seed,1785450851.5087175
-M00302,P097,Prefers teleconsultation when possible.,preference,seed,1779010271.5087175
-M00303,P098,Prefers morning slots.,preference,seed,1794376448.5087175
-M00304,P099,Prefers evening slots.,preference,seed,1790521325.5087175
-M00305,P100,Prefers morning slots.,preference,seed,1790545806.5087175
-M00306,P100,Prefers teleconsultation when possible.,preference,seed,1781163411.5087175
+M00001,P001,"Usual doctor: Dr. Arjun Mehra (Orthopedics, Kothrud Care Hospital, D11) — seen 4 times for knee pain.",preference,seed,1785154992.491697
+M00002,P001,Prefers evening slots after 4 PM because of office hours.,preference,seed,1783211224.491697
+M00003,P001,Prefers in-person consultations; lives in Kothrud.,preference,seed,1782061366.491697
+M00004,P001,Mother Sunita Sharma (P014) is registered; P001 often books appointments for her.,fact,seed,1785159801.491697
+M00005,P014,Prefers morning slots; avoids travelling in the evening.,preference,seed,1792374726.491697
+M00006,P014,Prefers hospitals in or near Kothrud.,preference,seed,1791117967.491697
+M00007,P014,Speaks Marathi; son Aarav (P001) usually accompanies her.,fact,seed,1790781602.491697
+M00008,P023,Prefers teleconsultation — travels frequently for work.,preference,seed,1794849675.491697
+M00009,P023,"Usual cardiologist: Dr. Farah Khan (D04), follow-ups for blood pressure.",preference,seed,1788913018.491697
+M00010,P031,"Has recurring migraines; waiting for a neurology appointment, prefers mornings.",fact,seed,1791560113.491697
+M00011,P002,Visited Ent (Dr. Ashok Bhosale) on 2026-01-25 at 17:00 for sinusitis.,episode,seed,1794782253.491697
+M00012,P002,Visited Pediatrics (Dr. Leena Fernandes) on 2026-10-12 at 17:00 for vaccination.,episode,seed,1788999621.491697
+M00013,P002,Visited Pediatrics (Dr. Divya Reddy) on 2025-12-26 at 16:00 for growth check.,episode,seed,1794415501.491697
+M00014,P002,Visited Gastroenterology (Dr. Ramesh Agarwal) on 2026-09-20 at 09:30 for stomach pain.,episode,seed,1788294697.491697
+M00015,P003,Visited Pediatrics (Dr. Leena Fernandes) on 2026-02-01 at 10:00 for child cough.,episode,seed,1779171659.491697
+M00016,P003,Visited Cardiology (Dr. Sunita Rao) on 2026-03-01 at 16:30 for high blood pressure follow-up.,episode,seed,1790444707.491697
+M00017,P005,Visited Neurology (Dr. Harish Menon) on 2026-09-08 at 11:00 for sleep issues.,episode,seed,1787202476.491697
+M00018,P005,Visited Gastroenterology (Dr. Snehal Kale) on 2025-11-07 at 10:00 for indigestion.,episode,seed,1780692639.491697
+M00019,P006,Visited Cardiology (Dr. Rajesh Iyer) on 2026-09-06 at 17:00 for ECG review.,episode,seed,1788909247.491697
+M00020,P006,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-11-06 at 17:30 for knee pain.,episode,seed,1792426453.491697
+M00021,P006,Visited General Medicine (Dr. Vivek Sathe) on 2026-03-06 at 18:00 for annual check-up.,episode,seed,1785218145.491697
+M00022,P007,Visited Orthopedics (Dr. Arjun Mehra) on 2026-04-24 at 17:30 for shoulder stiffness.,episode,seed,1779765292.491697
+M00023,P008,Visited General Medicine (Dr. Vivek Sathe) on 2025-11-19 at 11:30 for annual check-up.,episode,seed,1790343659.491697
+M00024,P008,Visited General Medicine (Dr. Rahul Chavan) on 2026-06-11 at 10:30 for cold and cough.,episode,seed,1779410839.491697
+M00025,P008,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-01-04 at 17:30 for shoulder stiffness.,episode,seed,1781159356.491697
+M00026,P009,Visited Neurology (Dr. Harish Menon) on 2026-07-24 at 16:00 for dizziness.,episode,seed,1794583222.491697
+M00027,P009,Visited Orthopedics (Dr. Pooja Bhide) on 2026-02-24 at 10:00 for shoulder stiffness.,episode,seed,1791407564.491697
+M00028,P010,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-01-20 at 17:30 for IBS follow-up.,episode,seed,1789741698.491697
+M00029,P010,Visited Ent (Dr. Vandana Kulkarni) on 2026-11-02 at 09:30 for ear pain.,episode,seed,1790200832.491697
+M00030,P011,Visited Orthopedics (Dr. Arjun Mehra) on 2025-11-30 at 11:00 for knee pain.,episode,seed,1780374628.491697
+M00031,P011,Visited Ent (Dr. Ritu Malhotra) on 2026-06-15 at 10:30 for sore throat.,episode,seed,1779039802.491697
+M00032,P011,Visited Cardiology (Dr. Vikram Shah) on 2026-07-27 at 16:00 for chest discomfort.,episode,seed,1779494721.491697
+M00033,P012,Visited Dermatology (Dr. Sameer Gupta) on 2025-11-28 at 17:30 for acne.,episode,seed,1794656675.491697
+M00034,P012,Visited General Medicine (Dr. Asha More) on 2026-02-20 at 09:30 for diabetes review.,episode,seed,1780232010.491697
+M00035,P012,Visited General Medicine (Dr. Zoya Mirza) on 2026-04-09 at 17:30 for diabetes review.,episode,seed,1787173973.491697
+M00036,P015,Visited Neurology (Dr. Prakash Jadhav) on 2026-03-27 at 16:00 for numbness in hands.,episode,seed,1788559477.491697
+M00037,P015,Visited Neurology (Dr. Harish Menon) on 2026-06-11 at 10:30 for sleep issues.,episode,seed,1785422373.491697
+M00038,P017,Visited Orthopedics (Dr. Swati Gokhale) on 2026-09-08 at 09:30 for ankle sprain.,episode,seed,1782170882.491697
+M00039,P018,Visited Ent (Dr. Ashok Bhosale) on 2026-06-26 at 10:30 for sinusitis.,episode,seed,1793606609.491697
+M00040,P018,Visited Ent (Dr. Sanjay Pawar) on 2026-05-23 at 10:30 for hearing check.,episode,seed,1784113124.491697
+M00041,P018,Visited Cardiology (Dr. Sunita Rao) on 2026-05-27 at 18:00 for chest discomfort.,episode,seed,1795051056.491697
+M00042,P019,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-01-31 at 10:00 for indigestion.,episode,seed,1791870457.491697
+M00043,P019,Visited Pediatrics (Dr. Divya Reddy) on 2026-07-19 at 17:30 for vaccination.,episode,seed,1780826874.491697
+M00044,P021,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-02-03 at 10:00 for ankle sprain.,episode,seed,1781367169.491697
+M00045,P021,Visited Pediatrics (Dr. Manoj Tiwari) on 2026-07-22 at 16:00 for child cough.,episode,seed,1778682234.491697
+M00046,P021,Visited Pediatrics (Dr. Leena Fernandes) on 2026-07-20 at 17:30 for growth check.,episode,seed,1785558499.491697
+M00047,P021,Visited Cardiology (Dr. Anil Kulkarni) on 2025-12-01 at 17:00 for palpitations.,episode,seed,1794073182.491697
+M00048,P022,Visited Neurology (Dr. Meera Iyengar) on 2025-11-24 at 16:30 for dizziness.,episode,seed,1778957605.491697
+M00049,P024,Visited Ent (Dr. Ashok Bhosale) on 2025-11-03 at 09:30 for sore throat.,episode,seed,1781904226.491697
+M00050,P024,Visited Pediatrics (Dr. Divya Reddy) on 2026-02-21 at 17:00 for growth check.,episode,seed,1779004432.491697
+M00051,P024,Visited Cardiology (Dr. Vikram Shah) on 2025-12-10 at 16:00 for high blood pressure follow-up.,episode,seed,1778944016.491697
+M00052,P025,Visited Dermatology (Dr. Neha Joshi) on 2026-08-15 at 10:00 for skin rash.,episode,seed,1787533807.491697
+M00053,P025,Visited Neurology (Dr. Harish Menon) on 2025-11-23 at 10:00 for sleep issues.,episode,seed,1793278362.491697
+M00054,P025,Visited Neurology (Dr. Prakash Jadhav) on 2025-11-14 at 10:00 for sleep issues.,episode,seed,1794677080.491697
+M00055,P025,Visited Orthopedics (Dr. Arjun Mehra) on 2026-03-18 at 09:30 for shoulder stiffness.,episode,seed,1781155151.491697
+M00056,P029,Visited Ent (Dr. Ashok Bhosale) on 2026-10-03 at 11:30 for sinusitis.,episode,seed,1784717101.491697
+M00057,P030,Visited General Medicine (Dr. Zoya Mirza) on 2025-12-21 at 16:30 for cold and cough.,episode,seed,1793184212.491697
+M00058,P030,Visited Pediatrics (Dr. Shreya Apte) on 2026-04-23 at 17:30 for child fever.,episode,seed,1786327757.491697
+M00059,P030,Visited Cardiology (Dr. Rajesh Iyer) on 2026-10-07 at 10:00 for chest discomfort.,episode,seed,1781318463.491697
+M00060,P031,Visited Dermatology (Dr. Priya Nair) on 2025-11-22 at 18:00 for eczema flare.,episode,seed,1779432687.491697
+M00061,P031,Visited Dermatology (Dr. Priya Nair) on 2026-03-29 at 16:30 for hair fall.,episode,seed,1791391393.491697
+M00062,P033,Visited Orthopedics (Dr. Swati Gokhale) on 2026-07-19 at 16:30 for back pain.,episode,seed,1778712916.491697
+M00063,P033,Visited Ent (Dr. Ritu Malhotra) on 2026-06-09 at 09:30 for sore throat.,episode,seed,1783679801.491697
+M00064,P033,Visited Orthopedics (Dr. Arjun Mehra) on 2026-10-18 at 18:00 for knee pain.,episode,seed,1780271970.491697
+M00065,P034,Visited General Medicine (Dr. Vivek Sathe) on 2026-02-01 at 11:30 for fever.,episode,seed,1780677823.491697
+M00066,P034,Visited Neurology (Dr. Nikhil Bose) on 2026-07-23 at 17:30 for sleep issues.,episode,seed,1794617109.491697
+M00067,P034,Visited Orthopedics (Dr. Pooja Bhide) on 2026-08-06 at 18:00 for back pain.,episode,seed,1789901822.491697
+M00068,P034,Visited Ent (Dr. Ritu Malhotra) on 2026-09-11 at 18:00 for sinusitis.,episode,seed,1785651235.491697
+M00069,P036,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-10-02 at 10:00 for indigestion.,episode,seed,1788866068.491697
+M00070,P036,Visited Ent (Dr. Sanjay Pawar) on 2026-07-30 at 16:00 for hearing check.,episode,seed,1779570177.491697
+M00071,P036,Visited Pediatrics (Dr. Manoj Tiwari) on 2025-11-30 at 10:00 for vaccination.,episode,seed,1783777670.491697
+M00072,P036,Visited Ent (Dr. Ashok Bhosale) on 2026-10-04 at 16:00 for sinusitis.,episode,seed,1780614718.491697
+M00073,P037,Visited Gastroenterology (Dr. Faisal Qureshi) on 2025-12-28 at 18:00 for indigestion.,episode,seed,1787527185.491697
+M00074,P037,Visited Orthopedics (Dr. Swati Gokhale) on 2026-01-22 at 16:00 for shoulder stiffness.,episode,seed,1778281838.491697
+M00075,P037,Visited General Medicine (Dr. Asha More) on 2026-11-06 at 11:00 for diabetes review.,episode,seed,1787943286.491697
+M00076,P038,Visited General Medicine (Dr. Rahul Chavan) on 2026-05-08 at 16:00 for annual check-up.,episode,seed,1783935187.491697
+M00077,P039,Visited Gastroenterology (Dr. Nandini Kher) on 2026-05-09 at 17:00 for indigestion.,episode,seed,1779596120.491697
+M00078,P039,Visited Dermatology (Dr. Amit Deshmukh) on 2025-12-13 at 11:30 for skin rash.,episode,seed,1790914322.491697
+M00079,P039,Visited Orthopedics (Dr. Swati Gokhale) on 2026-07-31 at 10:00 for shoulder stiffness.,episode,seed,1785470603.491697
+M00080,P042,Visited Cardiology (Dr. Rajesh Iyer) on 2026-01-16 at 18:00 for ECG review.,episode,seed,1782216589.491697
+M00081,P042,Visited Neurology (Dr. Meera Iyengar) on 2026-01-30 at 17:30 for dizziness.,episode,seed,1781327737.491697
+M00082,P042,Visited Gastroenterology (Dr. Snehal Kale) on 2026-05-05 at 11:00 for IBS follow-up.,episode,seed,1783227103.491697
+M00083,P042,Visited Ent (Dr. Ritu Malhotra) on 2026-03-16 at 16:30 for ear pain.,episode,seed,1779466682.491697
+M00084,P043,Visited Cardiology (Dr. Sunita Rao) on 2025-12-29 at 17:30 for high blood pressure follow-up.,episode,seed,1789878591.491697
+M00085,P043,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-08-19 at 18:00 for back pain.,episode,seed,1788362507.491697
+M00086,P044,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-05-09 at 11:00 for knee pain.,episode,seed,1785837582.491697
+M00087,P044,Visited Gastroenterology (Dr. Snehal Kale) on 2026-10-07 at 16:00 for indigestion.,episode,seed,1792423153.491697
+M00088,P044,Visited Neurology (Dr. Meera Iyengar) on 2025-12-01 at 17:30 for numbness in hands.,episode,seed,1779112182.491697
+M00089,P044,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-03-13 at 09:30 for growth check.,episode,seed,1790983512.491697
+M00090,P046,Visited Dermatology (Dr. Sameer Gupta) on 2025-12-19 at 11:30 for eczema flare.,episode,seed,1789500589.491697
+M00091,P046,Visited Orthopedics (Dr. Rohan Kapoor) on 2025-12-09 at 16:00 for ankle sprain.,episode,seed,1788621694.491697
+M00092,P047,Visited Dermatology (Dr. Sameer Gupta) on 2026-07-03 at 11:00 for hair fall.,episode,seed,1790070243.491697
+M00093,P047,Visited General Medicine (Dr. Rahul Chavan) on 2026-05-16 at 17:00 for cold and cough.,episode,seed,1778800261.491697
+M00094,P047,Visited Cardiology (Dr. Rajesh Iyer) on 2026-08-29 at 10:30 for ECG review.,episode,seed,1791929506.491697
+M00095,P047,Visited Neurology (Dr. Meera Iyengar) on 2026-02-18 at 11:00 for dizziness.,episode,seed,1781357155.491697
+M00096,P048,Visited Orthopedics (Dr. Pooja Bhide) on 2026-05-07 at 11:00 for knee pain.,episode,seed,1778748609.491697
+M00097,P049,Visited Pediatrics (Dr. Shreya Apte) on 2026-03-07 at 17:00 for growth check.,episode,seed,1785126407.491697
+M00098,P049,Visited Neurology (Dr. Prakash Jadhav) on 2026-08-18 at 09:30 for sleep issues.,episode,seed,1787439414.491697
+M00099,P049,Visited Neurology (Dr. Meera Iyengar) on 2026-09-04 at 10:30 for numbness in hands.,episode,seed,1788287870.491697
+M00100,P050,Visited Cardiology (Dr. Rajesh Iyer) on 2026-08-25 at 10:30 for chest discomfort.,episode,seed,1793736560.491697
+M00101,P050,Visited Ent (Dr. Ritu Malhotra) on 2026-02-17 at 18:00 for hearing check.,episode,seed,1794706912.491697
+M00102,P050,Visited Cardiology (Dr. Vikram Shah) on 2026-09-26 at 17:00 for high blood pressure follow-up.,episode,seed,1783276388.491697
+M00103,P050,Visited Gastroenterology (Dr. Nandini Kher) on 2026-08-13 at 16:30 for stomach pain.,episode,seed,1786564009.491697
+M00104,P051,Visited Orthopedics (Dr. Swati Gokhale) on 2026-08-07 at 10:30 for shoulder stiffness.,episode,seed,1783334869.491697
+M00105,P051,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-01-07 at 11:00 for child fever.,episode,seed,1789993357.491697
+M00106,P051,Visited General Medicine (Dr. Zoya Mirza) on 2026-09-02 at 09:30 for fever.,episode,seed,1789452818.491697
+M00107,P051,Visited Neurology (Dr. Prakash Jadhav) on 2026-02-23 at 10:30 for sleep issues.,episode,seed,1778421325.491697
+M00108,P052,Visited Dermatology (Dr. Amit Deshmukh) on 2026-03-10 at 17:30 for skin rash.,episode,seed,1794242538.491697
+M00109,P052,Visited Dermatology (Dr. Neha Joshi) on 2026-03-07 at 18:00 for acne.,episode,seed,1793179011.491697
+M00110,P052,Visited Cardiology (Dr. Farah Khan) on 2026-02-14 at 16:00 for ECG review.,episode,seed,1783982776.491697
+M00111,P052,Visited Cardiology (Dr. Rajesh Iyer) on 2026-04-03 at 17:00 for high blood pressure follow-up.,episode,seed,1780866048.491697
+M00112,P053,Visited Pediatrics (Dr. Divya Reddy) on 2025-10-25 at 16:30 for child fever.,episode,seed,1791491099.491697
+M00113,P053,Visited Orthopedics (Dr. Imran Shaikh) on 2026-03-09 at 10:00 for back pain.,episode,seed,1787708811.491697
+M00114,P053,Visited Ent (Dr. Ashok Bhosale) on 2026-02-03 at 11:30 for hearing check.,episode,seed,1791265655.491697
+M00115,P054,Visited Cardiology (Dr. Anil Kulkarni) on 2026-01-17 at 17:30 for chest discomfort.,episode,seed,1787795872.491697
+M00116,P056,Visited Neurology (Dr. Nikhil Bose) on 2026-04-13 at 10:00 for dizziness.,episode,seed,1778995562.491697
+M00117,P056,Visited Orthopedics (Dr. Rohan Kapoor) on 2025-12-10 at 11:30 for shoulder stiffness.,episode,seed,1786664198.491697
+M00118,P056,Visited General Medicine (Dr. Vivek Sathe) on 2026-05-05 at 16:30 for diabetes review.,episode,seed,1783895888.491697
+M00119,P057,Visited General Medicine (Dr. Vivek Sathe) on 2026-01-27 at 10:30 for cold and cough.,episode,seed,1783395364.491697
+M00120,P058,Visited Gastroenterology (Dr. Faisal Qureshi) on 2026-06-04 at 16:30 for indigestion.,episode,seed,1793749075.491697
+M00121,P058,Visited Orthopedics (Dr. Arjun Mehra) on 2025-10-22 at 17:00 for back pain.,episode,seed,1786339757.491697
+M00122,P059,Visited Dermatology (Dr. Amit Deshmukh) on 2026-02-21 at 16:00 for hair fall.,episode,seed,1790242569.491697
+M00123,P060,Visited Cardiology (Dr. Sunita Rao) on 2026-04-23 at 10:00 for chest discomfort.,episode,seed,1791820847.491697
+M00124,P060,Visited Orthopedics (Dr. Rohan Kapoor) on 2026-01-05 at 10:00 for ankle sprain.,episode,seed,1793623391.491697
+M00125,P060,Visited Dermatology (Dr. Priya Nair) on 2026-07-18 at 10:00 for eczema flare.,episode,seed,1780624247.491697
+M00126,P060,Visited Cardiology (Dr. Farah Khan) on 2026-04-17 at 18:00 for palpitations.,episode,seed,1779976347.491697
+M00127,P062,Visited Gastroenterology (Dr. Nandini Kher) on 2026-11-03 at 17:30 for stomach pain.,episode,seed,1791593052.491697
+M00128,P063,Visited Neurology (Dr. Meera Iyengar) on 2026-01-06 at 18:00 for numbness in hands.,episode,seed,1791762132.491697
+M00129,P063,Visited Orthopedics (Dr. Arjun Mehra) on 2026-05-08 at 09:30 for back pain.,episode,seed,1791897149.491697
+M00130,P064,Visited Dermatology (Dr. Priya Nair) on 2026-04-18 at 16:30 for eczema flare.,episode,seed,1793907013.491697
+M00131,P065,Visited Neurology (Dr. Prakash Jadhav) on 2026-11-01 at 10:00 for migraine.,episode,seed,1778292918.491697
+M00132,P065,Visited Ent (Dr. Ashok Bhosale) on 2026-01-14 at 16:00 for sore throat.,episode,seed,1791778264.491697
+M00133,P065,Visited Ent (Dr. Ritu Malhotra) on 2026-01-02 at 17:00 for sinusitis.,episode,seed,1789710130.491697
+M00134,P066,Visited Cardiology (Dr. Vikram Shah) on 2026-08-11 at 17:30 for ECG review.,episode,seed,1791353859.491697
+M00135,P066,Visited Dermatology (Dr. Sameer Gupta) on 2026-10-02 at 16:00 for eczema flare.,episode,seed,1788423655.491697
+M00136,P066,Visited Dermatology (Dr. Sameer Gupta) on 2026-06-30 at 17:00 for eczema flare.,episode,seed,1783180701.491697
+M00137,P067,Visited Gastroenterology (Dr. Snehal Kale) on 2026-05-19 at 17:00 for IBS follow-up.,episode,seed,1790046136.491697
+M00138,P067,Visited Cardiology (Dr. Farah Khan) on 2026-09-10 at 10:00 for palpitations.,episode,seed,1785513253.491697
+M00139,P067,Visited General Medicine (Dr. Asha More) on 2025-11-27 at 16:00 for annual check-up.,episode,seed,1780500391.491697
+M00140,P068,Visited Pediatrics (Dr. Divya Reddy) on 2026-02-07 at 11:30 for child fever.,episode,seed,1778340200.491697
+M00141,P068,Visited Neurology (Dr. Nikhil Bose) on 2026-09-22 at 16:00 for sleep issues.,episode,seed,1778592047.491697
+M00142,P068,Visited Dermatology (Dr. Sameer Gupta) on 2026-08-09 at 16:00 for hair fall.,episode,seed,1791983512.491697
+M00143,P069,Visited Neurology (Dr. Prakash Jadhav) on 2026-06-24 at 11:00 for numbness in hands.,episode,seed,1790137968.491697
+M00144,P069,Visited Gastroenterology (Dr. Snehal Kale) on 2026-07-11 at 11:30 for stomach pain.,episode,seed,1783110288.491697
+M00145,P070,Visited Neurology (Dr. Harish Menon) on 2026-07-04 at 10:30 for dizziness.,episode,seed,1784087708.491697
+M00146,P074,Visited Cardiology (Dr. Rajesh Iyer) on 2026-10-18 at 16:00 for ECG review.,episode,seed,1790692397.491697
+M00147,P074,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-01-18 at 17:00 for child cough.,episode,seed,1791188633.491697
+M00148,P074,Visited Orthopedics (Dr. Swati Gokhale) on 2026-06-18 at 11:00 for ankle sprain.,episode,seed,1788540958.491697
+M00149,P075,Visited Orthopedics (Dr. Arjun Mehra) on 2026-02-12 at 17:00 for ankle sprain.,episode,seed,1780581239.491697
+M00150,P075,Visited Cardiology (Dr. Rajesh Iyer) on 2026-05-15 at 10:30 for ECG review.,episode,seed,1781365024.491697
+M00151,P075,Visited Gastroenterology (Dr. Ramesh Agarwal) on 2025-11-16 at 16:00 for IBS follow-up.,episode,seed,1795094231.491697
+M00152,P075,Visited Cardiology (Dr. Anil Kulkarni) on 2025-11-28 at 16:30 for high blood pressure follow-up.,episode,seed,1787083832.491697
+M00153,P076,Visited Dermatology (Dr. Priya Nair) on 2026-05-07 at 10:30 for eczema flare.,episode,seed,1779421769.491697
+M00154,P076,Visited Ent (Dr. Ritu Malhotra) on 2026-06-24 at 18:00 for hearing check.,episode,seed,1783862472.491697
+M00155,P076,Visited Pediatrics (Dr. Leena Fernandes) on 2026-08-06 at 16:30 for growth check.,episode,seed,1785693262.491697
+M00156,P076,Visited Neurology (Dr. Anjali Verma) on 2025-11-15 at 16:00 for dizziness.,episode,seed,1778369523.491697
+M00157,P077,Visited Ent (Dr. Vandana Kulkarni) on 2026-08-08 at 18:00 for sinusitis.,episode,seed,1789568681.491697
+M00158,P077,Visited Neurology (Dr. Meera Iyengar) on 2025-11-04 at 11:00 for dizziness.,episode,seed,1792455300.491697
+M00159,P077,Visited General Medicine (Dr. Zoya Mirza) on 2026-07-31 at 10:30 for annual check-up.,episode,seed,1786389270.491697
+M00160,P078,Visited Cardiology (Dr. Sunita Rao) on 2026-04-07 at 10:30 for ECG review.,episode,seed,1782818383.491697
+M00161,P078,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-06-08 at 17:30 for child cough.,episode,seed,1781389895.491697
+M00162,P078,Visited Cardiology (Dr. Farah Khan) on 2026-09-19 at 09:30 for high blood pressure follow-up.,episode,seed,1783214089.491697
+M00163,P079,Visited Ent (Dr. Vandana Kulkarni) on 2025-12-21 at 17:00 for ear pain.,episode,seed,1787079295.491697
+M00164,P080,Visited Ent (Dr. Kiran Shetty) on 2026-05-08 at 16:00 for sore throat.,episode,seed,1790228045.491697
+M00165,P080,Visited Cardiology (Dr. Farah Khan) on 2026-09-07 at 18:00 for palpitations.,episode,seed,1781164624.491697
+M00166,P081,Visited Orthopedics (Dr. Imran Shaikh) on 2026-05-11 at 17:30 for shoulder stiffness.,episode,seed,1787658756.491697
+M00167,P082,Visited Gastroenterology (Dr. Ramesh Agarwal) on 2026-04-27 at 17:00 for indigestion.,episode,seed,1790684952.491697
+M00168,P082,Visited Orthopedics (Dr. Pooja Bhide) on 2025-12-16 at 16:30 for shoulder stiffness.,episode,seed,1780926366.491697
+M00169,P082,Visited General Medicine (Dr. Suresh Patwardhan) on 2026-09-29 at 16:00 for annual check-up.,episode,seed,1781443555.491697
+M00170,P083,Visited Pediatrics (Dr. Leena Fernandes) on 2025-12-09 at 11:30 for child cough.,episode,seed,1781581132.491697
+M00171,P084,Visited General Medicine (Dr. Rahul Chavan) on 2026-03-26 at 18:00 for diabetes review.,episode,seed,1779922075.491697
+M00172,P084,Visited Gastroenterology (Dr. Nandini Kher) on 2026-08-15 at 09:30 for stomach pain.,episode,seed,1783176140.491697
+M00173,P084,Visited Orthopedics (Dr. Pooja Bhide) on 2025-12-05 at 10:00 for shoulder stiffness.,episode,seed,1794316595.491697
+M00174,P084,Visited Neurology (Dr. Harish Menon) on 2026-04-19 at 10:00 for migraine.,episode,seed,1780464797.491697
+M00175,P086,Visited Cardiology (Dr. Anil Kulkarni) on 2026-04-19 at 10:00 for chest discomfort.,episode,seed,1790430275.491697
+M00176,P086,Visited Ent (Dr. Ashok Bhosale) on 2026-08-21 at 16:30 for ear pain.,episode,seed,1794981450.491697
+M00177,P086,Visited Ent (Dr. Ritu Malhotra) on 2026-07-05 at 17:00 for sore throat.,episode,seed,1792980516.491697
+M00178,P087,Visited Orthopedics (Dr. Swati Gokhale) on 2026-08-13 at 09:30 for knee pain.,episode,seed,1792470589.491697
+M00179,P088,Visited Pediatrics (Dr. Gaurav Salunkhe) on 2026-03-14 at 17:30 for child cough.,episode,seed,1783963687.491697
+M00180,P088,Visited Gastroenterology (Dr. Snehal Kale) on 2025-11-16 at 18:00 for stomach pain.,episode,seed,1784752185.491697
+M00181,P089,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-03-31 at 16:00 for indigestion.,episode,seed,1781838107.491697
+M00182,P089,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-07-15 at 17:00 for acidity.,episode,seed,1789801452.491697
+M00183,P089,Visited Ent (Dr. Kiran Shetty) on 2026-04-11 at 10:30 for sore throat.,episode,seed,1780750225.491697
+M00184,P089,Visited Ent (Dr. Sanjay Pawar) on 2026-11-08 at 16:00 for sinusitis.,episode,seed,1793252739.491697
+M00185,P090,Visited Gastroenterology (Dr. Ajay Thakur) on 2026-11-04 at 17:00 for IBS follow-up.,episode,seed,1782119447.491697
+M00186,P090,Visited Ent (Dr. Sanjay Pawar) on 2026-04-02 at 18:00 for sore throat.,episode,seed,1794070614.491697
+M00187,P091,Visited Cardiology (Dr. Rajesh Iyer) on 2026-05-01 at 16:30 for high blood pressure follow-up.,episode,seed,1790250162.491697
+M00188,P092,Visited General Medicine (Dr. Zoya Mirza) on 2026-07-04 at 16:30 for annual check-up.,episode,seed,1793375498.491697
+M00189,P092,Visited General Medicine (Dr. Asha More) on 2026-06-27 at 16:30 for fever.,episode,seed,1785392408.491697
+M00190,P092,Visited Neurology (Dr. Prakash Jadhav) on 2025-12-30 at 11:30 for dizziness.,episode,seed,1781245722.491697
+M00191,P092,Visited Ent (Dr. Vandana Kulkarni) on 2026-08-04 at 10:30 for ear pain.,episode,seed,1781826297.491697
+M00192,P093,Visited Ent (Dr. Sanjay Pawar) on 2025-12-17 at 18:00 for hearing check.,episode,seed,1785103887.491697
+M00193,P094,Visited Ent (Dr. Ashok Bhosale) on 2026-03-02 at 16:00 for sinusitis.,episode,seed,1784789408.491697
+M00194,P094,Visited Cardiology (Dr. Sunita Rao) on 2026-10-14 at 10:30 for chest discomfort.,episode,seed,1783767269.491697
+M00195,P094,Visited Dermatology (Dr. Priya Nair) on 2026-06-24 at 17:00 for acne.,episode,seed,1795050119.491697
+M00196,P096,Visited Dermatology (Dr. Amit Deshmukh) on 2026-11-01 at 11:00 for hair fall.,episode,seed,1785927390.491697
+M00197,P097,Visited General Medicine (Dr. Rahul Chavan) on 2026-02-26 at 17:00 for diabetes review.,episode,seed,1790387409.491697
+M00198,P097,Visited Cardiology (Dr. Vikram Shah) on 2026-09-28 at 09:30 for high blood pressure follow-up.,episode,seed,1781761361.491697
+M00199,P098,Visited General Medicine (Dr. Suresh Patwardhan) on 2026-02-03 at 10:30 for cold and cough.,episode,seed,1780343653.491697
+M00200,P098,Visited Neurology (Dr. Nikhil Bose) on 2026-04-27 at 10:00 for migraine.,episode,seed,1788432133.491697
+M00201,P099,Visited General Medicine (Dr. Zoya Mirza) on 2026-07-05 at 11:00 for fever.,episode,seed,1780479389.491697
+M00202,P100,Visited Dermatology (Dr. Sameer Gupta) on 2025-12-03 at 17:00 for acne.,episode,seed,1783730585.491697
+M00203,P100,Visited General Medicine (Dr. Rahul Chavan) on 2026-05-27 at 09:30 for annual check-up.,episode,seed,1781742314.491697
+M00204,P100,Visited Dermatology (Dr. Priya Nair) on 2026-03-07 at 11:00 for eczema flare.,episode,seed,1788695127.491697
+M00205,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-01-27 at 17:00 for knee pain.,episode,seed,1785197558.491697
+M00206,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-04-27 at 16:00 for knee pain.,episode,seed,1792487275.491697
+M00207,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-07-26 at 16:30 for knee pain.,episode,seed,1794074760.491697
+M00208,P001,Visited Orthopedics (Dr. Arjun Mehra) on 2026-10-09 at 16:00 for knee pain follow-up.,episode,seed,1784091553.491697
+M00209,P014,Visited General Medicine (Dr. Vivek Sathe) on 2026-09-24 at 10:00 for diabetes review.,episode,seed,1782229262.491697
+M00210,P023,Visited Cardiology (Dr. Farah Khan) on 2026-08-25 at 18:00 for high blood pressure follow-up.,episode,seed,1791087226.491697
+M00211,P002,Prefers evening slots.,preference,seed,1785788235.491697
+M00212,P002,Prefers teleconsultation when possible.,preference,seed,1788143533.491697
+M00213,P004,Prefers evening slots.,preference,seed,1792200766.491697
+M00214,P006,Prefers teleconsultation when possible.,preference,seed,1778146423.491697
+M00215,P010,Prefers evening slots.,preference,seed,1784837821.491697
+M00216,P011,Prefers morning slots.,preference,seed,1783882981.491697
+M00217,P012,Prefers teleconsultation when possible.,preference,seed,1789945647.491697
+M00218,P013,Prefers teleconsultation when possible.,preference,seed,1794529370.491697
+M00219,P015,Prefers evening slots.,preference,seed,1794379399.491697
+M00220,P017,Prefers morning slots.,preference,seed,1786635071.491697
+M00221,P018,Prefers morning slots.,preference,seed,1787217254.491697
+M00222,P019,Prefers morning slots.,preference,seed,1785116669.491697
+M00223,P020,Prefers morning slots.,preference,seed,1781130276.491697
+M00224,P020,Prefers teleconsultation when possible.,preference,seed,1778361072.491697
+M00225,P022,Prefers evening slots.,preference,seed,1791609458.491697
+M00226,P024,Prefers evening slots.,preference,seed,1793303828.491697
+M00227,P026,Prefers morning slots.,preference,seed,1782800179.491697
+M00228,P027,Prefers evening slots.,preference,seed,1786599293.491697
+M00229,P027,Prefers teleconsultation when possible.,preference,seed,1778286420.491697
+M00230,P028,Prefers teleconsultation when possible.,preference,seed,1783421122.491697
+M00231,P029,Prefers morning slots.,preference,seed,1791160798.491697
+M00232,P030,Prefers evening slots.,preference,seed,1793713624.491697
+M00233,P032,Prefers morning slots.,preference,seed,1791129365.491697
+M00234,P033,Prefers evening slots.,preference,seed,1780258162.491697
+M00235,P033,Prefers teleconsultation when possible.,preference,seed,1785317358.491697
+M00236,P034,Prefers teleconsultation when possible.,preference,seed,1795140341.491697
+M00237,P037,Prefers morning slots.,preference,seed,1780110178.491697
+M00238,P037,Prefers teleconsultation when possible.,preference,seed,1783940982.491697
+M00239,P038,Prefers morning slots.,preference,seed,1787393162.491697
+M00240,P039,Prefers evening slots.,preference,seed,1787468976.491697
+M00241,P041,Prefers morning slots.,preference,seed,1783559910.491697
+M00242,P043,Prefers morning slots.,preference,seed,1785275733.491697
+M00243,P043,Prefers teleconsultation when possible.,preference,seed,1785767847.491697
+M00244,P044,Prefers evening slots.,preference,seed,1790618610.491697
+M00245,P045,Prefers evening slots.,preference,seed,1782642915.491697
+M00246,P046,Prefers morning slots.,preference,seed,1787006078.491697
+M00247,P047,Prefers evening slots.,preference,seed,1791784444.491697
+M00248,P047,Prefers teleconsultation when possible.,preference,seed,1784314555.491697
+M00249,P048,Prefers evening slots.,preference,seed,1788854191.491697
+M00250,P049,Prefers morning slots.,preference,seed,1783193147.491697
+M00251,P050,Prefers morning slots.,preference,seed,1780071173.491697
+M00252,P051,Prefers evening slots.,preference,seed,1792027347.491697
+M00253,P052,Prefers morning slots.,preference,seed,1790397762.491697
+M00254,P053,Prefers evening slots.,preference,seed,1781031416.491697
+M00255,P054,Prefers morning slots.,preference,seed,1781489071.491697
+M00256,P055,Prefers morning slots.,preference,seed,1792565583.491697
+M00257,P057,Prefers evening slots.,preference,seed,1792219924.491697
+M00258,P058,Prefers evening slots.,preference,seed,1793228400.491697
+M00259,P058,Prefers teleconsultation when possible.,preference,seed,1781058441.491697
+M00260,P059,Prefers evening slots.,preference,seed,1790951073.491697
+M00261,P059,Prefers teleconsultation when possible.,preference,seed,1779334872.491697
+M00262,P060,Prefers evening slots.,preference,seed,1788108305.491697
+M00263,P060,Prefers teleconsultation when possible.,preference,seed,1780344491.491697
+M00264,P062,Prefers evening slots.,preference,seed,1792695589.491697
+M00265,P063,Prefers morning slots.,preference,seed,1782923816.491697
+M00266,P063,Prefers teleconsultation when possible.,preference,seed,1781801102.491697
+M00267,P064,Prefers evening slots.,preference,seed,1782068572.491697
+M00268,P065,Prefers morning slots.,preference,seed,1786467181.491697
+M00269,P066,Prefers morning slots.,preference,seed,1778577407.491697
+M00270,P067,Prefers evening slots.,preference,seed,1781107582.491697
+M00271,P067,Prefers teleconsultation when possible.,preference,seed,1780548641.491697
+M00272,P069,Prefers teleconsultation when possible.,preference,seed,1778889001.491697
+M00273,P070,Prefers evening slots.,preference,seed,1781325681.491697
+M00274,P070,Prefers teleconsultation when possible.,preference,seed,1789851177.491697
+M00275,P072,Prefers evening slots.,preference,seed,1790471819.491697
+M00276,P073,Prefers teleconsultation when possible.,preference,seed,1778343915.491697
+M00277,P074,Prefers morning slots.,preference,seed,1791049701.491697
+M00278,P074,Prefers teleconsultation when possible.,preference,seed,1779049279.491697
+M00279,P075,Prefers teleconsultation when possible.,preference,seed,1779956980.491697
+M00280,P076,Prefers evening slots.,preference,seed,1790973827.491697
+M00281,P077,Prefers evening slots.,preference,seed,1791353899.491697
+M00282,P077,Prefers teleconsultation when possible.,preference,seed,1788180174.491697
+M00283,P078,Prefers evening slots.,preference,seed,1780033499.491697
+M00284,P079,Prefers morning slots.,preference,seed,1779432096.491697
+M00285,P080,Prefers morning slots.,preference,seed,1794221151.491697
+M00286,P082,Prefers morning slots.,preference,seed,1790052607.491697
+M00287,P083,Prefers evening slots.,preference,seed,1782922546.491697
+M00288,P084,Prefers evening slots.,preference,seed,1791330146.491697
+M00289,P085,Prefers morning slots.,preference,seed,1781604266.491697
+M00290,P086,Prefers evening slots.,preference,seed,1791613006.491697
+M00291,P088,Prefers teleconsultation when possible.,preference,seed,1791259669.491697
+M00292,P089,Prefers teleconsultation when possible.,preference,seed,1782914026.491697
+M00293,P090,Prefers morning slots.,preference,seed,1785598226.491697
+M00294,P090,Prefers teleconsultation when possible.,preference,seed,1793963629.491697
+M00295,P091,Prefers morning slots.,preference,seed,1790171228.491697
+M00296,P091,Prefers teleconsultation when possible.,preference,seed,1791364500.491697
+M00297,P093,Prefers evening slots.,preference,seed,1782850897.491697
+M00298,P094,Prefers evening slots.,preference,seed,1785083702.491697
+M00299,P095,Prefers evening slots.,preference,seed,1782750489.491697
+M00300,P096,Prefers teleconsultation when possible.,preference,seed,1785139554.491697
+M00301,P097,Prefers evening slots.,preference,seed,1785450898.491697
+M00302,P097,Prefers teleconsultation when possible.,preference,seed,1779010318.491697
+M00303,P098,Prefers morning slots.,preference,seed,1794376495.491697
+M00304,P099,Prefers evening slots.,preference,seed,1790521372.491697
+M00305,P100,Prefers morning slots.,preference,seed,1790545853.491697
+M00306,P100,Prefers teleconsultation when possible.,preference,seed,1781163458.491697

@@ -1,10 +1,10 @@
 # Submission — Hospital Agent OS
 
-Assembled 2026-11-23 02:40.
+Assembled 2026-11-23 02:41.
 
 | Item | Location | Status |
 |---|---|---|
-| Source code (all tracked files) | `source.zip` | ✅ 107 files |
+| Source code (all tracked files) | `source.zip` | ✅ 108 files |
 | Dataset (HIS tables + triage dataset) | `data/*.csv` | ✅ 11 CSVs |
 | Model file | `models/triage_classifier.joblib` | ✅ TF-IDF + Logistic Regression |
 | Model metrics | `models/metrics.json`, `models/confusion_matrix.png` | ✅ specialty acc 0.970, macro-F1 0.970; emergency recall 1.000 |

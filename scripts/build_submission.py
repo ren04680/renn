@@ -30,7 +30,7 @@ def main() -> None:
         if f.is_file():
             shutil.copy(f, SUB / "models" / f.name)
     files = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split()
-    files = [f for f in files if not f.startswith("submission/")]
+    files = [f for f in files if not f.startswith(("submission/", "wheels/"))]
     with zipfile.ZipFile(SUB / "source.zip", "w", zipfile.ZIP_DEFLATED) as z:
         for f in files:
             p = ROOT / f

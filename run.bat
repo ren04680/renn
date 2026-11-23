@@ -41,6 +41,11 @@ if not exist ".venv\Scripts\python.exe" (
 )
 call ".venv\Scripts\activate.bat"
 
+if not exist ".venv\deps-ok" if exist "wheels\wh" (
+  echo [2/4] Installing packages from the local wheels folder - no internet needed ...
+  python -m pip install --no-index --find-links "wheels\wh" -r "wheels\req-win.txt"
+  python -c "import fastapi, langgraph, sklearn, uvicorn, sqlalchemy" && echo ok> ".venv\deps-ok"
+)
 if not exist ".venv\deps-ok" (
   echo [2/4] Installing Python packages - first run takes a few minutes ...
   python -m pip install --upgrade pip --retries 10 --timeout 60

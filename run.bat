@@ -4,16 +4,39 @@ cd /d "%~dp0"
 set PYTHONUTF8=1
 set PYTHONIOENCODING=utf-8
 
-REM Prefer the "py" launcher: on many PCs "python" opens the Microsoft Store instead of Python.
-set "PY=python"
-where py >nul 2>nul && set "PY=py -3"
+REM ---- Pick a normal CPython 3.11-3.13. The experimental free-threaded builds (3.13t) have no
+REM ---- Windows wheels for scikit-learn/scipy, so pip would try to compile them and fail.
+set "PY="
+for %%V in (3.13 3.12 3.11) do (
+  if not defined PY (
+    py -%%V -c "import sys, sysconfig; sys.exit(1 if sysconfig.get_config_var('Py_GIL_DISABLED') else 0)" >nul 2>nul && set "PY=py -%%V"
+  )
+)
+if not defined PY (
+  python -c "import sys, sysconfig; ok = sys.version_info[:2] in ((3, 11), (3, 12), (3, 13)) and not sysconfig.get_config_var('Py_GIL_DISABLED'); sys.exit(0 if ok else 1)" >nul 2>nul && set "PY=python"
+)
+if not defined PY (
+  echo ERROR: no suitable Python found. Only a free-threaded or unsupported Python is installed.
+  echo Install Python 3.12 or 3.13 from python.org with the normal installer - NOT the free-threaded option -
+  echo and tick "Add python.exe to PATH". Then run .\run.bat again.
+  exit /b 1
+)
+echo Using Python: %PY%
 
+REM ---- An old .venv made with a free-threaded or broken Python is removed and rebuilt.
+if exist ".venv\Scripts\python.exe" (
+  ".venv\Scripts\python.exe" -c "import sys, sysconfig; sys.exit(1 if sysconfig.get_config_var('Py_GIL_DISABLED') else 0)" >nul 2>nul
+  if errorlevel 1 (
+    echo Existing .venv uses a free-threaded or broken Python - recreating it ...
+    rmdir /s /q ".venv"
+  )
+)
 if not exist ".venv\Scripts\python.exe" (
   echo [1/4] Creating virtual environment with %PY% ...
   %PY% -m venv .venv
 )
 if not exist ".venv\Scripts\python.exe" (
-  echo ERROR: could not create .venv. Install Python 3.11-3.13 from python.org and tick "Add to PATH".
+  echo ERROR: could not create .venv - see the message above.
   exit /b 1
 )
 call ".venv\Scripts\activate.bat"
@@ -21,10 +44,10 @@ call ".venv\Scripts\activate.bat"
 if not exist ".venv\deps-ok" (
   echo [2/4] Installing Python packages - first run takes a few minutes ...
   python -m pip install --upgrade pip
-  python -m pip install -r requirements.txt
+  python -m pip install --prefer-binary -r requirements.txt
   if errorlevel 1 (
     echo chromadb failed to install - using the built-in vector store instead.
-    python -m pip install -r requirements-core.txt
+    python -m pip install --prefer-binary -r requirements-core.txt
   )
   python -c "import fastapi, langgraph, sklearn, uvicorn, sqlalchemy" && echo ok> ".venv\deps-ok"
 )

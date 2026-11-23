@@ -218,7 +218,7 @@ data/ models/ tests/ submission/ legacy/
 ```
 
 ## 8. Running on your laptop — troubleshooting
-* Use **Python 3.11–3.13**. Check with `python3 --version` (Windows: `python --version`).
+* Use **Python 3.11–3.13**, the normal build. Check with `python3 --version` (Windows: `py -0p`). The *free-threaded* build (`3.13t`) has no Windows wheels for scikit-learn; `run.bat` skips it automatically and rebuilds a `.venv` that was made with it.
 * **Port 8000 busy:** `PORT=8010 ./run.sh`, then open http://localhost:8010.
 * **chromadb won't install:** the launchers retry automatically without it, and memory uses the built-in vector store.
 * **DeepSeek slow or down:** click the mode badge to switch to Offline. Even without that, the circuit breaker falls back after the first failure.
